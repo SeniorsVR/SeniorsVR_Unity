@@ -15,7 +15,7 @@ namespace nico
         public Transform objectsTransformsParent;
         Transform[] objectsTransforms = new Transform[6];
 
-        int[] objetos = new int[6];
+        Articulo[] objetos = new Articulo[6];
 
         public Transform basketTransform;
 
@@ -33,15 +33,15 @@ namespace nico
             }
         }
 
-        public int AddObject(int tipo)
+        public int AddObject(Articulo articulo, int index)
         {
             if (currentIdx < 6)
             {
 
-                MeshRenderer meshRenderer = objectsTransforms[currentIdx].GetChild(tipo).GetComponent<MeshRenderer>();
+                MeshRenderer meshRenderer = objectsTransforms[currentIdx].GetChild(index).GetComponent<MeshRenderer>();
                 meshRenderer.enabled = true;
 
-                objetos[currentIdx] = tipo;
+                objetos[currentIdx] = articulo;
 
                 currentIdx++;
             }
@@ -61,6 +61,9 @@ namespace nico
 
         public void PickupBasket(GameObject ogBasket)
         {
+
+            TestManager.SetArticulosFlag(true);
+
             hasBasket = true;
 
             basketTransform.GetChild(0).gameObject.SetActive(true);

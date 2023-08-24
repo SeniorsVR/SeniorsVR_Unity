@@ -106,11 +106,15 @@ namespace nico
             {
                 Mostrador.Instance.ActualizarPaga(Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.5f;
+
+                TestManager.AddVesDevueltoBillete();
             }
             else
             {
                 Mostrador.Instance.ActualizarPaga(-Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.0795f;
+
+                TestManager.AddVesMarcadoBillete();
             }
         }
 

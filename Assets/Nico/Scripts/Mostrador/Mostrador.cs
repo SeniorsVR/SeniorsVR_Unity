@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 namespace nico
 {
@@ -11,12 +12,14 @@ namespace nico
             Instance = this;
         }
 
-        int[] precio = new int[9];
         public int precioReal = 0, precioRestante = 0;
         int pagaUsuario = 0;
 
         bool initFlag = false;
 
+        public TextMeshProUGUI text;
+
+        public Transform billetesTransform;
 
         bool isCurrentlySelected = false;
         QuickOutline outline;
@@ -55,26 +58,35 @@ namespace nico
 
         void OnMostradorPlayerActivation()
         {
+            TestManager.SetArticulosFlag(false);
+
             PlayerMovement.Instance.CollidedWithMostrador(MostradorMovements.Instance.targetPlayerTransform.position);
             MostradorMovements.Instance.Invoke("StartMovingBasketToMostrador", 1);
-            MostradorMovements.Instance.Invoke("ActivateAllBilletes", 2);
+            Invoke("ActivateAllBilletes", 2);
+
+            SetStateText(true);
+
         }
 
-
-        public void ComputeTotalValue(int[] objetos)
+        public void SetStateText(bool state)
         {
-            for (int i = 0; i < 9; i++)
-            {
-                precio[i] = Random.Range(0, 3);
-                precioReal += precio[i] * Billete.ObtenerValorDeBilllete(i);
-            }
+            text.transform.parent.parent.gameObject.SetActive(state);
+            text.text = "$ " + precioReal;
+        }
 
-            //print("Precio a pagar " + precioReal);
+        public void ComputeTotalValue(Articulo[] articulos)
+        {
+
+            foreach (Articulo articulo in articulos)
+            {
+                precioReal += ObjetosConstants.GetPrecioArticulo(articulo);
+            }
         }
 
         public void ActualizarPaga(int valor)
         {
             pagaUsuario += valor;
+            precioRestante = precioReal - pagaUsuario;
 
             if (pagaUsuario < 0)
             {
@@ -83,19 +95,35 @@ namespace nico
 
             if (pagaUsuario == precioReal)
             {
-                ExitoDeCompra();
+                //ExitoDeCompra();
             }
 
-            precioRestante = precioReal - pagaUsuario;
         }
 
-        void ExitoDeCompra()
+        public void ExitoDeCompra()
         {
-            MostradorMovements.Instance.SetStateText(false);
+            TestManager.SetCajaFlag(false);
+
+            SetStateText(false);
             Billete.isLocked = true;
 
             MostradorMovements.Instance.Invoke("StartMovingBasketToMostradorEnd", 1);
             MostradorMovements.Instance.Invoke("StartMovingBasketToPrice", 2);
+
+            TestManager.AddVueltoFinal(precioRestante);
+        }
+
+        void ActivateAllBilletes()
+        {
+            TestManager.SetCajaFlag(true);
+
+            Mostrador.Instance.ActualizarPaga(0);
+
+            foreach (Billete billete in billetesTransform.GetComponentsInChildren<Billete>(true))
+            {
+                billete.gameObject.SetActive(true);
+            }
+
         }
 
         public void CurrentlySelected()

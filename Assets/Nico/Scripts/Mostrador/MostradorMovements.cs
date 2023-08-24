@@ -13,8 +13,7 @@ namespace nico
             Instance = this;
         }
 
-        public Transform basketTransform, targetBasketTransform, targetPlayerTransform, billetesTransform;
-        public TextMeshProUGUI text;
+        public Transform basketTransform, targetBasketTransform, targetPlayerTransform;
 
         bool basketToMostradorFlag = false;
         bool basketToMostradorEndFlag = false;
@@ -25,8 +24,6 @@ namespace nico
 
         Vector3 ogBasketLocalPos, basketHidePos, basketPricePos;
         Quaternion ogBasketLocalRot;
-
-        bool FinishedPayment = false;
 
         private void Start()
         {
@@ -62,12 +59,6 @@ namespace nico
             else if (bagToPlayerFlag)
             {
                 MoveBagToPlayer();
-            }
-
-
-            if (!FinishedPayment)
-            {
-                text.text = "$ " + Mostrador.Instance.precioRestante;
             }
         }
 
@@ -174,24 +165,6 @@ namespace nico
 
             PlayerMovement.IsLocked = false;
 
-        }
-
-        public void ActivateAllBilletes()
-        {
-            Mostrador.Instance.ActualizarPaga(0);
-
-            foreach (Billete billete in billetesTransform.GetComponentsInChildren<Billete>(true))
-            {
-                billete.gameObject.SetActive(true);
-            }
-
-            SetStateText(true);
-        }
-
-        public void SetStateText(bool state)
-        {
-            FinishedPayment = !state;
-            text.transform.parent.parent.gameObject.SetActive(state);
         }
 
 

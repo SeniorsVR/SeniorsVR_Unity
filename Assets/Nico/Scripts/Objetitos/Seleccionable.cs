@@ -7,7 +7,8 @@ namespace nico
     public class Seleccionable : MonoBehaviour
     {
 
-        public int tipo = -1;
+        public Articulo tipo;
+        public int index;
 
         [HideInInspector]
         public bool isCurrentlySelected = false;
@@ -57,11 +58,21 @@ namespace nico
 
                     Recoger();
                 }
+
                 if (!isBasketFull)
                 {
                     isCurrentlySelected = true;
                 }
+                else
+                {
+                    TestManager.AddSecondsSeleccionableLleno(Time.deltaTime);
+                }
             }
+            else
+            {
+                TestManager.AddSecondsSeleccionableInvalido(Time.deltaTime);
+            }
+
         }
 
         void SwitchMaterialState(bool state)
@@ -82,13 +93,15 @@ namespace nico
         public void Recoger()
         {
 
-            int remaning = PlayerBasket.Instance.AddObject(tipo);
+            int remaning = PlayerBasket.Instance.AddObject(tipo, index);
+            TestManager.AddVesRecojida();
+
             if (remaning <= 0)
             {
                 isBasketFull = true;
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

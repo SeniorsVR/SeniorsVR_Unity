@@ -11,10 +11,10 @@ namespace nico
         public static float grabTime = 2;
 
         Seleccionable pickUpSeleccionado;
-
         Billete billeteSeleccionado;
         Mostrador mostradorSeleccionado;
         Baskets basketsSeleccionado;
+        MostradorPersona mostradorPersonaSeleccionado;
 
         PlayerMovement PlayerMovement;
 
@@ -45,6 +45,7 @@ namespace nico
                 billeteSeleccionado = hitObject.GetComponent<Billete>();
                 mostradorSeleccionado = hitObject.GetComponent<Mostrador>();
                 basketsSeleccionado = hitObject.GetComponent<Baskets>();
+                mostradorPersonaSeleccionado = hitObject.GetComponent<MostradorPersona>();
             }
             else
             {
@@ -52,6 +53,7 @@ namespace nico
                 billeteSeleccionado = null;
                 mostradorSeleccionado = null;
                 basketsSeleccionado = null;
+                mostradorPersonaSeleccionado = null;
             }
 
             // Dibujar el rayo en la escena para visualización
@@ -72,6 +74,10 @@ namespace nico
             if (basketsSeleccionado)
             {
                 basketsSeleccionado.CurrentlySelected();
+            }
+            if (mostradorPersonaSeleccionado)
+            {
+                mostradorPersonaSeleccionado.CurrentlySelected();
             }
         }
     }
