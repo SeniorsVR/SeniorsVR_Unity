@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace nico
 {
-    public class Seleccionable : MonoBehaviour
+
+    public class SeleccionableBasket : MonoBehaviour
     {
 
         public Articulo tipo;
         public int index;
+        public int basketIndex;
 
         [HideInInspector]
-        public bool isCurrentlySelected = false;
+        public Seleccionable seleccionable;
+
+        bool isCurrentlySelected = false;
         QuickOutline outline;
 
         MeshRenderer meshRenderer;
 
-        static bool isBasketFull = false;
 
         float grabCounter = 0;
 
@@ -26,6 +28,9 @@ namespace nico
         {
             meshRenderer = GetComponent<MeshRenderer>();
             outline = GetComponent<QuickOutline>();
+
+            meshRenderer.enabled = true;
+            gameObject.SetActive(false);
 
         }
 
@@ -48,29 +53,14 @@ namespace nico
 
         public void CurrentlySelected()
         {
-            if (PlayerBasket.Instance.hasBasket)
+            isCurrentlySelected = true;
+            grabCounter += Time.deltaTime;
+
+            if (grabCounter >= PlayerActions.grabTime)
             {
-                grabCounter += Time.deltaTime;
+                grabCounter = 0;
 
-                if (grabCounter >= PlayerActions.grabTime)
-                {
-                    grabCounter = 0;
-
-                    Recoger();
-                }
-
-                if (!isBasketFull)
-                {
-                    isCurrentlySelected = true;
-                }
-                else
-                {
-                    TestManager.AddSecondsSeleccionableLleno(Time.deltaTime);
-                }
-            }
-            else
-            {
-                TestManager.AddSecondsSeleccionableInvalido(Time.deltaTime);
+                Devolver();
             }
 
         }
@@ -90,25 +80,25 @@ namespace nico
             }
         }
 
-        public void Recoger()
+        public void Devolver()
         {
 
-            int remaning = PlayerBasket.Instance.AddObject(tipo, index, this);
-            TestManager.AddVesRecojida(tipo);
+            PlayerBasket.Instance.RemoveObject(index, basketIndex);
+            TestManager.AddVesDevuelto(tipo);
 
-            if (remaning <= 0)
+            if (seleccionable)
             {
-                isBasketFull = true;
+                seleccionable.Reponer();
             }
 
-            gameObject.SetActive(false);
+            //meshRenderer.enabled = false;
         }
 
-        public void Reponer()
+        public void SetState(bool state)
         {
-            isBasketFull = false;
+            //meshRenderer.enabled = true;
 
-            gameObject.SetActive(true);
+            gameObject.SetActive(state);
         }
     }
 }

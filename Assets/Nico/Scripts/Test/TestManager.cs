@@ -73,13 +73,15 @@ namespace nico
             metricas.segundos_mirando_objetos_lleno += t;
         }
 
-        public static void AddVesRecojida()
+        public static void AddVesRecojida(Articulo tipo)
         {
             metricas.veces_recogido_objeto++;
+            EvaluateNewArticulo(tipo);
         }
-        public static void AddVesDevuelto()
+        public static void AddVesDevuelto(Articulo tipo)
         {
             metricas.veces_devuelto_objeto++;
+            EvaluateOldArticulo(tipo);
         }
 
         public static void AddVesMarcadoBillete()
@@ -95,6 +97,62 @@ namespace nico
         {
             metricas.vuelto_final = vuelto;
         }
+        public static void AddSecondsBagPickup(float t)
+        {
+            metricas.segundos_esperando_bolsa += t;
+        }
         #endregion
+
+        static void EvaluateNewArticulo(Articulo newArticulo)//Cuando recoje
+        {
+            Articulo[] listaObjetos = metricas.objetos;
+            Articulo[] basketObjetos = PlayerBasket.Instance.objetos;
+
+            int nNeeded = 0;
+            int nCurrently = 0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (listaObjetos[i] == newArticulo)
+                {
+                    nNeeded++;
+                }
+                if (basketObjetos[i] == newArticulo)
+                {
+                    nCurrently++;
+                }
+            }
+
+            if (nNeeded - nCurrently <= 0)
+            {
+                metricas.veces_objeto_innecesario_recojido++;
+            }
+        }
+
+        static void EvaluateOldArticulo(Articulo oldArticulo)//Cuando devulve
+        {
+            Articulo[] listaObjetos = metricas.objetos;
+            Articulo[] basketObjetos = PlayerBasket.Instance.objetos;
+
+            int nNeeded = 0;
+            int nCurrently = 0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (listaObjetos[i] == oldArticulo)
+                {
+                    nNeeded++;
+                }
+                if (basketObjetos[i] == oldArticulo)
+                {
+                    nCurrently++;
+                }
+            }
+
+            if (nNeeded - nCurrently >= 0)
+            {
+                metricas.veces_objeto_necesario_devuelto++;
+            }
+        }
     }
 }

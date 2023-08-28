@@ -11,25 +11,42 @@ namespace nico
 
         bool isCurrentlySelected = false;
 
-        // Start is called before the first frame update
-        void Start()
-        {
+        QuickOutline outline;
 
+        private void Start()
+        {
+            outline = GetComponent<QuickOutline>();
         }
 
         void Update()
         {
 
-            if (isCurrentlySelected)
+            if (isCurrentlySelected && TestManager.enCaja)
             {
-
+                SwitchMaterialState(true);
             }
             else
             {
+                SwitchMaterialState(false);
                 seleccionarCounter = 0;
             }
 
             isCurrentlySelected = false;
+        }
+
+        void SwitchMaterialState(bool state)
+        {
+
+            if (state)
+            {
+                //con outline
+                outline.enabled = true;
+            }
+            else
+            {
+                //sin outline
+                outline.enabled = false;
+            }
         }
 
         public void CurrentlySelected()

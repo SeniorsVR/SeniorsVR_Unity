@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6740789539271256051}
   - component: {fileID: 7649220577540888896}
-  - component: {fileID: 739214954824991137}
   - component: {fileID: 6162404598217353365}
   m_Layer: 6
   m_Name: Billete
@@ -49,34 +48,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 0.24, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &739214954824991137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233679836477298343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7ec7e53101074141bd321eb25854837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outline: {fileID: 7394535315824721828}
-  tipo: -1
-  spriteRenderer: {fileID: 6223998307161518300}
-  outlineRenderer: {fileID: 7989431748613506751}
-  sprites:
-  - {fileID: 21300000, guid: 263f5ffba7bac8741a6d7775e01faf31, type: 3}
-  - {fileID: 21300000, guid: e4007a1940bcec544b3eaa2f911dab1c, type: 3}
-  - {fileID: 21300000, guid: 2804b902113fb0049b41c070d8f4a9d0, type: 3}
-  - {fileID: 21300000, guid: 0816735306936f046aaa28ee46749cff, type: 3}
-  - {fileID: 21300000, guid: df3587bc468a0d340a5d3315574febc5, type: 3}
-  - {fileID: 21300000, guid: 534532e769a46a8459f61fbb46813444, type: 3}
-  - {fileID: 21300000, guid: b7f754a84803d984da3726ac52a20ddd, type: 3}
-  - {fileID: 21300000, guid: e947084d34c90544bb3ad2df5f790403, type: 3}
-  - {fileID: 21300000, guid: 6696d449749e719429b16ecb33fbb323, type: 3}
-  - {fileID: 21300000, guid: 37674f827188c594f8e88867740a90c6, type: 3}
-  - {fileID: 21300000, guid: f4ad763271dfc104b93cf622d481eda0, type: 3}
 --- !u!114 &6162404598217353365
 MonoBehaviour:
   m_ObjectHideFlags: 0

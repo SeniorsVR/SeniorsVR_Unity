@@ -5,6 +5,7 @@ namespace nico
 {
     public enum Articulo
     {
+        EMPTY,
         Galleta,
         Tomate,
         Chorizo,

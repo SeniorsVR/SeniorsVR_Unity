@@ -12,15 +12,15 @@ namespace nico
             Instance = this;
         }
 
+        int maxArticulos = 6;
+
         public Transform objectsTransformsParent;
         Transform[] objectsTransforms = new Transform[6];
 
-        Articulo[] objetos = new Articulo[6];
+        [HideInInspector]
+        public Articulo[] objetos = new Articulo[6];
 
         public Transform basketTransform;
-
-        [HideInInspector]
-        public int currentIdx = 0;
 
         [HideInInspector]
         public bool hasBasket = false;
@@ -33,31 +33,40 @@ namespace nico
             }
         }
 
-        public int AddObject(Articulo articulo, int index)
+        public int AddObject(Articulo newArticulo, int index, Seleccionable seleccionable)
         {
-            if (currentIdx < 6)
+            int i = 0;
+            foreach (Articulo articulo in objetos)
             {
+                if (articulo == Articulo.EMPTY)
+                {
 
-                MeshRenderer meshRenderer = objectsTransforms[currentIdx].GetChild(index).GetComponent<MeshRenderer>();
-                meshRenderer.enabled = true;
+                    SeleccionableBasket seleccionableBasket = objectsTransforms[i].GetChild(index).GetComponent<SeleccionableBasket>();
+                    seleccionableBasket.seleccionable = seleccionable;
+                    seleccionableBasket.SetState(true);
 
-                objetos[currentIdx] = articulo;
-
-                currentIdx++;
+                    objetos[i] = newArticulo;
+                    break;
+                }
+                i++;
             }
 
-            if (HasBasketFull())
+            if (IsBasketFull())
             {
                 Mostrador.Instance.ComputeTotalValue(objetos);
             }
 
-            return 6 - currentIdx;
+            return maxArticulos - GetNumArticulos();
         }
 
-        public bool HasBasketFull()
+        public void RemoveObject(int index, int basketIndex)
         {
-            return currentIdx >= 6;
+            SeleccionableBasket seleccionableBasket = objectsTransforms[basketIndex].GetChild(index).GetComponent<SeleccionableBasket>();
+            seleccionableBasket.SetState(false);
+
+            objetos[basketIndex] = Articulo.EMPTY;
         }
+
 
         public void PickupBasket(GameObject ogBasket)
         {
@@ -73,5 +82,24 @@ namespace nico
 
             ogBasket.transform.position = Vector3.down * 500;
         }
+    
+        public int GetNumArticulos()
+        {
+            int total = 0;
+            foreach (Articulo articulo in objetos)
+            {
+                if (articulo != Articulo.EMPTY)
+                {
+                    total++;
+                }
+            }
+            return total;
+        }
+
+        public bool IsBasketFull()
+        {
+            return GetNumArticulos() == maxArticulos;
+        }
+
     }
 }

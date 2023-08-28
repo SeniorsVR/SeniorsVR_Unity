@@ -37,6 +37,8 @@ namespace nico
         Vector3 ogBasketAnchorLocalPos;
         Quaternion ogBasketAnchorLocalRotation;
 
+        public BasketInteractive basketInteractive;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -84,15 +86,18 @@ namespace nico
 
         void MoveBasket(Vector3 basketLookDirection)
         {
-
-            basketLookDirection.y = 0;
-            basketTransform.rotation = Quaternion.LookRotation(basketLookDirection);
-
-            if (basketTransform.childCount > 0)
+            if (basketInteractive.selectedState <= 0)
             {
-                basketTransform.GetChild(0).localPosition = Vector3.Lerp(basketTransform.GetChild(0).localPosition, ogBasketAnchorLocalPos, Time.deltaTime * 5);
-                basketTransform.GetChild(0).localRotation = Quaternion.Lerp(basketTransform.GetChild(0).localRotation, ogBasketAnchorLocalRotation, Time.deltaTime * 5);
+                basketLookDirection.y = 0;
+                basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, Quaternion.LookRotation(basketLookDirection), Time.deltaTime * 2);
+
+                if (basketTransform.childCount > 0)
+                {
+                    basketTransform.GetChild(0).localPosition = Vector3.Lerp(basketTransform.GetChild(0).localPosition, ogBasketAnchorLocalPos, Time.deltaTime * 3);
+                    basketTransform.GetChild(0).localRotation = Quaternion.Lerp(basketTransform.GetChild(0).localRotation, ogBasketAnchorLocalRotation, Time.deltaTime * 3);
+                }
             }
+
         }
 
         void ObtainOffsetDirection()

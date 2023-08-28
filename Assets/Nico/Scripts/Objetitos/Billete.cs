@@ -28,8 +28,8 @@ namespace nico
         private void Start()
         {
             ogPos = transform.position;
-            playerPos = Mostrador.Instance.transform.position - Mostrador.Instance.transform.right + Mostrador.Instance.transform.up;
-            pagaPos = Mostrador.Instance.transform.position + Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.5f * Mostrador.Instance.transform.up;
+            playerPos = Mostrador.Instance.transform.position - Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f;
+            pagaPos = Mostrador.Instance.transform.position + Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up;
             transform.position = playerPos;
 
             if (tipo < 4)

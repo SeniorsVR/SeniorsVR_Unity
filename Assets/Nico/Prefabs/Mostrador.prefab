@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4160310255931365968}
   - component: {fileID: 5204122441958414297}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cajera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426161917546250618}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.99, y: 1.06, z: -0.419}
+  m_LocalPosition: {x: 0.99, y: 2.03, z: -0.419}
   m_LocalScale: {x: 0.1953697, y: 0.48842427, z: 0.48842427}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 9122742154907458475}
   - component: {fileID: 463571281313481542}
   - component: {fileID: 8263717096120606243}
+  - component: {fileID: 6257707655206284828}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -423,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3566790119988430895}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.055, y: -0.715, z: 0}
+  m_LocalPosition: {x: -0.06, y: -0.715, z: 0.11}
   m_LocalScale: {x: 0.23487101, y: 1, z: 0.49243602}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -505,6 +506,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.000006, y: 0.88, z: 10.000002}
   m_Center: {x: 0, y: 0.0000019073486, z: -0.00000047683716}
+--- !u!114 &6257707655206284828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566790119988430895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  outlineWidth: 15
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  needsUpdate: 1
 --- !u!1 &4056301128666375560
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +740,7 @@ GameObject:
   - component: {fileID: 7221014541001048729}
   - component: {fileID: 446885572273973975}
   - component: {fileID: 4274770359175339399}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +836,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6860167879185402492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 2.34, z: 0.103}
+  m_LocalPosition: {x: 0.52, y: 2.34, z: 0.34}
   m_LocalScale: {x: 0.72421783, y: 1, z: 0.336078}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -871,7 +891,7 @@ GameObject:
   - component: {fileID: 7068350261164780353}
   - component: {fileID: 7068350261164780354}
   - component: {fileID: 7068350261164780355}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Mostrador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,7 +1083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9050436932632418747}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

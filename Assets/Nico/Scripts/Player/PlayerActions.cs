@@ -15,6 +15,10 @@ namespace nico
         Mostrador mostradorSeleccionado;
         Baskets basketsSeleccionado;
         MostradorPersona mostradorPersonaSeleccionado;
+        BagInteractive bagSeleccionado;
+
+        BasketInteractive basketSeleccionado;
+        SeleccionableBasket seleccionableBasketSeleccionado;
 
         PlayerMovement PlayerMovement;
 
@@ -34,9 +38,9 @@ namespace nico
             // Obtiene la posición y dirección del raycast
             Vector3 raycastOrigin = mainCameraTransform.position;
             Vector3 raycastDirection = mainCameraTransform.forward;
-            int layerMask = 1 << LayerMask.NameToLayer("Interactive");
-
             RaycastHit hit;
+
+            int layerMask = 1 << LayerMask.NameToLayer("Interactive");
             if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, grabRange, layerMask))
             {
                 GameObject hitObject = hit.collider.gameObject;
@@ -46,6 +50,7 @@ namespace nico
                 mostradorSeleccionado = hitObject.GetComponent<Mostrador>();
                 basketsSeleccionado = hitObject.GetComponent<Baskets>();
                 mostradorPersonaSeleccionado = hitObject.GetComponent<MostradorPersona>();
+                bagSeleccionado = hitObject.GetComponent<BagInteractive>();
             }
             else
             {
@@ -54,6 +59,31 @@ namespace nico
                 mostradorSeleccionado = null;
                 basketsSeleccionado = null;
                 mostradorPersonaSeleccionado = null;
+                bagSeleccionado = null;
+            }
+
+            layerMask = 1 << LayerMask.NameToLayer("Basket");
+            if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, grabRange, layerMask))
+            {
+                GameObject hitObject = hit.collider.gameObject;
+
+                basketSeleccionado = hitObject.GetComponent<BasketInteractive>();
+            }
+            else
+            {
+                basketSeleccionado = null;
+            }
+
+            layerMask = 1 << LayerMask.NameToLayer("BasketInteractive");
+            if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, grabRange, layerMask))
+            {
+                GameObject hitObject = hit.collider.gameObject;
+
+                seleccionableBasketSeleccionado = hitObject.GetComponent<SeleccionableBasket>();
+            }
+            else
+            {
+                seleccionableBasketSeleccionado = null;
             }
 
             // Dibujar el rayo en la escena para visualización
@@ -78,6 +108,18 @@ namespace nico
             if (mostradorPersonaSeleccionado)
             {
                 mostradorPersonaSeleccionado.CurrentlySelected();
+            }
+            if (bagSeleccionado)
+            {
+                bagSeleccionado.CurrentlySelected();
+            }
+            if (basketSeleccionado)
+            {
+                basketSeleccionado.CurrentlySelected();
+            }
+            if (seleccionableBasketSeleccionado)
+            {
+                seleccionableBasketSeleccionado.CurrentlySelected();
             }
         }
     }

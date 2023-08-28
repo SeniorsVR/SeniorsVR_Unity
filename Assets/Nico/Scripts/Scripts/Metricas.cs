@@ -21,11 +21,33 @@ namespace nico
         public int veces_marcado_billete = 0; //Veces que el AM selecciona un billete
         public int veces_devuelto_billete = 0; //Veces que el AM devuelve un billete
 
-        public int vuelto_final = 0;
+        public float segundos_esperando_bolsa = 0; //Segundos en que el AM tarda en recojer la bolsa
+
+        public int vuelto_final = 0; //El vuelto final de la compra, puede ser positivo o negativo
+
+        public int veces_objeto_innecesario_recojido = 0; //Veces en las que el AM recoje un objeto que no necesita, ya sea que no esta en la lista o que ya fue cubierto
+        public int veces_objeto_necesario_devuelto = 0; //Veces en las que el AM devuelve un objeto que si necesitaba
+
+        public bool irse_sin_bolsa = false; // Si se fue sin la bolsa de productos
+
+
+        public Articulo[] objetos = new Articulo[6]; // Lista de objetos que se pide
 
         public Metricas()
         {
-
+            InitList();
         }
+
+        void InitList()
+        {
+            objetos[0] = Articulo.Bebida;
+            objetos[1] = Articulo.Chorizo;
+            objetos[2] = Articulo.Chorizo;
+            objetos[3] = Articulo.Cordero;
+            objetos[4] = Articulo.Galleta;
+            objetos[5] = Articulo.Tomate;
+        }
+
+
     }
 }

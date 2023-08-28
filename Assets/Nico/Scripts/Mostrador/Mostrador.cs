@@ -46,7 +46,7 @@ namespace nico
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.CompareTag("Player") && PlayerBasket.Instance.HasBasketFull())
+            if (other.gameObject.CompareTag("Player") && PlayerBasket.Instance.IsBasketFull())
             {
                 if (!initFlag)
                 {
@@ -128,7 +128,7 @@ namespace nico
 
         public void CurrentlySelected()
         {
-            if (!initFlag && PlayerBasket.Instance.currentIdx > 5)
+            if (!initFlag && PlayerBasket.Instance.IsBasketFull())
             {
                 isCurrentlySelected = true;
             }
