@@ -4,72 +4,35 @@ using UnityEngine;
 
 namespace nico
 {
-    public class BagInteractive : MonoBehaviour
+    public class BagInteractive : InteractiveParent
     {
-        float seleccionarCounter = 0;
-        float seleccionTime = 1;
-
-
         bool pickedUp = false;
-        bool isCurrentlySelected = false;
 
-        public QuickOutline outline;
-
+        public override void Start_()
+        {
+            selectTime = 1;
+        }
 
         // Update is called once per frame
-        void Update()
+        public override void Update_()
         {
-
-            if (isCurrentlySelected)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                seleccionarCounter = 0;
-                SwitchMaterialState(false);
-            }
 
             if (!pickedUp)
             {
                 TestManager.AddSecondsBagPickup(Time.deltaTime);
             }
-
-            isCurrentlySelected = false;
         }
 
-        public void CurrentlySelected()
+
+        public override bool SelectionConditionFunction()
         {
-            isCurrentlySelected = true;
-            seleccionarCounter += Time.deltaTime;
-
-            if (seleccionarCounter >= seleccionTime)
-            {
-                seleccionarCounter = 0;
-
-                Recoger();
-            }
+            return !pickedUp;
         }
-
-        void SwitchMaterialState(bool state)
-        {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
-
-        public void Recoger()
+        public override void SelectionFunction()
         {
             pickedUp = true;
             MostradorMovements.Instance.StartMovingBagToPlayer();
         }
+
     }
 }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 namespace nico
 {
-    public class Mostrador : MonoBehaviour
+    public class Mostrador : InteractiveParent
     {
         public static Mostrador Instance;
         private void Awake()
@@ -20,29 +20,6 @@ namespace nico
         public TextMeshProUGUI text;
 
         public Transform billetesTransform;
-
-        bool isCurrentlySelected = false;
-        QuickOutline outline;
-
-        private void Start()
-        {
-            outline = GetComponent<QuickOutline>();
-        }
-
-        void Update()
-        {
-
-            if (isCurrentlySelected)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                SwitchMaterialState(false);
-            }
-
-            isCurrentlySelected = false;
-        }
 
         private void OnCollisionEnter(Collision other)
         {
@@ -61,10 +38,9 @@ namespace nico
             TestManager.SetArticulosFlag(false);
 
             PlayerMovement.Instance.CollidedWithMostrador(MostradorMovements.Instance.targetPlayerTransform.position);
-            MostradorMovements.Instance.Invoke("StartMovingBasketToMostrador", 1);
+            MostradorMovements.Instance.StartMovingBasketToBack();
+            MostradorMovements.Instance.Invoke("StartMovingBasketToPreMostrador", 1);
             Invoke("ActivateAllBilletes", 2);
-
-            SetStateText(true);
 
         }
 
@@ -117,7 +93,7 @@ namespace nico
         {
             TestManager.SetCajaFlag(true);
 
-            Mostrador.Instance.ActualizarPaga(0);
+            ActualizarPaga(0);
 
             foreach (Billete billete in billetesTransform.GetComponentsInChildren<Billete>(true))
             {
@@ -126,7 +102,7 @@ namespace nico
 
         }
 
-        public void CurrentlySelected()
+        public override void CurrentlySelected()
         {
             if (!initFlag && PlayerBasket.Instance.IsBasketFull())
             {
@@ -134,19 +110,5 @@ namespace nico
             }
         }
 
-        void SwitchMaterialState(bool state)
-        {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
     }
 }
