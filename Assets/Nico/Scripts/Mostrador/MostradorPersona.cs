@@ -4,68 +4,23 @@ using UnityEngine;
 
 namespace nico
 {
-    public class MostradorPersona : MonoBehaviour
+    public class MostradorPersona : InteractiveParent
     {
-        float seleccionarCounter = 0;
-        float seleccionTime = 5;
-
-        bool isCurrentlySelected = false;
-
-        QuickOutline outline;
-
-        private void Start()
+        public static MostradorPersona Instance;
+        private void Awake()
         {
-            outline = GetComponent<QuickOutline>();
+            Instance = this;
         }
 
-        void Update()
+        public GameObject confirmar;
+
+        public override bool SelectionConditionFunction()
         {
-
-            if (isCurrentlySelected && TestManager.enCaja)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                SwitchMaterialState(false);
-                seleccionarCounter = 0;
-            }
-
-            isCurrentlySelected = false;
+            return TestManager.enCaja;
         }
-
-        void SwitchMaterialState(bool state)
+        public override void SelectionFunction()
         {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
-
-        public void CurrentlySelected()
-        {
-            isCurrentlySelected = true;
-            seleccionarCounter += Time.deltaTime;
-
-            if (seleccionarCounter >= seleccionTime && TestManager.enCaja)
-            {
-                seleccionarCounter = 0;
-
-                Activar();
-            }
-
-        }
-
-        void Activar()
-        {
-            Mostrador.Instance.ExitoDeCompra();
+            confirmar.SetActive(true);
         }
     }
 }

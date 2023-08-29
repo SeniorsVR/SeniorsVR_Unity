@@ -4,32 +4,12 @@ using UnityEngine;
 
 namespace nico
 {
-    public class Baskets : MonoBehaviour
+    public class Baskets : InteractiveParent
     {
-        bool isCurrentlySelected = false;
-        QuickOutline outline;
 
         public GameObject topBasket;
 
-        private void Start()
-        {
-            outline = GetComponent<QuickOutline>();
-        }
-        void Update()
-        {
-
-            if (isCurrentlySelected)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                SwitchMaterialState(false);
-            }
-
-            isCurrentlySelected = false;
-        }
-        public void CurrentlySelected()
+        public override void CurrentlySelected()
         {
             if (!PlayerBasket.Instance.hasBasket)
             {
@@ -37,25 +17,9 @@ namespace nico
             }
         }
 
-        void SwitchMaterialState(bool state)
+        private void OnCollisionStay(Collision collision)
         {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
-
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("Player"))
+            if (isCurrentlySelected && collision.gameObject.CompareTag("Player"))
             {
                 if (!PlayerBasket.Instance.hasBasket)
                 {

@@ -2246,9 +2246,9 @@ GameObject:
   - component: {fileID: 1635356436}
   - component: {fileID: 1635356438}
   - component: {fileID: 1635356437}
-  - component: {fileID: 1635356441}
-  - component: {fileID: 1635356440}
   - component: {fileID: 1635356439}
+  - component: {fileID: 1635356440}
+  - component: {fileID: 1635356441}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2319,11 +2319,9 @@ MonoBehaviour:
   speed: 2
   friccion: 10
   sensibility: 10
-  isMoving: 0
   cameraLookDirection: {x: 0, y: 0, z: 1}
   cameraTransform: {fileID: 1304679398}
   basketTransform: {fileID: 606593127}
-  MostradorFlag: 0
   mostradorPosition: {x: 0, y: 0, z: 0}
   basketInteractive: {fileID: 947721594}
 --- !u!114 &1635356440
@@ -3634,7 +3632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a979158fdb735479de2aec97787347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 6840907897231098189}
 --- !u!137 &3301253039276174809
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3773,11 +3770,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 909669441}
     m_Modifications:
-    - target: {fileID: 463571281313481542, guid: bc2390acb7506a84eb1546344f3af81e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 961752743125226780, guid: bc2390acb7506a84eb1546344f3af81e,
         type: 3}
       propertyPath: tipo
@@ -3903,31 +3895,11 @@ PrefabInstance:
       propertyPath: tipo
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 6971282412042208665, guid: bc2390acb7506a84eb1546344f3af81e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.02
-      objectReference: {fileID: 0}
     - target: {fileID: 6974240082537408143, guid: bc2390acb7506a84eb1546344f3af81e,
         type: 3}
       propertyPath: basketTransform
       value: 
       objectReference: {fileID: 543450652814197951}
-    - target: {fileID: 7068350260280864244, guid: bc2390acb7506a84eb1546344f3af81e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068350260280864244, guid: bc2390acb7506a84eb1546344f3af81e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068350260280864244, guid: bc2390acb7506a84eb1546344f3af81e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.35
-      objectReference: {fileID: 0}
     - target: {fileID: 7068350261164780352, guid: bc2390acb7506a84eb1546344f3af81e,
         type: 3}
       propertyPath: basketTransform

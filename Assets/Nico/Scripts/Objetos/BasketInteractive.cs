@@ -5,18 +5,18 @@ using UnityEngine;
 namespace nico
 {
 
-    public class BasketInteractive : MonoBehaviour
+    public class BasketInteractive : InteractiveParent
     {
 
         [HideInInspector]
         public int selectedState = 0;
 
-        void Update()
+        public override void Update_()
         {
             selectedState--;
         }
 
-        public void CurrentlySelected()
+        public override void CurrentlySelected()
         {
             if (PlayerBasket.Instance.GetNumArticulos() > 0)
             {

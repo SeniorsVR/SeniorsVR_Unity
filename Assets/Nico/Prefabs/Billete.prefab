@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15397164b9c9973458ede3a055b43dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 7394535315824721828}
+  outline_go: {fileID: 7394535315824721828}
   tipo: -1
   spriteRenderer: {fileID: 6223998307161518300}
   outlineRenderer: {fileID: 7989431748613506751}

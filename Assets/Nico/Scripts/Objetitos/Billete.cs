@@ -4,15 +4,13 @@ using UnityEngine;
 
 namespace nico
 {
-    public class Billete : MonoBehaviour
+    public class Billete : InteractiveParent
     {
 
-        public GameObject outline;
+        public GameObject outline_go;
         public int tipo = -1;
 
-        bool isCurrentlySelected, isPermanentlySelected;
-
-        float grabCounter = 0;
+        bool isPermanentlySelected;
 
         public SpriteRenderer spriteRenderer, outlineRenderer;
 
@@ -25,8 +23,11 @@ namespace nico
 
         public static bool isLocked = false;
 
-        private void Start()
+        new void Start()
         {
+
+            selectTime = PlayerActions.grabTime;
+
             ogPos = transform.position;
             playerPos = Mostrador.Instance.transform.position - Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f;
             pagaPos = Mostrador.Instance.transform.position + Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up;
@@ -47,7 +48,7 @@ namespace nico
         }
 
 
-        void Update()
+        new void Update()
         {
             if (isLocked)
             {
@@ -56,19 +57,26 @@ namespace nico
 
             if (isCurrentlySelected || isPermanentlySelected)
             {
-                outline.SetActive(true);
+                outline_go.SetActive(true);
             }
             else
             {
-                grabCounter = 0;
-                outline.SetActive(false);
+                selectCounter = 0;
+                outline_go.SetActive(false);
             }
 
             isCurrentlySelected = false;
 
             if (inMostradorFlag)
             {
-                transform.position = Vector3.Lerp(transform.position, ogPos, Time.deltaTime * 2);
+                if (isPermanentlySelected)
+                {
+                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right, Time.deltaTime * 2);
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, ogPos, Time.deltaTime * 2);
+                }
             }
             else if (hideFlag)
             {
@@ -83,24 +91,20 @@ namespace nico
             }
         }
 
-        public void CurrentlySelected()
+        public override bool SelectionConditionFunction()
         {
-            if (!isLocked)
-            {
-                isCurrentlySelected = true;
-
-                if (grabCounter > PlayerActions.grabTime)
-                {
-                    grabCounter = 0;
-                    SwitchSelectedState();
-                }
-                grabCounter += Time.deltaTime;
-
-            }
+            return !isLocked;
+        }
+        public override void SelectionFunction()
+        {
+            SwitchSelectedState();
         }
 
         void SwitchSelectedState()
         {
+
+            MostradorPersona.Instance.confirmar.SetActive(false);
+
             isPermanentlySelected = !isPermanentlySelected;
             if (isPermanentlySelected)
             {

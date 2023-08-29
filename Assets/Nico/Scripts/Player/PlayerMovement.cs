@@ -16,8 +16,8 @@ namespace nico
         public float friccion = 1f;
         public float sensibility = 1f;
 
-        [HideInInspector]
-        public bool isMoving = false;
+        public static bool isMoving = false;
+        public static float movementCooldown = 0;
 
         [HideInInspector]
         public Vector3 cameraLookDirection = new Vector3(0, 0, 1);
@@ -27,9 +27,8 @@ namespace nico
 
         public Transform cameraTransform, basketTransform;
 
-        [HideInInspector]
-        public bool MostradorFlag = false;
-        public static bool IsLocked = false;
+        public static bool mostradorFlag = false;
+        public static bool isLocked = false;
 
         [HideInInspector]
         public Vector3 mostradorPosition;
@@ -44,6 +43,7 @@ namespace nico
         {
             rb = GetComponent<Rigidbody>();
 
+            //Obtener la posicion y angulo locales de la canasta original respecto al jugador
             ogBasketAnchorLocalPos = basketTransform.GetChild(0).localPosition;
             ogBasketAnchorLocalRotation = basketTransform.GetChild(0).localRotation;
         }
@@ -51,13 +51,16 @@ namespace nico
         // Update is called once per frame
         void Update()
         {
+            //Funcion para mirar en el Unity
             ObtainOffsetDirection();
-            CheckIfMovement();
+
+            //Actualiza el estado de movimiento
+            UpdateMovementState();
 
             // Moverse si es necesario
-            if (!IsLocked)
+            if (!isLocked)
             {
-                if (isMoving)
+                if (isMoving)//Muevete
                 {
                     Vector3 moveDirection = cameraLookDirection;
                     moveDirection.y = 0;
@@ -65,32 +68,32 @@ namespace nico
                     rb.velocity = Vector3.Lerp(rb.velocity, moveDirection * speed, 1 - Time.deltaTime * friccion);
 
                 }
-                else
+                else//Frena
                 {
                     rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * friccion);
                 }
             }
-            else
+            else if (mostradorFlag)//Si esta en el mostrador
             {
                 IsOnMostrador();
             }
 
             // Ajustar direccion local de camara
             cameraLookDirection = Vector3.Lerp(cameraLookDirection, realLookDirection, Time.deltaTime * sensibility);
-
             cameraTransform.rotation = Quaternion.LookRotation(cameraLookDirection);
 
+            //Mueve el canasto
             MoveBasket(cameraLookDirection);
-
         }
 
-        void MoveBasket(Vector3 basketLookDirection)
+        void MoveBasket(Vector3 basketLookDirection) // Mueve el canasto dependiendo de hacia donde mira
         {
             if (basketInteractive.selectedState <= 0)
             {
                 basketLookDirection.y = 0;
-                basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, Quaternion.LookRotation(basketLookDirection), Time.deltaTime * 2);
+                basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, Quaternion.LookRotation(basketLookDirection), Time.deltaTime * 2); // Que el giro no sea instantanea, para que pueda ser mirado
 
+                //Mueve el modelo en si
                 if (basketTransform.childCount > 0)
                 {
                     basketTransform.GetChild(0).localPosition = Vector3.Lerp(basketTransform.GetChild(0).localPosition, ogBasketAnchorLocalPos, Time.deltaTime * 3);
@@ -100,7 +103,7 @@ namespace nico
 
         }
 
-        void ObtainOffsetDirection()
+        void ObtainOffsetDirection() //Unity editor function
         {
             float rotacionHorizontal = 0;
             float rotacionVertical = 0;
@@ -135,24 +138,13 @@ namespace nico
             realLookDirection.Normalize();
         }
 
-        void CheckIfMovement()
-        {
-            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
-            {
-                isMoving = true;
-            }
-            else
-            {
-                isMoving = false;
-            }
-        }
 
-        public void CollidedWithMostrador(Vector3 targetPos)
+        public void CollidedWithMostrador(Vector3 targetPos) // Llamada cuando el jugador choca con el mostrador
         {
-            if (!MostradorFlag)
+            if (!mostradorFlag)
             {
-                MostradorFlag = true;
-                IsLocked = true;
+                mostradorFlag = true;
+                isLocked = true;
 
                 rb.velocity = Vector3.zero;
                 mostradorPosition = targetPos;
@@ -160,7 +152,55 @@ namespace nico
         }
         void IsOnMostrador()
         {
-            transform.position = Vector3.Lerp(transform.position, mostradorPosition, Time.deltaTime * speed);
+            Vector3 targetPos = mostradorPosition;
+            float distance = Vector3.Distance(transform.position, targetPos);
+            if (distance < 0.01f)
+            {
+                transform.position = targetPos;
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+            }
+        }
+
+        void UpdateMovementState()
+        {
+            if (ButtonWasPressed()) //Que se empieze a mover 0.01 segundos despues de pulsar, para que se pueda detectar cuando esta quieto
+            {
+                movementCooldown = 0.01f;
+            }
+            isMoving = movementCooldown <= 0 && ButtonIsHeld();
+            movementCooldown -= Time.deltaTime;
+        }
+        public float GetCurrentSpeed()
+        {
+            //No se usa, pero ok
+            return rb.velocity.magnitude;
+        }
+
+        //Estan funciones deberian ser llamadas cuando se pulsa cualquier boton del control
+        public static bool ButtonIsHeld()
+        {
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool ButtonWasPressed()
+        {
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

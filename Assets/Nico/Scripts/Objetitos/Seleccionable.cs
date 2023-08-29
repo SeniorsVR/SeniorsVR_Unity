@@ -4,61 +4,23 @@ using UnityEngine;
 
 namespace nico
 {
-    public class Seleccionable : MonoBehaviour
+    public class Seleccionable : InteractiveParent
     {
 
         public Articulo tipo;
         public int index;
 
-        [HideInInspector]
-        public bool isCurrentlySelected = false;
-        QuickOutline outline;
-
-        MeshRenderer meshRenderer;
-
         static bool isBasketFull = false;
 
-        float grabCounter = 0;
-
-
-        // Start is called before the first frame update
-        void Start()
+        public override void Start_()
         {
-            meshRenderer = GetComponent<MeshRenderer>();
-            outline = GetComponent<QuickOutline>();
-
+            selectTime = PlayerActions.grabTime;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-            if (isCurrentlySelected)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                grabCounter = 0;
-                SwitchMaterialState(false);
-            }
-
-            isCurrentlySelected = false;
-        }
-
-        public void CurrentlySelected()
+        public override bool SelectionConditionFunction()
         {
             if (PlayerBasket.Instance.hasBasket)
             {
-                grabCounter += Time.deltaTime;
-
-                if (grabCounter >= PlayerActions.grabTime)
-                {
-                    grabCounter = 0;
-
-                    Recoger();
-                }
-
                 if (!isBasketFull)
                 {
                     isCurrentlySelected = true;
@@ -66,31 +28,18 @@ namespace nico
                 else
                 {
                     TestManager.AddSecondsSeleccionableLleno(Time.deltaTime);
+                    return false;
                 }
             }
             else
             {
                 TestManager.AddSecondsSeleccionableInvalido(Time.deltaTime);
+                return false;
             }
-
+            return true;
         }
 
-        void SwitchMaterialState(bool state)
-        {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
-
-        public void Recoger()
+        public override void SelectionFunction() //Recojer objeto
         {
 
             int remaning = PlayerBasket.Instance.AddObject(tipo, index, this);

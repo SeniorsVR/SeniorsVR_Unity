@@ -4,7 +4,7 @@ using UnityEngine;
 namespace nico
 {
 
-    public class SeleccionableBasket : MonoBehaviour
+    public class SeleccionableBasket : InteractiveParent
     {
 
         public Articulo tipo;
@@ -14,75 +14,21 @@ namespace nico
         [HideInInspector]
         public Seleccionable seleccionable;
 
-        bool isCurrentlySelected = false;
-        QuickOutline outline;
-
-        MeshRenderer meshRenderer;
-
-
-        float grabCounter = 0;
-
 
         // Start is called before the first frame update
-        void Start()
+        public override void Start_()
         {
-            meshRenderer = GetComponent<MeshRenderer>();
-            outline = GetComponent<QuickOutline>();
+            selectTime = PlayerActions.grabTime;
 
-            meshRenderer.enabled = true;
             gameObject.SetActive(false);
-
         }
 
-        // Update is called once per frame
-        void Update()
+        public override bool SelectionConditionFunction()
         {
-
-            if (isCurrentlySelected)
-            {
-                SwitchMaterialState(true);
-            }
-            else
-            {
-                grabCounter = 0;
-                SwitchMaterialState(false);
-            }
-
-            isCurrentlySelected = false;
+            return !TestManager.enCaja;
         }
-
-        public void CurrentlySelected()
+        public override void SelectionFunction() //Devolver el articulo
         {
-            isCurrentlySelected = true;
-            grabCounter += Time.deltaTime;
-
-            if (grabCounter >= PlayerActions.grabTime)
-            {
-                grabCounter = 0;
-
-                Devolver();
-            }
-
-        }
-
-        void SwitchMaterialState(bool state)
-        {
-
-            if (state)
-            {
-                //con outline
-                outline.enabled = true;
-            }
-            else
-            {
-                //sin outline
-                outline.enabled = false;
-            }
-        }
-
-        public void Devolver()
-        {
-
             PlayerBasket.Instance.RemoveObject(index, basketIndex);
             TestManager.AddVesDevuelto(tipo);
 
@@ -90,14 +36,11 @@ namespace nico
             {
                 seleccionable.Reponer();
             }
-
-            //meshRenderer.enabled = false;
         }
+
 
         public void SetState(bool state)
         {
-            //meshRenderer.enabled = true;
-
             gameObject.SetActive(state);
         }
     }
