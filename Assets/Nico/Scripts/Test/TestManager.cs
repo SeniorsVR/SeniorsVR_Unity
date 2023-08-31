@@ -39,7 +39,6 @@ namespace nico
 
         private void Start()
         {
-            Screen.orientation = ScreenOrientation.LandscapeLeft;
             StartCoroutine(StartXRCoroutine());
 
             TestManager.SetTestFlag(true);
@@ -347,6 +346,10 @@ namespace nico
                 Debug.Log("Starting XR...");
                 XRGeneralSettings.Instance.Manager.StartSubsystems();
             }
+        }
+        public void cancelTest(){
+            StopXR();
+            SceneManager.LoadScene("CancelScene");
         }
 
         void StopXR()
