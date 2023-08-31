@@ -17,29 +17,39 @@ namespace nico
         private void OnTriggerEnter(Collider other)
         {
 
-            if (other.CompareTag("Player") && rm.back)
+            if (other.CompareTag("Player"))
             {
-                if (TestManager.enIda)
+                if (!Eseldelinicio)
                 {
-                    TestManager.SetIdaFlag(false);
+                    if (TestManager.enIda)
+                    {
+                        TestManager.SetIdaFlag(false);
 
-                    TestManager.SetKioskoFlag(true);
-                    TestManager.SetRecojerCanastoFlag(true);
+                        TestManager.SetKioskoFlag(true);
+                        TestManager.SetRecojerCanastoFlag(true);
+
+                    }
+                    else if (TestManager.enIrse && rm.back)
+                    {
+                        TestManager.SetIrseFlag(false);
+                        TestManager.SetKioskoFlag(false);
+
+                        TestManager.SetVueltaFlag(true);
+
+                        //TestManager.PrintInLog();
+
+                    }
                 }
-                else if (TestManager.enIrse)
+                else
                 {
-                    TestManager.SetIrseFlag(false);
-                    TestManager.SetKioskoFlag(false);
+                    if (Eseldelinicio && rm.back && TestManager.enVuelta)
+                    {
 
-                    TestManager.SetVueltaFlag(true);
-
-                    //TestManager.PrintInLog();
-                }
-                else if (Eseldelinicio && TestManager.enVuelta)
-                {
-                    TestManager.SetVueltaFlag(false);
-                    if(endEvent != null){
-                        endEvent();
+                        TestManager.SetVueltaFlag(false);
+                        if (endEvent != null)
+                        {
+                            endEvent();
+                        }
                     }
                 }
             }

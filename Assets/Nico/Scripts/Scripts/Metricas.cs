@@ -46,7 +46,7 @@ namespace nico
         public int cantidad_segmentos_ruta = 0;
         public int cantidad_segmentos_ruta_transitados = 0;
         public int cantidad_segmentos_no_ruta = 0;
-        public int articulos_validos = 0;
+
         public int cantidad_minima_billetes = 0;
 
         public Articulo[] objetos = new Articulo[6]; // Lista de objetos que se pide
@@ -55,7 +55,7 @@ namespace nico
         {
         }
 
-        public void registrarLista(Dictionary <string, int> lista)
+        public Articulo[] registrarLista(Dictionary <string, int> lista)
         {
             int k = 0;
             foreach( KeyValuePair<string, int> kvp in lista ) {
@@ -68,30 +68,32 @@ namespace nico
                         break;
                     case "Vienesa":
                         for(int i = 0; i < kvp.Value; i++){
-                            objetos[k] = Articulo.Bebida;
+                            objetos[k] = Articulo.Chorizo;
                             k++;
                         }
                         break;
                     case "Carne":
                         for(int i = 0; i < kvp.Value; i++){
-                            objetos[k] = Articulo.Bebida;
+                            objetos[k] = Articulo.Cordero;
                             k++;
                         }
                         break;
                     case "Galleta":
                         for(int i = 0; i < kvp.Value; i++){
-                            objetos[k] = Articulo.Bebida;
+                            objetos[k] = Articulo.Galleta;
                             k++;
                         }
                         break;
                     case "Tomate":
                         for(int i = 0; i < kvp.Value; i++){
-                            objetos[i+k] = Articulo.Bebida;
+                            objetos[k] = Articulo.Tomate;
                             k++;
                         }
                         break;
                 }
             }
+
+            return objetos;
         }
 
     }

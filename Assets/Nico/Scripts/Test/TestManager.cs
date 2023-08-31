@@ -19,6 +19,7 @@ namespace nico
             }
 
             Instance = this;
+            metricas = new Metricas();
             DontDestroyOnLoad(gameObject);
         }
 
@@ -38,7 +39,6 @@ namespace nico
 
         private void Start()
         {
-            metricas = new Metricas();
             Screen.orientation = ScreenOrientation.LandscapeLeft;
             StartCoroutine(StartXRCoroutine());
 
@@ -205,7 +205,10 @@ namespace nico
         public static void EvaluateArticulos()
         {
             Articulo[] listaObjetosCopy = new Articulo[metricas.objetos.Length];
-            Array.Copy(metricas.objetos, listaObjetosCopy, metricas.objetos.Length);
+            for (int i = 1; i < 6; i++)
+            {
+                listaObjetosCopy[i] = metricas.objetos[i];
+            }
 
             Articulo[] basketObjetos = PlayerBasket.Instance.objetos;
 
@@ -213,8 +216,10 @@ namespace nico
 
             foreach (Articulo articuloPlayer in basketObjetos)
             {
+
                 for (int i = 1; i < 6; i++)
                 {
+
                     Articulo articuloLista = listaObjetosCopy[i];
 
                     if (articuloPlayer == articuloLista)
