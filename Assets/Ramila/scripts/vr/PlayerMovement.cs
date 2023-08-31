@@ -191,26 +191,43 @@ namespace nico
         }
 
         //Estan funciones deberian ser llamadas cuando se pulsa cualquier boton del control
-        public static bool ButtonIsHeld()
+        public bool ButtonIsHeld()
         {
-            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
-            {
-                return true;
+            if(!vr){
+                if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }else{
+                if(Input.anyKey){
+                    return true;
+                }else{
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            
         }
-        public static bool ButtonWasPressed()
+        public bool ButtonWasPressed()
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+            if(!vr){
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }else{
+                if(Input.anyKeyDown){
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
     }

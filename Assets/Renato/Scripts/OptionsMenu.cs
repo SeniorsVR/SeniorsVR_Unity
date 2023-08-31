@@ -11,6 +11,7 @@ public class OptionsMenu : MonoBehaviour {
     private DateTime now;
     static private string currentProfile;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         now = DateTime.Now;

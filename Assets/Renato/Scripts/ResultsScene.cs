@@ -1,55 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using nico;
+using Unity.Mathematics;
 
 public class ResultsScene : MonoBehaviour {
     private string filename, currentProfile;
     [SerializeField] private TMP_Text[] texts;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        filename = HistoryScene.GetSimulationName();
-        currentProfile = HistoryScene.GetSelectedProfile();
-        Simulation simulation = SaveSystem.LoadSimulation(filename, currentProfile);
-        Debug.Log(filename);
-        Debug.Log(simulation.GetUsername() + ", " + simulation.GetDate());
-        texts[1].text = simulation.GetDate();
-        texts[2].text = TimeInSeconds(simulation.GetTotalTime());
-        texts[3].text = TimeInSeconds(simulation.GetFirstTime()) + "/" + TimeInSeconds(simulation.GetThirdTime());
-        texts[4].text = TimeInSeconds(simulation.GetSecondTime());
-        texts[5].text = simulation.GetCorrectItems().ToString() + " objetos correctos";
-        texts[6].text = simulation.GetIncorrectItems().ToString() + " objectos incorrectos";
-        if (simulation.GetAmountPaid() < simulation.GetMoneyToPay()) {
-            texts[7].text = "Pagó " + (simulation.GetMoneyToPay() - simulation.GetAmountPaid()) + "$ menos de lo debido";
-        } if (simulation.GetAmountPaid() == simulation.GetAmountPaid()) {
-            texts[7].text = "Canceló correctamente";
+        //filename = HistoryScene.GetSimulationName();
+        currentProfile = ProfileScene.GetSelectedProfile();
+        //Simulation simulation = SaveSystem.LoadSimulation(filename, currentProfile);
+        //Debug.Log(filename);
+        //Debug.Log(simulation.GetUsername() + ", " + simulation.GetDate());
+        texts[1].text = DateTime.Now.Date.ToString();
+        texts[2].text = TimeInSeconds(TestManager.metricas.tiempo_total);
+        texts[3].text = TimeInSeconds(TestManager.metricas.tiempo_total_ida) + "/" + TimeInSeconds(TestManager.metricas.tiempo_total_vuelta);
+        texts[4].text = TimeInSeconds(TestManager.metricas.tiempo_total_kiosko);
+        texts[5].text = TestManager.metricas.articulos_validos + " de 6 objetos correctos";
+        texts[6].text = (6-TestManager.metricas.articulos_validos) + " objectos incorrectos";
+        if (TestManager.metricas.vuelto_final > 0) {
+            texts[7].text = "Pagó $" + (TestManager.metricas.vuelto_final) + " menos de lo debido";
+        }else if (TestManager.metricas.vuelto_final == 0) {
+            texts[7].text = "Pagó correctamente";
         } else {
-            texts[7].text = "Pagó " + (simulation.GetAmountPaid() - simulation.GetMoneyToPay()) + "$ más de lo debido";
+            texts[7].text = "Pagó $" + (-TestManager.metricas.vuelto_final) + " más de lo debido";
         }
-        texts[8].text = simulation.GetBillInteractions().ToString() + "/" + simulation.GetMinBillInteractions().ToString();
-        texts[9].text = simulation.GetProductInteractions().ToString() + "/" + simulation.GetMinProductInteractions().ToString();
-        if (simulation.GetProductsTook()) {
+        texts[8].text = (TestManager.metricas.veces_marcado_billete+TestManager.metricas.veces_devuelto_billete).ToString() + "/" + TestManager.metricas.cantidad_minima_billetes.ToString();
+        texts[9].text = (TestManager.metricas.veces_devuelto_objeto+TestManager.metricas.veces_recogido_objeto).ToString() + "/6";
+        if (!TestManager.metricas.irse_sin_bolsa) {
             texts[10].text = "Sí";
         } else {
             texts[10].text = "No";
         }
-        texts[11].text = simulation.GetOutOfRoute().ToString() + " segmentos fuera de ruta";
-        texts[12].text = simulation.GetRedLights().ToString() + " luces rojas v/s " + simulation.GetGreenLights().ToString() + " luces verdes";
-        texts[13].text = simulation.GetVeredaSegments().ToString() + " en la vereda y " + simulation.GetNoVeredaSegments() + " fuera";
+        texts[11].text = TestManager.metricas.cantidad_segmentos_ruta_transitados + "/" + TestManager.metricas.cantidad_segmentos_ruta;
+        texts[12].text = TestManager.metricas.cantidad_segmentos_no_ruta + " segmentos fuera de ruta";
+        texts[13].text = TestManager.metricas.contador_cruces_invalidos + " luces rojas v/s " + TestManager.metricas.contador_cruces_validos + " luces verdes";
+        texts[14].text = TestManager.metricas.contador_transita_calle + " segmentos de calle transitados (no en vía peatonal)";
     }
 
     public void MainMenu() {
         SceneManager.LoadScene("FirstScene");
     }
 
-    public string TimeInSeconds(int time) {
+    public string TimeInSeconds(float time) {
         if (time < 60) {
-            return time + "s.";
+            return Mathf.RoundToInt(time) + "s.";
         } else {
-            return time/60 + " m. " + time%60 + " s.";
+            return Mathf.RoundToInt(time)/60 + " m. " + Mathf.RoundToInt(time)%60 + " s.";
         }
     }
 }

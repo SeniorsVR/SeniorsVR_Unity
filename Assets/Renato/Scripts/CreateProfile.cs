@@ -13,6 +13,7 @@ public class CreateProfile : MonoBehaviour {
     private string age;
 
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

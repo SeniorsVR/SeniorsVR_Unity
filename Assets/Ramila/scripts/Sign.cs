@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 
 public class Sign : MonoBehaviour {
-    static private int listSize = 4;
+    static private int listSize = 6;
     [SerializeField] private TMP_Text[] texts;
     public string[] objects;
     static private Dictionary <string, int> dictionary;

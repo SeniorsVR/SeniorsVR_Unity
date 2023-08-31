@@ -9,10 +9,15 @@ namespace nico
     {
         public bool Eseldelinicio = false;
 
+        public routeMarker rm;
+
+        public delegate void End();
+        public static event End endEvent;
+
         private void OnTriggerEnter(Collider other)
         {
 
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && rm.back)
             {
                 if (TestManager.enIda)
                 {
@@ -33,8 +38,9 @@ namespace nico
                 else if (Eseldelinicio && TestManager.enVuelta)
                 {
                     TestManager.SetVueltaFlag(false);
-
-                    //Cosas de fin de test lol
+                    if(endEvent != null){
+                        endEvent();
+                    }
                 }
             }
         }

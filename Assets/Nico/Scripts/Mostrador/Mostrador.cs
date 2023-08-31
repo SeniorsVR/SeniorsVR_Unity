@@ -89,6 +89,7 @@ namespace nico
             TestManager.ComputePaymentEfficiency(pagaUsuario, totalBilletes);
 
             TestManager.AddVueltoFinal(precioRestante);
+            TestManager.EvaluateArticulos();
         }
 
         void ActivateAllBilletes()
