@@ -14,12 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Renato/Scenes/ResultsScene.unity
     guid: 37657f6cab33e26478d2cc2e8e34a321
-  - enabled: 0
-    path: Assets/Ramila/Scenes/ResultsScene.unity
-    guid: 81cf674336989494faaea0b4a38d7c2e
-  - enabled: 0
-    path: Assets/Nico/Scenes/SampleScene.unity
-    guid: e595ffda9104a194b948a0adcb719f3e
   - enabled: 1
     path: Assets/Renato/Scenes/ProfileScene.unity
     guid: 2058b1c6fcd4e6940ac0ecc0320fe02c
