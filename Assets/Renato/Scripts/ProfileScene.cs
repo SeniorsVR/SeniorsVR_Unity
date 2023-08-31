@@ -6,12 +6,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ProfileScene : MonoBehaviour {
-    public TMP_Text profileText, ageText;
+    public GameObject popup;
+    public TMP_Text profileText, ageText, confirmacion;
     private Profile profile;
     private DateTime now;
     private new string name;
     static private string currentProfile;
     void Start() {
+        popup.SetActive(false);
         Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -20,6 +22,7 @@ public class ProfileScene : MonoBehaviour {
         profile = SaveSystem.LoadProfile(name);
 
         profileText.SetText(profile.GetName());
+        confirmacion.SetText("¿Estás seguro que quieres comenzar un test para el paciente " + profile.GetName() + "?");
         string[] split = profile.GetAge().Split('-');
         DateTime time = new(int.Parse(split[2]), int.Parse(split[1]), int.Parse(split[0]));
         ageText.SetText((now - time).Days/365 + " años");
@@ -36,6 +39,14 @@ public class ProfileScene : MonoBehaviour {
     public void OptionsMenu() {
         SetSelectedProfile(name);
         SceneManager.LoadScene("OptionsScene");
+    }
+
+    public void confirmationPopup(){
+        popup.SetActive(true);
+    }
+
+    public void confirmationPopupVolver(){
+        popup.SetActive(false);
     }
 
     public void StartSimulation() {
