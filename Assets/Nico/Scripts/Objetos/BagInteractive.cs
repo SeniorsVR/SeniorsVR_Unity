@@ -31,6 +31,7 @@ namespace nico
         public override void SelectionFunction()
         {
             pickedUp = true;
+            TestManager.SetBagPicked();
             MostradorMovements.Instance.StartMovingBagToPlayer();
         }
 

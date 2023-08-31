@@ -9,8 +9,10 @@ namespace nico
     {
         public float tiempo_total = 0; //Tiempo total del test
         public float tiempo_total_kiosko = 0; //Tiempo total en el kiosko
+        public float tiempo_total_canasto = 0; //Tiempo total en recojer canastos
         public float tiempo_total_articulos = 0; //Tiempo total buscando articulos
         public float tiempo_total_caja = 0; //Tiempo total en la caja
+        public float tiempo_total_irse = 0; //Tiempo total en salir del minimarket
 
         public float segundos_mirando_objetos_invalido = 0; //Segundos en que el AM esta mirando un objeto sin canasto
         public float segundos_mirando_objetos_lleno = 0; //Segundos en que el AM esta mirando un objeto con canasto lleno
@@ -28,8 +30,9 @@ namespace nico
         public int veces_objeto_innecesario_recojido = 0; //Veces en las que el AM recoje un objeto que no necesita, ya sea que no esta en la lista o que ya fue cubierto
         public int veces_objeto_necesario_devuelto = 0; //Veces en las que el AM devuelve un objeto que si necesitaba
 
-        public bool irse_sin_bolsa = false; // Si se fue sin la bolsa de productos
+        public bool irse_sin_bolsa = true; // Si se fue sin la bolsa de productos
 
+        public int numero_billetes_innecesarios = 0; // Cantidad de billetes extras con los que pago en comparacion al optimo
 
         public Articulo[] objetos = new Articulo[6]; // Lista de objetos que se pide
 
@@ -47,7 +50,6 @@ namespace nico
             objetos[4] = Articulo.Galleta;
             objetos[5] = Articulo.Tomate;
         }
-
 
     }
 }

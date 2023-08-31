@@ -10,7 +10,8 @@ namespace nico
         public GameObject outline_go;
         public int tipo = -1;
 
-        bool isPermanentlySelected;
+        [HideInInspector]
+        public bool isPermanentlySelected;
 
         public SpriteRenderer spriteRenderer, outlineRenderer;
 
@@ -111,14 +112,14 @@ namespace nico
                 Mostrador.Instance.ActualizarPaga(Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.5f;
 
-                TestManager.AddVesDevueltoBillete();
+                TestManager.AddVesMarcadoBillete();
             }
             else
             {
                 Mostrador.Instance.ActualizarPaga(-Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.0795f;
 
-                TestManager.AddVesMarcadoBillete();
+                TestManager.AddVesDevueltoBillete();
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,10 @@ namespace nico
         public static Metricas metricas;
 
         public static bool enKiosko = false;
+        public static bool enCanasto = false;
         public static bool enArticulos = false;
         public static bool enCaja = false;
+        public static bool enIrse = false;
 
 
         private void Start()
@@ -39,6 +42,10 @@ namespace nico
             {
                 metricas.tiempo_total_kiosko += Time.deltaTime;
 
+                if (enCanasto)
+                {
+                    metricas.tiempo_total_canasto += Time.deltaTime;
+                }
                 if (enArticulos)
                 {
                     metricas.tiempo_total_articulos += Time.deltaTime;
@@ -46,6 +53,10 @@ namespace nico
                 if (enCaja)
                 {
                     metricas.tiempo_total_caja += Time.deltaTime;
+                }
+                if (enIrse)
+                {
+                    metricas.tiempo_total_irse += Time.deltaTime;
                 }
             }
         }
@@ -55,6 +66,10 @@ namespace nico
         {
             enKiosko = state;
         }
+        public static void SetRecojerCanastoFlag(bool state)
+        {
+            enCanasto = state;
+        }
         public static void SetArticulosFlag(bool state)
         {
             enArticulos = state;
@@ -62,6 +77,10 @@ namespace nico
         public static void SetCajaFlag(bool state)
         {
             enCaja = state;
+        }
+        public static void SetIrseFlag(bool state)
+        {
+            enIrse = state;
         }
 
         public static void AddSecondsSeleccionableInvalido(float t)
@@ -100,6 +119,17 @@ namespace nico
         public static void AddSecondsBagPickup(float t)
         {
             metricas.segundos_esperando_bolsa += t;
+        }
+        public static void SetBagPicked()
+        {
+            metricas.irse_sin_bolsa = false;
+        }
+
+        public static void ComputePaymentEfficiency(int amount, int nCoins)
+        {
+            int optimalCoins = ComputeMinPayment(amount);
+
+            metricas.numero_billetes_innecesarios = nCoins - optimalCoins;
         }
         #endregion
 
@@ -154,5 +184,52 @@ namespace nico
                 metricas.veces_objeto_necesario_devuelto++;
             }
         }
+    
+        static int ComputeMinPayment(int amount)
+        {
+            int[] coins = ObjetosConstants.coins;
+
+            int[] dp = new int[amount + 1];
+            Array.Fill(dp, int.MaxValue);
+            dp[0] = 0;
+
+            for (int i = 1; i <= amount; i++)
+            {
+                foreach (int coin in coins)
+                {
+                    if (i >= coin)
+                    {
+                        dp[i] = Mathf.Min(dp[i], dp[i - coin] + 1);
+                    }
+                }
+            }
+
+            return dp[amount] != int.MaxValue ? dp[amount] : -1;
+        }
+
+
+
+        public static void PrintInLog()
+        {
+            print("Tiempo total: " + metricas.tiempo_total);
+            print("Tiempo kiosko: " + metricas.tiempo_total_kiosko);
+            print("Tiempo recojer canasto: " + metricas.tiempo_total_canasto);
+            print("Tiempo buscando articulos: " + metricas.tiempo_total_articulos);
+            print("Tiempo en irse: " + metricas.tiempo_total_irse);
+            print("Tiempo buscando articulos: " + metricas.tiempo_total_articulos);
+            print("Tiempo mirnado invalido: " + metricas.segundos_mirando_objetos_invalido);
+            print("Tiempo mirando lleno: " + metricas.segundos_mirando_objetos_lleno);
+            print("Veces obj recojido: " + metricas.veces_recogido_objeto);
+            print("Veces obj devuelto: " + metricas.veces_devuelto_objeto);
+            print("Veces billete marcado: " + metricas.veces_marcado_billete);
+            print("Veces billete devuelto: " + metricas.veces_devuelto_billete);
+            print("Tiempo toma en recojer bolsa: " + metricas.segundos_esperando_bolsa);
+            print("Vuelto: " + metricas.vuelto_final);
+            print("Veces objeto innecesario recojido: " + metricas.veces_objeto_innecesario_recojido );
+            print("Veces objeto necesario debuelto: " + metricas.veces_objeto_necesario_devuelto);
+            print("Irse sin bolsa: " + metricas.irse_sin_bolsa);
+            print("Billetes innecesarios: " + metricas.numero_billetes_innecesarios);
+        }
+
     }
 }
