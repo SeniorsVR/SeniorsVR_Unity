@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using nico;
 using UnityEngine;
 
 public class Cruce : MonoBehaviour
 {
-    public bool countedFlag = false;
-
+    public Semaforo semaforoPeatonal;
     private void OnTriggerEnter(Collider other)
     {
-        if (!countedFlag)
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                countedFlag = true;
-
-                //Contar
+            if(semaforoPeatonal.state){
+                TestManager.AddCruceValido();
+            }else{
+                TestManager.AddCruceInvalido();
             }
         }
     }

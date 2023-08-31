@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.Management;
 
 namespace nico
 {
@@ -34,7 +36,7 @@ namespace nico
         private void Start()
         {
             metricas = new Metricas();
-
+            StartCoroutine(StartXRCoroutine());
 
             //TestManager.SetKioskoFlag(true);//debug
             TestManager.SetTestFlag(true);
@@ -68,6 +70,19 @@ namespace nico
                     metricas.tiempo_total_irse += Time.deltaTime;
                 }
             }
+        }
+
+        private void OnEnable() {
+            routeMarker.endSimEvent += finish;
+        }
+
+        private void OnDisable() {
+            routeMarker.endSimEvent -= finish;
+        }
+
+        public void finish() {
+            StopXR();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         #region Metricas
@@ -146,7 +161,24 @@ namespace nico
         }
         public static void AddCruceInvalido()
         {
-            metricas.contador_cruzes_invalidos++;
+            metricas.contador_cruces_invalidos++;
+        }
+        public static void AddCruceValido()
+        {
+            metricas.contador_cruces_validos++;
+        }
+
+        public static void AddcontadorTransitaCalle(){
+            metricas.contador_transita_calle++;
+        }
+        public static void AddSegmentosRuta(){
+            metricas.cantidad_segmentos_ruta++;
+        }
+        public static void AddSegmentosRutaTransitados(){
+            metricas.cantidad_segmentos_ruta_transitados++;
+        }
+        public static void AddSegmentosNoRutaTransitados(){
+            metricas.cantidad_segmentos_no_ruta++;
         }
         #endregion
 
@@ -248,5 +280,30 @@ namespace nico
             print("Billetes innecesarios: " + metricas.numero_billetes_innecesarios);
         }
 
+        public IEnumerator StartXRCoroutine(){
+            Debug.Log("Initializing XR...");
+            yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
+
+            if (XRGeneralSettings.Instance.Manager.activeLoader == null)
+            {
+                Debug.LogError("Initializing XR Failed. Check Editor or Player log for details.");
+            }
+            else
+            {
+                Debug.Log("Starting XR...");
+                XRGeneralSettings.Instance.Manager.StartSubsystems();
+            }
+        }
+
+        void StopXR()
+        {
+            Debug.Log("Stopping XR...");
+            XRGeneralSettings.Instance.Manager.StopSubsystems();
+            XRGeneralSettings.Instance.Manager.DeinitializeLoader();
+            Debug.Log("XR stopped completely.");
+            Screen.orientation = ScreenOrientation.Portrait;
+        }
+
     }
+
 }

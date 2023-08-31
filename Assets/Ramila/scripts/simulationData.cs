@@ -8,7 +8,6 @@ public class simulationData : MonoBehaviour {
     static public string[] statsNames;
     static public int[][] statistics;
     void Start() {
-        Debug.Log("aaaaaaaaaaaaa");
         StartCoroutine(StartXRCoroutine());
         statistics = new int [3][];
         statistics[0] = new int [2]; statistics[1] = new int [2]; statistics[2] = new int [2];
