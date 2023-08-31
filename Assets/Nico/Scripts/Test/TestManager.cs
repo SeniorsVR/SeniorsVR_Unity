@@ -200,6 +200,35 @@ namespace nico
         public static void AddSegmentosNoRutaTransitados(){
             metricas.cantidad_segmentos_no_ruta++;
         }
+
+
+        public static void EvaluateArticulos()
+        {
+            Articulo[] listaObjetosCopy = new Articulo[metricas.objetos.Length];
+            Array.Copy(metricas.objetos, listaObjetosCopy, metricas.objetos.Length);
+
+            Articulo[] basketObjetos = PlayerBasket.Instance.objetos;
+
+            int validos = 0;
+
+            foreach (Articulo articuloPlayer in basketObjetos)
+            {
+                for (int i = 1; i < 6; i++)
+                {
+                    Articulo articuloLista = listaObjetosCopy[i];
+
+                    if (articuloPlayer == articuloLista)
+                    {
+                        validos++;
+                        listaObjetosCopy[i] = Articulo.EMPTY;
+
+                        break;
+                    }
+                }
+            }
+
+            metricas.articulos_validos = validos;
+        }
         #endregion
 
         static void EvaluateNewArticulo(Articulo newArticulo)//Cuando recoje
