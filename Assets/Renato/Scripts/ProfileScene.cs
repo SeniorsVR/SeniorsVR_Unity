@@ -41,7 +41,8 @@ public class ProfileScene : MonoBehaviour {
     public void StartSimulation() {
         //Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
         //SaveSystem.SaveSimulation(simulation);
-        SceneManager.LoadScene("test");
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Invoke("comenzarTest",5);
     }
 
     public void History() {
@@ -55,5 +56,9 @@ public class ProfileScene : MonoBehaviour {
 
     static public string GetSelectedProfile() {
         return currentProfile;
+    }
+
+    private void comenzarTest(){
+        SceneManager.LoadScene("test");
     }
 }
