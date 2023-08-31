@@ -18,25 +18,36 @@ public class routeLoop : MonoBehaviour
     public float movementBuffer;
     public float rotationSpeed;
     bool first;
+    public int desfase;
+    public GameObject body;
+
+    public List<Color> colores;
     
     private bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
+        body.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", colores[Random.Range(0, colores.Count)]);
         first = true;
-        target = 0;
+        target = 0 + desfase;
         currentPoint = 0;
         isMoving = false;
         points = new List<Transform>();
-        nextTransit = new Transit();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         if(isMoving){
+            if(target==0){
+                route[route.Count-1].canTransit = true;
+            }else{
+                route[target-1].canTransit = true;
+            }
             if(route[target].isCrossRoad){
+                if(!route[target].isStop){
+                    route[target].canTransit = false;
+                }
                 transform.position = Vector3.MoveTowards(transform.position,points[currentPoint].position, Time.deltaTime * speed/2);
                 transform.rotation = Quaternion.Lerp(transform.rotation, points[currentPoint].rotation, Time.deltaTime * rotationSpeed);
             }else{
@@ -52,6 +63,11 @@ public class routeLoop : MonoBehaviour
                         target = 0;
                     }
                     isMoving = false;
+                     if(target==0){
+                        route[route.Count-1].canTransit = true;
+                    }else{
+                        route[target-1].canTransit = true;
+                    }
                 }
             }
         }else{
@@ -71,6 +87,18 @@ public class routeLoop : MonoBehaviour
                 case 4:
                     points = nextTransit.points4;
                     break;
+                case 5:
+                    points = nextTransit.points5;
+                    break;
+                case 6:
+                    points = nextTransit.points6;
+                    break;
+                case 7:
+                    points = nextTransit.points7;
+                    break;
+                case 8:
+                    points = nextTransit.points8;
+                    break;
                 }
                 if(first){
                     transform.position = points[0].position;
@@ -78,6 +106,20 @@ public class routeLoop : MonoBehaviour
                     first = false;
                 }
                 currentPoint = 0;
+            }else{
+                if(target==0){
+                    if(!route[route.Count-1].isStop){
+                        route[route.Count-1].canTransit = false;
+                    }else{
+                        route[route.Count-2].canTransit = false;
+                    }
+                }else{
+                    if(!route[target-1].isStop){
+                        route[target-1].canTransit = false;
+                    }else{
+                        route[target-2].canTransit = false;
+                    }
+                }
             }
         }
     }
