@@ -39,6 +39,7 @@ namespace nico
         private void Start()
         {
             metricas = new Metricas();
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
             StartCoroutine(StartXRCoroutine());
 
             TestManager.SetTestFlag(true);
@@ -176,6 +177,7 @@ namespace nico
         public static void ComputePaymentEfficiency(int amount, int nCoins)
         {
             int optimalCoins = ComputeMinPayment(amount);
+            metricas.cantidad_minima_billetes = optimalCoins;
 
             metricas.numero_billetes_innecesarios = nCoins - optimalCoins;
         }
@@ -200,8 +202,6 @@ namespace nico
         public static void AddSegmentosNoRutaTransitados(){
             metricas.cantidad_segmentos_no_ruta++;
         }
-
-
         public static void EvaluateArticulos()
         {
             Articulo[] listaObjetosCopy = new Articulo[metricas.objetos.Length];
@@ -304,8 +304,6 @@ namespace nico
 
             return dp[amount] != int.MaxValue ? dp[amount] : -1;
         }
-
-
 
         public static void PrintInLog()
         {

@@ -12,6 +12,7 @@ public class ProfileScene : MonoBehaviour {
     private new string name;
     static private string currentProfile;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         now = DateTime.Now;
@@ -38,8 +39,9 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void StartSimulation() {
-        Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
-        SaveSystem.SaveSimulation(simulation);
+        //Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
+        //SaveSystem.SaveSimulation(simulation);
+        SceneManager.LoadScene("test");
     }
 
     public void History() {

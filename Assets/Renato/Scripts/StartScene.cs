@@ -11,6 +11,7 @@ public class StartScene : MonoBehaviour {
     public GameObject profilesGameObject, profile, images;
     static private string selectedProfile;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Profile[] profiles = SaveSystem.LoadProfiles();
@@ -20,7 +21,7 @@ public class StartScene : MonoBehaviour {
             profilesGameObject.SetActive(false);
             images.SetActive(true);
         } else {
-            primaryText.text = "Selecciona tu perfil";
+            primaryText.text = "Selecciona el perfil del Paciente";
             images.SetActive(false);
             for (int i = 0; i < profiles.Length; i++) {
                 if (i >= 1) {

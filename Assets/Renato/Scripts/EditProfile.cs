@@ -10,6 +10,7 @@ public class EditProfile : MonoBehaviour {
     private Profile profile;
     static private string currentProfile;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         currentProfile = OptionsMenu.GetSelectedProfile();

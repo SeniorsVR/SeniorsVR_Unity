@@ -13,6 +13,7 @@ public class HistoryScene : MonoBehaviour {
     static private string currentProfile, filename;
     private Simulation[] simulations;
     void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         currentProfile = ProfileScene.GetSelectedProfile();

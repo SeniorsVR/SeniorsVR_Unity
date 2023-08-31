@@ -75,7 +75,7 @@ namespace nico
             {
                 isCurrentlySelected = true;
 
-                if (!PlayerMovement.isMoving && PlayerMovement.ButtonWasPressed())
+                if (!PlayerMovement.isMoving && PlayerMovement.Instance.ButtonWasPressed())
                 {
                     PlayerMovement.movementCooldown += 0.5f;
                     SelectionFunction();

@@ -46,22 +46,52 @@ namespace nico
         public int cantidad_segmentos_ruta = 0;
         public int cantidad_segmentos_ruta_transitados = 0;
         public int cantidad_segmentos_no_ruta = 0;
+        public int articulos_validos = 0;
+        public int cantidad_minima_billetes = 0;
 
         public Articulo[] objetos = new Articulo[6]; // Lista de objetos que se pide
 
         public Metricas()
         {
-            InitList();
         }
 
-        void InitList()
+        public void registrarLista(Dictionary <string, int> lista)
         {
-            objetos[0] = Articulo.Bebida;
-            objetos[1] = Articulo.Chorizo;
-            objetos[2] = Articulo.Chorizo;
-            objetos[3] = Articulo.Cordero;
-            objetos[4] = Articulo.Galleta;
-            objetos[5] = Articulo.Tomate;
+            int k = 0;
+            foreach( KeyValuePair<string, int> kvp in lista ) {
+                switch (kvp.Key){
+                    case "Bebida":
+                        for(int i = 0; i < kvp.Value; i++){
+                            objetos[k] = Articulo.Bebida;
+                            k++;
+                        }
+                        break;
+                    case "Vienesa":
+                        for(int i = 0; i < kvp.Value; i++){
+                            objetos[k] = Articulo.Bebida;
+                            k++;
+                        }
+                        break;
+                    case "Carne":
+                        for(int i = 0; i < kvp.Value; i++){
+                            objetos[k] = Articulo.Bebida;
+                            k++;
+                        }
+                        break;
+                    case "Galleta":
+                        for(int i = 0; i < kvp.Value; i++){
+                            objetos[k] = Articulo.Bebida;
+                            k++;
+                        }
+                        break;
+                    case "Tomate":
+                        for(int i = 0; i < kvp.Value; i++){
+                            objetos[i+k] = Articulo.Bebida;
+                            k++;
+                        }
+                        break;
+                }
+            }
         }
 
     }
