@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace nico
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement_old : MonoBehaviour
     {
-        public static PlayerMovement Instance;
+        public static PlayerMovement_old Instance;
         private void Awake()
         {
             Instance = this;
