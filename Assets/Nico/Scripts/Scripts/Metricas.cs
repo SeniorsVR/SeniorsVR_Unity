@@ -34,6 +34,8 @@ namespace nico
 
         public int numero_billetes_innecesarios = 0; // Cantidad de billetes extras con los que pago en comparacion al optimo
 
+        public int contador_cruzes_invalidos = 0; // Cantidad cruzes invalidos
+
         public Articulo[] objetos = new Articulo[6]; // Lista de objetos que se pide
 
         public Metricas()

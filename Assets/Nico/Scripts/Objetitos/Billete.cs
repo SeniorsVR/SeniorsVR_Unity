@@ -30,8 +30,9 @@ namespace nico
             selectTime = PlayerActions.grabTime;
 
             ogPos = transform.position;
-            playerPos = Mostrador.Instance.transform.position - Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f;
-            pagaPos = Mostrador.Instance.transform.position + Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up;
+
+            playerPos = Mostrador.Instance.transform.position - (Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f) * MostradorMovements.scalar;
+            pagaPos = Mostrador.Instance.transform.position + (Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up) * MostradorMovements.scalar;
             transform.position = playerPos;
 
             if (tipo < 4)
@@ -72,7 +73,7 @@ namespace nico
             {
                 if (isPermanentlySelected)
                 {
-                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right, Time.deltaTime * 2);
+                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right * MostradorMovements.scalar, Time.deltaTime * 2);
                 }
                 else
                 {

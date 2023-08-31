@@ -17,15 +17,18 @@ namespace nico
             }
 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         public static Metricas metricas;
+
+        public static bool enTest = false;
 
         public static bool enKiosko = false;
         public static bool enCanasto = false;
         public static bool enArticulos = false;
         public static bool enCaja = false;
-        public static bool enIrse = false;
+        public static bool enIrse = false; // Irse solo mimimarket
 
 
         private void Start()
@@ -33,11 +36,17 @@ namespace nico
             metricas = new Metricas();
 
 
-            TestManager.SetKioskoFlag(true);//debug
+            //TestManager.SetKioskoFlag(true);//debug
+            TestManager.SetTestFlag(true);
         }
 
         private void Update()
         {
+            if (enTest)
+            {
+                metricas.tiempo_total += Time.deltaTime;
+            }
+
             if (enKiosko)
             {
                 metricas.tiempo_total_kiosko += Time.deltaTime;
@@ -62,6 +71,10 @@ namespace nico
         }
 
         #region Metricas
+        public static void SetTestFlag(bool state)
+        {
+            enTest = state;
+        }
         public static void SetKioskoFlag(bool state)
         {
             enKiosko = state;
@@ -130,6 +143,10 @@ namespace nico
             int optimalCoins = ComputeMinPayment(amount);
 
             metricas.numero_billetes_innecesarios = nCoins - optimalCoins;
+        }
+        public static void AddCruceInvalido()
+        {
+            metricas.contador_cruzes_invalidos++;
         }
         #endregion
 

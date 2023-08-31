@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
+#if UNITY_ANDROID
+    using System.Runtime.Remoting.Messaging;
+#endif
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

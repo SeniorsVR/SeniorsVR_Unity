@@ -8,9 +8,15 @@ namespace nico
     public class MostradorMovements : MonoBehaviour
     {
         public static MostradorMovements Instance;
+
+        public static float scalar = 1;
+
         private void Awake()
         {
             Instance = this;
+
+
+            scalar = transform.lossyScale.x / transform.localScale.x;
         }
 
         public Transform basketTransform, targetBasketTransform, targetPlayerTransform;
@@ -28,15 +34,17 @@ namespace nico
         Vector3 ogBasketLocalPos, basketHidePos, basketPricePos, bagPickupPos;
         Quaternion ogBasketLocalRot;
 
+
         private void Start()
         {
+
             ogBasketLocalPos = basketTransform.localPosition;
             ogBasketLocalRot = basketTransform.localRotation;
 
-            basketPricePos = transform.position + 0.75f * transform.up - transform.forward + transform.right;
-            basketHidePos = basketPricePos - 3 * transform.up;
+            basketPricePos = transform.position + (0.75f * transform.up - transform.forward + transform.right) * scalar;
+            basketHidePos = basketPricePos - (3 * transform.up) * scalar;
 
-            bagPickupPos = targetBasketTransform.position - transform.forward * 2;
+            bagPickupPos = targetBasketTransform.position - (transform.forward * 2) * scalar;
         }
 
         private void Update()
@@ -87,7 +95,7 @@ namespace nico
         }
         public void MoveBasketToBack()
         {
-            Vector3 targetPos = bagPickupPos - transform.right * 3;
+            Vector3 targetPos = bagPickupPos - (transform.right * 3) * scalar;
             basketTransform.position = Vector3.Lerp(basketTransform.position, targetPos, Time.deltaTime);
         }
 
@@ -97,15 +105,17 @@ namespace nico
             basketToBack = false;
             basketToPreMostradorFlag = true;
 
-            basketTransform.position = bagPickupPos - transform.right*3;
+            basketTransform.position = bagPickupPos - (transform.right* 3) * scalar;
         }
         void MoveBasketToPreMostrador()
         {
-            Vector3 targetPos = bagPickupPos + Vector3.up * 0.25f;
-            basketTransform.position = Vector3.Lerp(basketTransform.position, targetPos, Time.deltaTime * 2);
-            basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, Quaternion.identity, Time.deltaTime * 2);
+            Vector3 targetPos = bagPickupPos + (Vector3.up * 0.25f) * scalar;
+            Quaternion targetAngle = Quaternion.Euler(0, 90, 0);
 
-            if (Vector3.Distance(basketTransform.localPosition, targetPos) < 0.05f)
+            basketTransform.position = Vector3.Lerp(basketTransform.position, targetPos, Time.deltaTime * 2);
+            basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, targetAngle, Time.deltaTime * 2);
+
+            if (Vector3.Distance(basketTransform.localPosition, targetPos) < 0.05f * scalar)
             {
                 StartMovingBasketToMostrador();
             }
@@ -121,8 +131,10 @@ namespace nico
         }
         void MoveBasketToMostrador()
         {
+            Quaternion targetAngle = Quaternion.Euler(0, 90, 0);
+
             basketTransform.position = Vector3.Lerp(basketTransform.position, targetBasketTransform.position, Time.deltaTime * 2);
-            basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, Quaternion.identity, Time.deltaTime * 2);
+            basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, targetAngle, Time.deltaTime * 2);
         }
 
         public void StartMovingBasketToMostradorEnd()
@@ -133,7 +145,8 @@ namespace nico
         }
         void MoveBasketToMostradorEnd()
         {
-            basketTransform.position = Vector3.Lerp(basketTransform.position, targetBasketTransform.position - transform.forward * 2, Time.deltaTime * 2);
+            Vector3 targetPos = targetBasketTransform.position - (transform.forward * 2) * scalar;
+            basketTransform.position = Vector3.Lerp(basketTransform.position, targetPos, Time.deltaTime * 2);
         }
 
         public void StartMovingBasketToPrice()
@@ -146,7 +159,7 @@ namespace nico
         {
             basketTransform.localPosition = Vector3.Lerp(basketTransform.localPosition, basketPricePos, Time.deltaTime * 2);
 
-            if (Vector3.Distance(basketTransform.localPosition, basketPricePos) < 0.05f)
+            if (Vector3.Distance(basketTransform.localPosition, basketPricePos) < 0.05f * scalar)
             {
                 StartMovingBasketToHide();
             }
@@ -162,7 +175,7 @@ namespace nico
         {
             basketTransform.localPosition = Vector3.Lerp(basketTransform.localPosition, basketHidePos, Time.deltaTime * 2);
 
-            if (Vector3.Distance(basketTransform.localPosition, basketHidePos) < 0.05f)
+            if (Vector3.Distance(basketTransform.localPosition, basketHidePos) < 0.05f * scalar)
             {
                 StartMovingBagToShow();
             }
@@ -182,7 +195,7 @@ namespace nico
         {
             basketTransform.localPosition = Vector3.Lerp(basketTransform.localPosition, basketPricePos, Time.deltaTime * 2);
 
-            if (Vector3.Distance(basketTransform.localPosition, basketPricePos) < 0.05f)
+            if (Vector3.Distance(basketTransform.localPosition, basketPricePos) < 0.05f * scalar)
             {
                 StartMovingBagToMostrador();
             }
@@ -205,7 +218,7 @@ namespace nico
             basketTransform.position = Vector3.Lerp(basketTransform.position, bagPickupPos, Time.deltaTime*2);
             basketTransform.rotation = Quaternion.Lerp(basketTransform.rotation, targetAngle, Time.deltaTime*3);
 
-            if (Vector3.Distance(basketTransform.localPosition, bagPickupPos) < 0.05f)
+            if (Vector3.Distance(basketTransform.localPosition, bagPickupPos) < 0.05f * scalar)
             {
                 basketTransform.localPosition = bagPickupPos;
                 basketTransform.rotation = targetAngle;
@@ -228,7 +241,7 @@ namespace nico
             basketTransform.localPosition = Vector3.Lerp(basketTransform.localPosition, ogBasketLocalPos, Time.deltaTime * 2);
             basketTransform.localRotation = Quaternion.Lerp(basketTransform.localRotation, ogBasketLocalRot, Time.deltaTime * 4);
 
-            if (Vector3.Distance(basketTransform.localPosition, ogBasketLocalPos) < 0.05f)
+            if (Vector3.Distance(basketTransform.localPosition, ogBasketLocalPos) < 0.05f * scalar)
             {
                 EndMoveBagToPlayer();
             }
