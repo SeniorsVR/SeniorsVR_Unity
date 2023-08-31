@@ -27,8 +27,13 @@ namespace nico
             for (int i = 0; i < 3; i++)
             {
                 int layerMask = 1 << LayerMask.NameToLayer(layers[i]);
+                float grabrange = grabRange;
+                if (!layers[i].Equals("Interactive"))
+                {
+                    grabrange = 3;
+                }
 
-                if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, grabRange, layerMask))
+                if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, grabrange, layerMask))
                 {
                     GameObject hitObject = hit.collider.gameObject;
 

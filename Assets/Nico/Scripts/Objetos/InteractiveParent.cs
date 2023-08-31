@@ -77,8 +77,8 @@ namespace nico
 
                 if (!PlayerMovement.isMoving && PlayerMovement.ButtonWasPressed())
                 {
+                    PlayerMovement.movementCooldown += 0.5f;
                     SelectionFunction();
-                    PlayerMovement.movementCooldown = 0.5f;
                 }
             }
         }

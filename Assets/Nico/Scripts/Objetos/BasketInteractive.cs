@@ -18,6 +18,7 @@ namespace nico
 
         public override void CurrentlySelected()
         {
+
             if (PlayerBasket.Instance.GetNumArticulos() > 0)
             {
                 selectedState = 2;

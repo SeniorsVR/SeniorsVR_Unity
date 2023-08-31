@@ -8,6 +8,10 @@ namespace nico
     public class Metricas
     {
         public float tiempo_total = 0; //Tiempo total del test
+
+        public float tiempo_total_ida = 0; //Tiempo total ida del test
+        public float tiempo_total_vuelta = 0; //Tiempo total veulta del test
+
         public float tiempo_total_kiosko = 0; //Tiempo total en el kiosko
         public float tiempo_total_canasto = 0; //Tiempo total en recojer canastos
         public float tiempo_total_articulos = 0; //Tiempo total buscando articulos

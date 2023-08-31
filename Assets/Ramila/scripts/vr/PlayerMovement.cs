@@ -179,10 +179,10 @@ namespace nico
         {
             if (ButtonWasPressed()) //Que se empieze a mover 0.01 segundos despues de pulsar, para que se pueda detectar cuando esta quieto
             {
-                movementCooldown = 0.01f;
+                movementCooldown += 0.01f;
             }
             isMoving = movementCooldown <= 0 && ButtonIsHeld();
-            movementCooldown -= Time.deltaTime;
+            movementCooldown = Mathf.Max(0, movementCooldown - Time.deltaTime);
         }
         public float GetCurrentSpeed()
         {

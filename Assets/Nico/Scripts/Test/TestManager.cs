@@ -26,6 +26,9 @@ namespace nico
 
         public static bool enTest = false;
 
+        public static bool enIda = false;
+        public static bool enVuelta = false;
+
         public static bool enKiosko = false;
         public static bool enCanasto = false;
         public static bool enArticulos = false;
@@ -38,8 +41,8 @@ namespace nico
             metricas = new Metricas();
             StartCoroutine(StartXRCoroutine());
 
-            //TestManager.SetKioskoFlag(true);//debug
             TestManager.SetTestFlag(true);
+            TestManager.SetIdaFlag(true);
         }
 
         private void Update()
@@ -47,27 +50,36 @@ namespace nico
             if (enTest)
             {
                 metricas.tiempo_total += Time.deltaTime;
-            }
 
-            if (enKiosko)
-            {
-                metricas.tiempo_total_kiosko += Time.deltaTime;
+                if (enIda)
+                {
+                    metricas.tiempo_total_ida += Time.deltaTime;
+                }
+                else if(enVuelta)
+                {
+                    metricas.tiempo_total_vuelta += Time.deltaTime;
+                }
 
-                if (enCanasto)
+                if (enKiosko)
                 {
-                    metricas.tiempo_total_canasto += Time.deltaTime;
-                }
-                if (enArticulos)
-                {
-                    metricas.tiempo_total_articulos += Time.deltaTime;
-                }
-                if (enCaja)
-                {
-                    metricas.tiempo_total_caja += Time.deltaTime;
-                }
-                if (enIrse)
-                {
-                    metricas.tiempo_total_irse += Time.deltaTime;
+                    metricas.tiempo_total_kiosko += Time.deltaTime;
+
+                    if (enCanasto)
+                    {
+                        metricas.tiempo_total_canasto += Time.deltaTime;
+                    }
+                    if (enArticulos)
+                    {
+                        metricas.tiempo_total_articulos += Time.deltaTime;
+                    }
+                    if (enCaja)
+                    {
+                        metricas.tiempo_total_caja += Time.deltaTime;
+                    }
+                    if (enIrse)
+                    {
+                        metricas.tiempo_total_irse += Time.deltaTime;
+                    }
                 }
             }
         }
@@ -89,6 +101,14 @@ namespace nico
         public static void SetTestFlag(bool state)
         {
             enTest = state;
+        }
+        public static void SetIdaFlag(bool state)
+        {
+            enIda = state;
+        }
+        public static void SetVueltaFlag(bool state)
+        {
+            enVuelta = state;
         }
         public static void SetKioskoFlag(bool state)
         {
@@ -261,6 +281,8 @@ namespace nico
         public static void PrintInLog()
         {
             print("Tiempo total: " + metricas.tiempo_total);
+            print("Tiempo total ida: " + metricas.tiempo_total_ida);
+            print("Tiempo total vuelta: " + metricas.tiempo_total_vuelta);
             print("Tiempo kiosko: " + metricas.tiempo_total_kiosko);
             print("Tiempo recojer canasto: " + metricas.tiempo_total_canasto);
             print("Tiempo buscando articulos: " + metricas.tiempo_total_articulos);
