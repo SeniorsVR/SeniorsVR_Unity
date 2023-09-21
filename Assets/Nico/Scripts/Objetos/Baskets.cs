@@ -9,22 +9,15 @@ namespace nico
 
         public GameObject topBasket;
 
-        public override void CurrentlySelected()
+        public override bool SelectionConditionFunction()
+        {
+            return !PlayerBasket.Instance.hasBasket;
+        }
+        public override void SelectionFunction()
         {
             if (!PlayerBasket.Instance.hasBasket)
             {
-                isCurrentlySelected = true;
-            }
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            if (isCurrentlySelected && collision.gameObject.CompareTag("Player"))
-            {
-                if (!PlayerBasket.Instance.hasBasket)
-                {
-                    PlayerBasket.Instance.PickupBasket(topBasket);
-                }
+                PlayerBasket.Instance.PickupBasket(topBasket);
             }
         }
     }

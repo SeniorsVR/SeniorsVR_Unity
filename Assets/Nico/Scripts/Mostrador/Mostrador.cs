@@ -21,18 +21,6 @@ namespace nico
 
         public Transform billetesTransform;
 
-        private void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.CompareTag("Player") && PlayerBasket.Instance.IsBasketFull())
-            {
-                if (!initFlag)
-                {
-                    initFlag = true;
-                    OnMostradorPlayerActivation();
-                }
-            }
-        }
-
         void OnMostradorPlayerActivation()
         {
             TestManager.SetArticulosFlag(false);
@@ -78,7 +66,9 @@ namespace nico
 
         public void ExitoDeCompra()
         {
+
             TestManager.SetCajaFlag(false);
+            TestManager.SetIrseFlag(true);
 
             SetStateText(false);
             Billete.isLocked = true;
@@ -86,7 +76,20 @@ namespace nico
             MostradorMovements.Instance.Invoke("StartMovingBasketToMostradorEnd", 1);
             MostradorMovements.Instance.Invoke("StartMovingBasketToPrice", 2);
 
+
+            int totalBilletes = 0;
+            foreach (GameObject billeteGO in GameObject.FindGameObjectsWithTag("Billete"))
+            {
+                Billete billete = billeteGO.GetComponent<Billete>();
+                if (billete && billete.isPermanentlySelected)
+                {
+                    totalBilletes++;
+                }
+            }
+            TestManager.ComputePaymentEfficiency(pagaUsuario, totalBilletes);
+
             TestManager.AddVueltoFinal(precioRestante);
+            TestManager.EvaluateArticulos();
         }
 
         void ActivateAllBilletes()
@@ -102,11 +105,16 @@ namespace nico
 
         }
 
-        public override void CurrentlySelected()
+        public override bool SelectionConditionFunction()
         {
-            if (!initFlag && PlayerBasket.Instance.IsBasketFull())
+            return !initFlag && PlayerBasket.Instance.IsBasketFull();
+        }
+        public override void SelectionFunction()
+        {
+            if (!initFlag)
             {
-                isCurrentlySelected = true;
+                initFlag = true;
+                OnMostradorPlayerActivation();
             }
         }
 

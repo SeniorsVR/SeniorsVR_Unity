@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2021.3/staging' branch; Version is '2021.3.11f1 (0a5ca18544bf) revision 679073'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19045) 64bit CoreSingleLanguage' Language: 'es' Physical Memory: 8048 MB
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'es' Physical Memory: 16253 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -11,13 +11,13 @@ C:\Program Files\Unity\Hub\Editor\2021.3.11f1\Editor\Unity.exe
 -name
 AssetImportWorker3
 -projectPath
-C:/Users/nicol/OneDrive/Documentos/Unity/SeniorsVR_Unity
+C:/Users/Nicolas/Documents/Unity/SeniorsVR_Unity
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-49975
-Successfully changed project path to: C:/Users/nicol/OneDrive/Documentos/Unity/SeniorsVR_Unity
-C:/Users/nicol/OneDrive/Documentos/Unity/SeniorsVR_Unity
+51659
+Successfully changed project path to: C:/Users/Nicolas/Documents/Unity/SeniorsVR_Unity
+C:/Users/Nicolas/Documents/Unity/SeniorsVR_Unity
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -47,61 +47,211 @@ C:/Users/nicol/OneDrive/Documentos/Unity/SeniorsVR_Unity
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 162.27 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 136.62 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.11f1 (0a5ca18544bf)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/nicol/OneDrive/Documentos/Unity/SeniorsVR_Unity/Assets
+[Subsystems] Discovering subsystems at path C:/Users/Nicolas/Documents/Unity/SeniorsVR_Unity/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1050 (ID=0x1c8d)
+    Renderer: NVIDIA GeForce GTX 1650 (ID=0x1f82)
     Vendor:   NVIDIA
-    VRAM:     4021 MB
-    Driver:   26.21.14.3086
+    VRAM:     3949 MB
+    Driver:   31.0.15.3623
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56540
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56040
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.015294 seconds.
+Registered in 0.008130 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 140.90 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 122.02 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.925 seconds
+- Completed reload, in  0.724 seconds
 Domain Reload Profiling:
-	ReloadAssembly (926ms)
-		BeginReloadAssembly (96ms)
+	ReloadAssembly (725ms)
+		BeginReloadAssembly (86ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (679ms)
-			LoadAssemblies (93ms)
+		EndReloadAssembly (518ms)
+			LoadAssemblies (81ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (129ms)
+			SetupTypeCache (120ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (31ms)
-			SetupLoadedEditorAssemblies (442ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (317ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (85ms)
+				InitializePlatformSupportModulesInManaged (58ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (141ms)
+				RefreshPlugins (122ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (114ms)
-				ProcessInitializeOnLoadMethodAttributes (101ms)
+				ProcessInitializeOnLoadAttributes (93ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.016901 seconds.
-Android Extension - Scanning For ADB Devices 5089 ms
+Registered in 0.007454 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Nicolas\Documents\Unity\SeniorsVR_Unity\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Nicolas\Documents\Unity\SeniorsVR_Unity\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 112.21 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Package Manager log level set to [2]
+Mono: successfully reloaded assembly
+- Completed reload, in  1.363 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1364ms)
+		BeginReloadAssembly (211ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (127ms)
+		EndReloadAssembly (1045ms)
+			LoadAssemblies (81ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (269ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (64ms)
+			SetupLoadedEditorAssemblies (577ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (112ms)
+				BeforeProcessingInitializeOnLoad (110ms)
+				ProcessInitializeOnLoadAttributes (259ms)
+				ProcessInitializeOnLoadMethodAttributes (75ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.01 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5306 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 35 unused Assets / (0.7 MB). Loaded Objects now: 5765.
+Memory consumption went from 214.1 MB to 213.4 MB.
+Total: 3.320200 ms (FindLiveObjects: 0.425200 ms CreateObjectMapping: 0.412200 ms MarkObjects: 2.189900 ms  DeleteObjects: 0.292100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 488813.463267 seconds.
+  path: Assets/Renato/Prefabs/New Material.mat
+  artifactKey: Guid(9b466bb7b05deb24e98819e3921b4a2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Renato/Prefabs/New Material.mat using Guid(9b466bb7b05deb24e98819e3921b4a2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '240a7f8ec0c6d4bcec23d6c965789fb9') in 0.249466 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.699699 seconds.
+  path: Assets/Ramila/Assets/Camino.prefab
+  artifactKey: Guid(c52e7a51724c79346bbec336f3bfe266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/Assets/Camino.prefab using Guid(c52e7a51724c79346bbec336f3bfe266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f5019906070c6ab518e503ae7cc8e5a') in 0.057810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Ramila/Assets/Vereda.prefab
+  artifactKey: Guid(b5a8f0fe18182e84499881fa725fca5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/Assets/Vereda.prefab using Guid(b5a8f0fe18182e84499881fa725fca5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1cce79cc6eaf1e91a6153af5a833551') in 0.037576 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Ramila/Assets/Semaforo.prefab
+  artifactKey: Guid(6c35552b7c863424b9d46de0fd2bc899) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/Assets/Semaforo.prefab using Guid(6c35552b7c863424b9d46de0fd2bc899) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01d70dee748423d9417ac9e6ee848a96') in 0.035695 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Ramila/Assets/PasoPeatonal.prefab
+  artifactKey: Guid(b890ade77305de945842040f2a69d9cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/Assets/PasoPeatonal.prefab using Guid(b890ade77305de945842040f2a69d9cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd844539ff1b479c20c10a7997dd1ca8') in 0.031551 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 25.840568 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/bench_1_v_3.prefab
+  artifactKey: Guid(e1923c3f7715d8043bf59366a3ad15d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/bench_1_v_3.prefab using Guid(e1923c3f7715d8043bf59366a3ad15d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd011f3e5bfbd2b6dc83121b49e181490') in 0.049911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/fence_1.prefab
+  artifactKey: Guid(dd519f40d3a16084e85023e421a94b6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/fence_1.prefab using Guid(dd519f40d3a16084e85023e421a94b6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fbcf9bc10e2227cd0ce1a736356b343') in 0.050644 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/road_stop.prefab
+  artifactKey: Guid(a75fb4294e0f87a448d14de1e59439c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/road_stop.prefab using Guid(a75fb4294e0f87a448d14de1e59439c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfd4b07fe77e53fdec5fb1c4553476f7') in 3.134984 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/sign_5.prefab
+  artifactKey: Guid(40a9b9ce6e2f9114d9358f7379274fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/sign_5.prefab using Guid(40a9b9ce6e2f9114d9358f7379274fbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5558171af73581f60b9b380904d7e718') in 0.050898 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/fence_2.prefab
+  artifactKey: Guid(4f33094af56104f43a3d8343baaf5baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/fence_2.prefab using Guid(4f33094af56104f43a3d8343baaf5baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d297148aeaa6f3dc0d9b3760b389a1c') in 0.039484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/sign_3.prefab
+  artifactKey: Guid(92d029e80a6312b4ab672dee2a549ee6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/sign_3.prefab using Guid(92d029e80a6312b4ab672dee2a549ee6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46b6399b014ec501f82ac04f56944df1') in 0.052297 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/road_intersection_T.prefab
+  artifactKey: Guid(0e54e929b4b02524ea00279b82ab4a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/road_intersection_T.prefab using Guid(0e54e929b4b02524ea00279b82ab4a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc8f98e7ebb17e9c9529d9036e7505a1') in 0.035718 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/sign_2.prefab
+  artifactKey: Guid(5a9df1592a573d44c908823e4262efae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/sign_2.prefab using Guid(5a9df1592a573d44c908823e4262efae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2cf50269b63510a6328c6ae3dff1f36') in 0.051631 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/sign_4.prefab
+  artifactKey: Guid(135986bb367acc94d89311c1e3f393bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/sign_4.prefab using Guid(135986bb367acc94d89311c1e3f393bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05f9f8cfeb89dfcfe282cdfcb4ccebee') in 0.058937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Ramila/European Buildings/Decorations/bench_2_v_1.prefab
+  artifactKey: Guid(441208d0311004f4e893fe3616c8de9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ramila/European Buildings/Decorations/bench_2_v_1.prefab using Guid(441208d0311004f4e893fe3616c8de9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec497b17aeac3608451c4c59d8eef786') in 0.049911 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -10,7 +10,8 @@ namespace nico
         public GameObject outline_go;
         public int tipo = -1;
 
-        bool isPermanentlySelected;
+        [HideInInspector]
+        public bool isPermanentlySelected;
 
         public SpriteRenderer spriteRenderer, outlineRenderer;
 
@@ -29,8 +30,9 @@ namespace nico
             selectTime = PlayerActions.grabTime;
 
             ogPos = transform.position;
-            playerPos = Mostrador.Instance.transform.position - Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f;
-            pagaPos = Mostrador.Instance.transform.position + Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up;
+
+            playerPos = Mostrador.Instance.transform.position - (Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f) * MostradorMovements.scalar;
+            pagaPos = Mostrador.Instance.transform.position + (Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up) * MostradorMovements.scalar;
             transform.position = playerPos;
 
             if (tipo < 4)
@@ -71,7 +73,7 @@ namespace nico
             {
                 if (isPermanentlySelected)
                 {
-                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right, Time.deltaTime * 2);
+                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right * MostradorMovements.scalar, Time.deltaTime * 2);
                 }
                 else
                 {
@@ -111,14 +113,14 @@ namespace nico
                 Mostrador.Instance.ActualizarPaga(Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.5f;
 
-                TestManager.AddVesDevueltoBillete();
+                TestManager.AddVesMarcadoBillete();
             }
             else
             {
                 Mostrador.Instance.ActualizarPaga(-Billete.ObtenerValorDeBilllete(tipo));
                 outlineRenderer.transform.localScale = Vector3.one * 1.0795f;
 
-                TestManager.AddVesMarcadoBillete();
+                TestManager.AddVesDevueltoBillete();
             }
         }
 

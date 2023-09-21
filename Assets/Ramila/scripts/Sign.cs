@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using nico;
 
 public class Sign : MonoBehaviour {
-    static private int listSize = 4;
+    static private int listSize = 6;
     [SerializeField] private TMP_Text[] texts;
     public string[] objects;
     static private Dictionary <string, int> dictionary;
@@ -13,6 +14,7 @@ public class Sign : MonoBehaviour {
     public Sprite[] sprites;
     void Start() {
         dictionary = randomObjects();
+
         int i = 0;
         foreach( KeyValuePair<string, int> kvp in dictionary ) {
             texts[i].text = "- " + kvp.Key + " x" + kvp.Value;
@@ -20,6 +22,8 @@ public class Sign : MonoBehaviour {
             spriteRenderers[i].sprite = sprites[index];
             i++;
         }
+
+        TestManager.metricas.registrarLista(dictionary);
     }
 
     public int getIndex(Sprite[] sprites, string name) {

@@ -27,6 +27,8 @@ namespace nico
 
         private void Start()
         {
+            TestManager.SetRecojerCanastoFlag(true);
+
             for (int i = 0; i < 6; i++)
             {
                 objectsTransforms[i] = objectsTransformsParent.GetChild(i);
@@ -71,6 +73,7 @@ namespace nico
         public void PickupBasket(GameObject ogBasket)
         {
 
+            TestManager.SetRecojerCanastoFlag(false);
             TestManager.SetArticulosFlag(true);
 
             hasBasket = true;

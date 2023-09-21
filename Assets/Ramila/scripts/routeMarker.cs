@@ -8,7 +8,7 @@ public class routeMarker : MonoBehaviour
     public Transform cameraTransform;
     public float arrowSpeed;
     private Vector3 targetVector;
-    bool back;
+    public bool back;
     public delegate void EndSim();
     public static event EndSim endSimEvent;
     private void OnEnable() {
