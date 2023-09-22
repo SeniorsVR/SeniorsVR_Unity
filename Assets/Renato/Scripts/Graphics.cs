@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
@@ -8,8 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class Graphics : MonoBehaviour {
     public GameObject dot, plotObjects;
+    public TMP_Text profileText;
     private RectTransform labelTemplateX, labelTemplateY;
     private RectTransform dashTemplateX, dashTemplateY;
+    private new string name;
+    private Profile profile;
     static private Vector2[] clones;
     void Awake() {
         labelTemplateX = transform.Find("LabelX").GetComponent<RectTransform>();
@@ -19,6 +23,9 @@ public class Graphics : MonoBehaviour {
     }
 
     void Start() {
+        name = StartScene.GetSelectedProfile();
+        profile = SaveSystem.LoadProfile(name);
+        profileText.SetText(profile.GetName());
         float[] data = {1, 5, 3, 4, 5, 7, 8, 8, 3, 10};
         CreateGraphic(data);
     }
@@ -49,7 +56,7 @@ public class Graphics : MonoBehaviour {
             labelX.GetComponent<Text>().text = (i + 1).ToString();
 
             RectTransform dashX = Instantiate(dashTemplateX);
-            dashX.SetParent(plotObjects.transform);
+            dashX.SetParent(transform);
             dashX.gameObject.SetActive(true);
             dashX.localPosition = new Vector3(-plotRT.rect.width/2, (float) ( -0.5 + (double) i/(data.Length - 1))*plotRT.rect.height, 0);
 
@@ -60,7 +67,7 @@ public class Graphics : MonoBehaviour {
             labelY.GetComponent<Text>().text = (data[i]).ToString();
 
             RectTransform dashY = Instantiate(dashTemplateY);
-            dashY.SetParent(plotObjects.transform);
+            dashY.SetParent(transform);
             dashY.gameObject.SetActive(true);
             dashY.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), -plotRT.rect.height/2, 0);
 

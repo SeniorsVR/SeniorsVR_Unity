@@ -8,6 +8,14 @@ public class SettingsScene : MonoBehaviour {
         
     }
 
+    void Update() {
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                SceneManager.LoadScene("FirstScene");
+            }
+        }
+    }
+
     public void SaveChanges() {
         SceneManager.LoadScene("FirstScene");
     }

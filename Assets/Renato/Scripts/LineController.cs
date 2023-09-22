@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LineController : Graphic {
     public Vector2Int gridSize;
     private Vector2[] points;
-    private float thickness = 15f;
+    private float thickness = 10f;
 
     private float width, height, unitWidth, unitHeight;
 
@@ -41,6 +41,7 @@ public class LineController : Graphic {
             vh.AddTriangle(index + 0, index + 1, index + 2);
             vh.AddTriangle(index + 1, index + 2, index + 3);
         }
+        transform.SetAsLastSibling();
     }
 
     public float GetAngle(Vector2 me, Vector2 target) {

@@ -4336,7 +4336,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1105120184}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsScene, Assembly-CSharp
         m_MethodName: SaveChanges
         m_Mode: 1
