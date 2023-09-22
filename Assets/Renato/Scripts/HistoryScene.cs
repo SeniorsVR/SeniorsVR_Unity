@@ -26,7 +26,7 @@ public class HistoryScene : MonoBehaviour {
                     if (count >= 1) {
                         GameObject clone = Instantiate(simulationGameObject, new Vector3(simulationGameObject.transform.position.x, simulationGameObject.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Simulations").transform);
                     }
-                    dateText.text = "Fecha: " + simulation.GetDate().Split(" ")[0];
+                    dateText.text = simulation.GetDate().Split(" ")[0];
                     timeText.text = "Duración: " + TimeInSeconds(simulation.GetTotalTime());
                     count++;
                 }

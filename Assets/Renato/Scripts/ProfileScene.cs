@@ -56,6 +56,10 @@ public class ProfileScene : MonoBehaviour {
         Invoke("comenzarTest",5);
     }
 
+    public void Graphics() {
+        SceneManager.LoadScene("GraphicsScene");
+    }
+
     public void History() {
         SetSelectedProfile(name);
         SceneManager.LoadScene("HistoryScene");

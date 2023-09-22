@@ -8,9 +8,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using nico;
 using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class ResultsScene : MonoBehaviour {
     private string filename, currentProfile;
+    public TMP_Dropdown navegationDropdown, securityDropdown, functionDropdown;
     [SerializeField] private TMP_Text[] texts;
     void Start() {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -21,6 +23,15 @@ public class ResultsScene : MonoBehaviour {
         //Simulation simulation = SaveSystem.LoadSimulation(filename, currentProfile);
         //Debug.Log(filename);
         //Debug.Log(simulation.GetUsername() + ", " + simulation.GetDate());
+        navegationDropdown.ClearOptions();
+        List<string> options = new List<string>();
+        options.Add("Tiempo Ida:    2:35s");
+        options.Add("Tiempo Vuelta:    3:15s");
+        options.Add("Ida/Vuelta:    0.79" );
+        options.Add("Completitud de ruta:   1");
+        options.Add("Desvío de ruta:    4");
+        navegationDropdown.AddOptions(options);
+
         texts[1].text = DateTime.Now.ToString();
         texts[2].text = TimeInSeconds(TestManager.metricas.tiempo_total);
         texts[3].text = TimeInSeconds(TestManager.metricas.tiempo_total_ida) + "/" + TimeInSeconds(TestManager.metricas.tiempo_total_vuelta);
