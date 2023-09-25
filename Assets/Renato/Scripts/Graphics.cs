@@ -18,8 +18,8 @@ public class Graphics : MonoBehaviour {
     void Awake() {
         labelTemplateX = transform.Find("LabelX").GetComponent<RectTransform>();
         labelTemplateY = transform.Find("LabelY").GetComponent<RectTransform>();
-        dashTemplateX = transform.Find("LinesObject/DashX").GetComponent<RectTransform>();
-        dashTemplateY = transform.Find("LinesObject/DashY").GetComponent<RectTransform>();
+        dashTemplateX = transform.Find("DashX").GetComponent<RectTransform>();
+        dashTemplateY = transform.Find("DashY").GetComponent<RectTransform>();
     }
 
     void Start() {
@@ -59,6 +59,8 @@ public class Graphics : MonoBehaviour {
             dashX.SetParent(transform);
             dashX.gameObject.SetActive(true);
             dashX.localPosition = new Vector3(-plotRT.rect.width/2, (float) ( -0.5 + (double) i/(data.Length - 1))*plotRT.rect.height, 0);
+            dashX.sizeDelta = new Vector2(plotRT.rect.width, dashX.rect.height);
+            dashX.transform.localScale = new Vector3(1f, 1f, 1f);
 
             RectTransform labelY = Instantiate(labelTemplateY);
             labelY.SetParent(transform);
@@ -70,6 +72,8 @@ public class Graphics : MonoBehaviour {
             dashY.SetParent(transform);
             dashY.gameObject.SetActive(true);
             dashY.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), -plotRT.rect.height/2, 0);
+            dashY.sizeDelta = new Vector2(plotRT.rect.height, dashX.rect.height);
+            dashY.transform.localScale = new Vector3(1f, 1f, 1f);
 
         }
     }
