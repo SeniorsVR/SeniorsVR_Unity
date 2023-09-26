@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
     public TMP_Text profileText, ageText;
+    public GameObject normal, popup;
     private Profile profile;
     private DateTime now;
     static private string currentProfile;
@@ -26,7 +27,11 @@ public class OptionsMenu : MonoBehaviour {
 
     void Update() {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor) {
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Input.GetKeyDown(KeyCode.Escape) && popup.activeSelf) {
+                normal.SetActive(true);
+                popup.SetActive(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape)) {
                 SceneManager.LoadScene("ProfileScene");
             }
         }
@@ -38,7 +43,17 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     public void DeleteProfile() {
+        normal.SetActive(false);
+        popup.SetActive(true);
+    }
+
+    public void ConfirmDeleteButton() {
         SaveSystem.DeleteProfile(currentProfile);
+    }
+
+    public void GoBackButton() {
+        normal.SetActive(true);
+        popup.SetActive(false);
     }
 
     static public void SetSelectedProfile(string profileName) {

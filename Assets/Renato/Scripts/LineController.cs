@@ -5,27 +5,12 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class LineController : Graphic {
-    // private LineRenderer lineRenderer;
-    //private Transform[] points;
-    
-    /*private void Awake() {
-        lineRenderer = GetComponent<LineRenderer>();
-    }
-
-    void Update() { // change Update function because it happens once
-        for (int i = 0; i < points.Length; i++) {
-            lineRenderer.SetPosition(i, points[i].position);
-        }
-    } */
     public Vector2Int gridSize;
     private Vector2[] points;
-    private float thickness = 0.1f;
+    private float thickness = 10f;
 
     private float width, height, unitWidth, unitHeight;
 
-    /*public void SetUpLine(Vector2[] points) {
-        this.points = points;
-    }*/
 
     protected override void OnPopulateMesh(VertexHelper vh) {
         points = Graphics.getVectors();
@@ -37,32 +22,50 @@ public class LineController : Graphic {
         unitWidth = width/(float)gridSize.x;
         unitHeight = height/(float)gridSize.y;
 
-        if (points.Length < 2) {
+        if (points == null || points.Length < 2) {
             return;
         }
 
-        for (int i = 0; i < points.Length; i++) {
+        float angle = 0;
+        for (int i = 0; i < points.Length - 1; i++) {
             Vector2 point = points[i];
-            DrawVertices(point, vh);
+            Vector2 point2 = points[i + 1];
+            if (i < points.Length - 1) {
+                angle = GetAngle(points[i], points[i + 1]) + 90f;
+            }
+            DrawVerticesForPoint(point, point2, angle, vh);
         }
 
         for (int i = 0; i < points.Length - 1; i++) {
-            int index = i*2;
-            vh.AddTriangle(index, index + 1, index + 3);
-            vh.AddTriangle(index + 3, index + 2, index);
+            int index = i*4;
+            vh.AddTriangle(index + 0, index + 1, index + 2);
+            vh.AddTriangle(index + 1, index + 2, index + 3);
         }
+        transform.SetAsLastSibling();
     }
 
-    void DrawVertices(Vector2 point, VertexHelper vh) {
+    public float GetAngle(Vector2 me, Vector2 target) {
+        return (float) (Mathf.Atan2(9f*(target.y - me.y), 16f*(target.x - me.x)) * (180/Mathf.PI));
+    }
+
+    void DrawVerticesForPoint(Vector2 point, Vector2 point2, float angle, VertexHelper vh) {
         UIVertex vertex = UIVertex.simpleVert;
         vertex.color = color;
 
-        vertex.position = new Vector3(-thickness/2, 0);
-        vertex.position += new Vector3(unitWidth*point.x, unitHeight * point.y);
+        vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-thickness/2, 0);
+        vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
         vh.AddVert(vertex);
 
-        vertex.position = new Vector3(thickness/2, 0);
-        vertex.position += new Vector3(unitWidth*point.x, unitHeight*point.y);
+        vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(thickness/2, 0);
+        vertex.position += new Vector3(unitWidth * point.x, unitHeight*point.y);
+        vh.AddVert(vertex);
+
+        vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-thickness/2, 0);
+        vertex.position += new Vector3(unitWidth * point2.x, unitHeight * point2.y);
+        vh.AddVert(vertex);
+
+        vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(thickness/2, 0);
+        vertex.position += new Vector3(unitWidth * point2.x, unitHeight*point2.y);
         vh.AddVert(vertex);
     }
 }

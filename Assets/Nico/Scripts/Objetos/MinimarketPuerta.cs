@@ -42,13 +42,19 @@ namespace nico
                 }
                 else
                 {
-                    if (Eseldelinicio && rm.back && TestManager.enVuelta)
+                    if (Eseldelinicio)
                     {
-
-                        TestManager.SetVueltaFlag(false);
-                        if (endEvent != null)
+                        if (rm.back && TestManager.enVuelta)
                         {
-                            endEvent();
+                            TestManager.SetVueltaFlag(false);
+                            if (endEvent != null)
+                            {
+                                endEvent();
+                            }
+                        }
+                        else if (!TestManager.enTest) {
+                            TestManager.Instance.StartTest();
+                            print("test iniciado");
                         }
                     }
                 }

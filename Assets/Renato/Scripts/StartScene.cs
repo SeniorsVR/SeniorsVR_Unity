@@ -7,26 +7,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour {
-    public TMP_Text primaryText, nameText, ageText;
-    public GameObject profilesGameObject, profile, images;
+    public TMP_Text nameText, ageText;
+    public GameObject profilesGameObject, profile, chooseGameObject, empty;
+    private Profile[] profiles;
     static private string selectedProfile;
-    void Start() {
+
+    void Awake() {
         Screen.orientation = ScreenOrientation.Portrait;
+    }
+    void Start() {
+        profiles = SaveSystem.LoadProfiles();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Profile[] profiles = SaveSystem.LoadProfiles();
         DateTime now = DateTime.Now;
         if (profiles == null) {
-            primaryText.text = "No hay perfiles creados";
+            empty.SetActive(true);
+            chooseGameObject.SetActive(false);
             profilesGameObject.SetActive(false);
-            images.SetActive(true);
         } else {
-            primaryText.text = "Selecciona el perfil del Paciente";
-            images.SetActive(false);
+            empty.SetActive(false);
+            chooseGameObject.SetActive(true);
+            profilesGameObject.SetActive(true);
             for (int i = 0; i < profiles.Length; i++) {
                 if (i >= 1) {
                     GameObject clone = Instantiate(profile, new Vector3(profile.transform.position.x, profile.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Profiles").transform);
                 }
+                nameText.name = profiles[i].GetID();
                 nameText.text = profiles[i].GetName();
                 string[] split = profiles[i].GetAge().Split('-');
                 DateTime time = new(int.Parse(split[2]), int.Parse(split[1]), int.Parse(split[0]));
@@ -43,12 +49,16 @@ public class StartScene : MonoBehaviour {
         }
     }
 
+    public void Settings() {
+        SceneManager.LoadScene("SettingsScene");
+    }
+
     public void CreateProfile() {
         SceneManager.LoadScene("CreateProfileScene");
     }
 
-    public void ProfileView(TMP_Text name) {
-        SetSelectedProfile(name.text);
+    public void ProfileView(TMP_Text id) {
+        SetSelectedProfile(id.name);
         SceneManager.LoadScene("ProfileScene");
     }
 

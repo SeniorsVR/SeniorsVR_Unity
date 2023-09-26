@@ -42,7 +42,7 @@ public static class SaveSystem {
         }
     }
 
-    static public Profile LoadProfile(string name) {
+    static public Profile LoadProfile(string id) {
         int i = 0;
         var filenames = Directory.GetFiles(Application.persistentDataPath + "/Profiles/");
         foreach(var filename in filenames) {
@@ -53,7 +53,7 @@ public static class SaveSystem {
                 Profile profile = formatter.Deserialize(stream) as Profile;
                 stream.Close();
 
-                if (profile.GetName() == name) {
+                if (profile.GetID() == id) {
                     return profile;
                 }
                 i++;
@@ -66,13 +66,13 @@ public static class SaveSystem {
         return null;
     }
 
-    static public void DeleteProfile(string name) {
+    static public void DeleteProfile(string id) {
         foreach (var file in Directory.GetFiles(Application.persistentDataPath + "/Profiles/")) {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(file, FileMode.Open);
 
             Profile profile = formatter.Deserialize(stream) as Profile;
-            if (profile.GetName() == name) {
+            if (profile.GetID() == id) {
                 stream.Close();
                 FileInfo file_info = new FileInfo(file);
                 file_info.Delete();

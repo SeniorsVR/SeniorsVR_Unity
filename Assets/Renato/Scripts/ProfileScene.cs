@@ -6,20 +6,42 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ProfileScene : MonoBehaviour {
-    public TMP_Text profileText, ageText;
+    public GameObject popup;
+    public TMP_Text profileText, ageText, testsText, confirmacion;
     private Profile profile;
+    private Simulation[] simulations;
     private DateTime now;
-    private new string name;
+    private string id;
     static private string currentProfile;
     void Start() {
+        popup.SetActive(false);
         Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         now = DateTime.Now;
-        name = StartScene.GetSelectedProfile();
-        profile = SaveSystem.LoadProfile(name);
+        id = StartScene.GetSelectedProfile();
+        profile = SaveSystem.LoadProfile(id);
+        simulations = SaveSystem.LoadSimulations();
+
+        int count = 0;
+        if (simulations != null) {
+            for (int i = 0; i < simulations.Length; i++) {
+                if (simulations[i].GetUsername() == currentProfile) {
+                    count++;
+                }
+            }
+        }
+        
+        if (count == 0) {
+            testsText.SetText("Ninguna");
+        } else if (count == 1) {
+            testsText.SetText("1 prueba");
+        } else {
+            testsText.SetText(count.ToString() + " pruebas");
+        }
 
         profileText.SetText(profile.GetName());
+        confirmacion.SetText("¿Estás seguro que quieres comenzar un test para el paciente " + profile.GetName() + "?");
         string[] split = profile.GetAge().Split('-');
         DateTime time = new(int.Parse(split[2]), int.Parse(split[1]), int.Parse(split[0]));
         ageText.SetText((now - time).Days/365 + " años");
@@ -34,8 +56,16 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void OptionsMenu() {
-        SetSelectedProfile(name);
+        SetSelectedProfile(id);
         SceneManager.LoadScene("OptionsScene");
+    }
+
+    public void confirmationPopup(){
+        popup.SetActive(true);
+    }
+
+    public void confirmationPopupVolver(){
+        popup.SetActive(false);
     }
 
     public void StartSimulation() {
@@ -45,8 +75,12 @@ public class ProfileScene : MonoBehaviour {
         Invoke("comenzarTest",5);
     }
 
+    public void Graphics() {
+        SceneManager.LoadScene("GraphicsScene");
+    }
+
     public void History() {
-        SetSelectedProfile(name);
+        SetSelectedProfile(id);
         SceneManager.LoadScene("HistoryScene");
     }
 

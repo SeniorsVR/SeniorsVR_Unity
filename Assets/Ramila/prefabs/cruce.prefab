@@ -18,7 +18,7 @@ GameObject:
   m_TagString: CalleCruce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &465820
 Transform:
@@ -160,7 +160,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &324197727153651411
 Transform:
@@ -220,7 +220,7 @@ GameObject:
   m_TagString: Vereda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7941524009010956869
 Transform:
@@ -314,7 +314,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5891949851687453001
 Transform:
@@ -348,7 +348,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7616655459219222923
 Transform:
@@ -445,7 +445,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2980547047056617304
 Transform:
@@ -539,7 +539,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1737253533712574341
 Transform:
@@ -570,7 +570,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8020290724517181645
 Transform:
@@ -604,7 +604,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6939613790705668506
 Transform:
@@ -701,7 +701,7 @@ GameObject:
   m_TagString: Vereda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1300455239259340269
 Transform:
@@ -795,7 +795,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1772126779383793583
 Transform:
@@ -828,7 +828,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8060299799277361356
 Transform:
@@ -888,7 +888,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7343109935778417519
 Transform:
@@ -975,6 +975,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465820}
     m_Modifications:
+    - target: {fileID: 997174931358860242, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1335707796260612089, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: m_RootOrder
@@ -1050,6 +1055,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Semaforo
       objectReference: {fileID: 0}
+    - target: {fileID: 3940878794883192958, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4010865299625185661, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: state
@@ -1064,6 +1074,21 @@ PrefabInstance:
         type: 3}
       propertyPath: constGreenTime
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043692940322908155, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222039532054422327, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789015745873559763, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c35552b7c863424b9d46de0fd2bc899, type: 3}
@@ -1080,6 +1105,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465820}
     m_Modifications:
+    - target: {fileID: 997174931358860242, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1335707796260612089, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: m_RootOrder
@@ -1155,6 +1185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Semaforo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3940878794883192958, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4010865299625185661, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: constRedTime
@@ -1164,6 +1199,21 @@ PrefabInstance:
         type: 3}
       propertyPath: constGreenTime
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043692940322908155, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222039532054422327, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789015745873559763, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c35552b7c863424b9d46de0fd2bc899, type: 3}
@@ -1192,6 +1242,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465820}
     m_Modifications:
+    - target: {fileID: 997174931358860242, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1335707796260612089, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: m_RootOrder
@@ -1267,6 +1322,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Semaforo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3940878794883192958, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4010865299625185661, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: constRedTime
@@ -1276,6 +1336,21 @@ PrefabInstance:
         type: 3}
       propertyPath: constGreenTime
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043692940322908155, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222039532054422327, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789015745873559763, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c35552b7c863424b9d46de0fd2bc899, type: 3}
@@ -1292,6 +1367,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 465820}
     m_Modifications:
+    - target: {fileID: 997174931358860242, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1335707796260612089, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: m_RootOrder
@@ -1367,6 +1447,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Semaforo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3940878794883192958, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4010865299625185661, guid: 6c35552b7c863424b9d46de0fd2bc899,
         type: 3}
       propertyPath: cruce
@@ -1391,6 +1476,21 @@ PrefabInstance:
         type: 3}
       propertyPath: constGreenTime
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043692940322908155, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222039532054422327, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789015745873559763, guid: 6c35552b7c863424b9d46de0fd2bc899,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c35552b7c863424b9d46de0fd2bc899, type: 3}
