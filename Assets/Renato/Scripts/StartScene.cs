@@ -7,22 +7,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour {
-    public TMP_Text primaryText, nameText, ageText;
-    public GameObject profilesGameObject, profile, images;
+    public TMP_Text nameText, ageText;
+    public GameObject profilesGameObject, profile, chooseGameObject, empty;
+    private Profile[] profiles;
     static private string selectedProfile;
-    void Start() {
+
+    void Awake() {
         Screen.orientation = ScreenOrientation.Portrait;
+        profiles = SaveSystem.LoadProfiles();
+    }
+    void Start() {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Profile[] profiles = SaveSystem.LoadProfiles();
         DateTime now = DateTime.Now;
         if (profiles == null) {
-            primaryText.text = "No hay perfiles creados";
+            empty.SetActive(true);
+            chooseGameObject.SetActive(false);
             profilesGameObject.SetActive(false);
-            images.SetActive(true);
         } else {
-            primaryText.text = "Selecciona el perfil del Paciente";
-            images.SetActive(false);
+            empty.SetActive(false);
+            chooseGameObject.SetActive(true);
+            profilesGameObject.SetActive(true);
+            //primaryText.text = "Selecciona el perfil del Paciente";
+            //images.SetActive(false);
             for (int i = 0; i < profiles.Length; i++) {
                 if (i >= 1) {
                     GameObject clone = Instantiate(profile, new Vector3(profile.transform.position.x, profile.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Profiles").transform);
@@ -41,6 +48,10 @@ public class StartScene : MonoBehaviour {
                 Application.Quit();
             }
         }
+    }
+
+    public void Settings() {
+        SceneManager.LoadScene("SettingsScene");
     }
 
     public void CreateProfile() {

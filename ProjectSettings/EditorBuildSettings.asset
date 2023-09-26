@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ramila/Scenes/CancelScene.unity
     guid: 571eaae26bf00f745bc6ea71b0195d62
+  - enabled: 1
+    path: Assets/Renato/Scenes/GraphicsScene.unity
+    guid: 18ff661e2a6b2974db94e2f8d7f3e91a
+  - enabled: 1
+    path: Assets/Renato/Scenes/SettingsScene.unity
+    guid: 39e033b94b28a1b44a195528591a37ad
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b554cc72793e9c34bb8f65587d659b71,
       type: 2}
