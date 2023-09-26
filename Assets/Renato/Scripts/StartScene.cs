@@ -14,9 +14,9 @@ public class StartScene : MonoBehaviour {
 
     void Awake() {
         Screen.orientation = ScreenOrientation.Portrait;
-        profiles = SaveSystem.LoadProfiles();
     }
     void Start() {
+        profiles = SaveSystem.LoadProfiles();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         DateTime now = DateTime.Now;
@@ -28,12 +28,11 @@ public class StartScene : MonoBehaviour {
             empty.SetActive(false);
             chooseGameObject.SetActive(true);
             profilesGameObject.SetActive(true);
-            //primaryText.text = "Selecciona el perfil del Paciente";
-            //images.SetActive(false);
             for (int i = 0; i < profiles.Length; i++) {
                 if (i >= 1) {
                     GameObject clone = Instantiate(profile, new Vector3(profile.transform.position.x, profile.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Profiles").transform);
                 }
+                nameText.name = profiles[i].GetID();
                 nameText.text = profiles[i].GetName();
                 string[] split = profiles[i].GetAge().Split('-');
                 DateTime time = new(int.Parse(split[2]), int.Parse(split[1]), int.Parse(split[0]));
@@ -58,8 +57,8 @@ public class StartScene : MonoBehaviour {
         SceneManager.LoadScene("CreateProfileScene");
     }
 
-    public void ProfileView(TMP_Text name) {
-        SetSelectedProfile(name.text);
+    public void ProfileView(TMP_Text id) {
+        SetSelectedProfile(id.name);
         SceneManager.LoadScene("ProfileScene");
     }
 

@@ -41,7 +41,9 @@ public class CreateProfile : MonoBehaviour {
         }
 
         if (name != "" && age != "") {
-            Profile profile = new Profile(name, age);  
+            Guid guid = Guid.NewGuid();
+            string str = guid.ToString();
+            Profile profile = new Profile(str, name, age);
             SaveSystem.SaveProfile(profile);
             SceneManager.LoadScene("FirstScene");
         }
