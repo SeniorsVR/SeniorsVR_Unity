@@ -41,6 +41,11 @@ namespace nico
         {
             StartCoroutine(StartXRCoroutine());
 
+        }
+
+        public void StartTest()
+        {
+
             TestManager.SetTestFlag(true);
             TestManager.SetIdaFlag(true);
         }
@@ -94,7 +99,7 @@ namespace nico
 
         public void finish() {
             StopXR();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("ResultsScene");
         }
 
         #region Metricas
