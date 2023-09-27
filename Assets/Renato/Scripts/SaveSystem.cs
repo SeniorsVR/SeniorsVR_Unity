@@ -6,19 +6,25 @@ using UnityEngine.SceneManagement;
 public static class SaveSystem {
     static public void SaveProfile(Profile profile) {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = string.Concat(Application.persistentDataPath, "/Profiles/", profile.GetName());
+        string path = Path.Combine(Application.persistentDataPath, "Profiles", profile.GetID());
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles"))) {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles"));
         }
         FileStream stream = new FileStream(path, FileMode.Create);
+
+        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profile.GetID()));
+        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profile.GetID(), "Simulations"));
 
         formatter.Serialize(stream, profile);
         stream.Close();
     }
 
     static public Profile[] LoadProfiles() {
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles"))) {
+            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles"));
+        }
         int i = 0;
-        var filenames = Directory.GetFiles(Application.persistentDataPath + "/Profiles/");
+        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath,"Profiles"));
         Profile[] profiles = new Profile[filenames.Length];
         foreach(var filename in filenames) {
             if (File.Exists(filename)) {
@@ -44,7 +50,7 @@ public static class SaveSystem {
 
     static public Profile LoadProfile(string id) {
         int i = 0;
-        var filenames = Directory.GetFiles(Application.persistentDataPath + "/Profiles/");
+        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath,"Profiles"));
         foreach(var filename in filenames) {
             if (File.Exists(filename)) {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -67,9 +73,13 @@ public static class SaveSystem {
     }
 
     static public void DeleteProfile(string id) {
-        foreach (var file in Directory.GetFiles(Application.persistentDataPath + "/Profiles/")) {
+        foreach (var file in Directory.GetFiles(Path.Combine(Application.persistentDataPath,"Profiles"))) {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(file, FileMode.Open);
+
+            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + id, "Simulations"))) {
+                Directory.Delete(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + id, "Simulations"),true);
+            }
 
             Profile profile = formatter.Deserialize(stream) as Profile;
             if (profile.GetID() == id) {
@@ -85,10 +95,9 @@ public static class SaveSystem {
 
     static public void SaveSimulation(Simulation simulation) {
         BinaryFormatter formatter = new BinaryFormatter();
-        string[] split = simulation.GetDate().Split(' ');
-        string path = string.Concat(Application.persistentDataPath, "/Simulations/", split[0], "-", simulation.GetUsername());
-        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Simulations"))) {
-            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Simulations"));
+        string path = Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations", simulation.GetID());
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations"))) {
+            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations"));
         }
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -96,9 +105,9 @@ public static class SaveSystem {
         stream.Close();
     }
 
-    static public Simulation[] LoadSimulations() {
+    static public Simulation[] LoadSimulations(string profileID) {
         int i = 0;
-        var filenames = Directory.GetFiles(Application.persistentDataPath + "/Simulations/");
+        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations"));
         Simulation[] simulations = new Simulation[filenames.Length];
         foreach(var filename in filenames) {
             if (File.Exists(filename)) {
@@ -116,32 +125,23 @@ public static class SaveSystem {
         }
         if (simulations.Length == 0) {
             Debug.LogError("No hay nada!");
-            return null;
-        } else {
-            return simulations;
         }
+        return simulations;
     }
 
-    static public Simulation LoadSimulation(string file, string profile) {
-        int i = 0;
-        var filenames = Directory.GetFiles(Application.persistentDataPath + "/Simulations/");
-        foreach(var filename in filenames) {
-            if (File.Exists(filename)) {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(filename, FileMode.Open);
+    static public Simulation LoadSimulation(string profileID, string simulationID) {
+        string filename = Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations", simulationID);
+        if (File.Exists(filename)){
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(filename, FileMode.Open);
 
-                Simulation simulation = formatter.Deserialize(stream) as Simulation;
-                stream.Close();
+            Simulation simulation = formatter.Deserialize(stream) as Simulation;
+            stream.Close();
 
-                if (simulation.GetUsername() == profile && simulation.GetDate().Split(" ")[0] == file){
-                    return simulation;
-                }
-                i++;
-            } else {
-                Debug.LogError("Save file not found in " + filename);
-                return null;
-            }
+            return simulation;
+        } else {
+            Debug.LogError("Save file not found in " + filename);
+            return null;
         }
-        return null;
     }
 }

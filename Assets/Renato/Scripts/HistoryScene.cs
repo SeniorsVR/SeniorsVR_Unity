@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 #if UNITY_ANDROID
     using System.Runtime.Remoting.Messaging;
 #endif
@@ -18,22 +16,19 @@ public class HistoryScene : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         currentProfile = ProfileScene.GetSelectedProfile();
-        simulations = SaveSystem.LoadSimulations();
+        simulations = SaveSystem.LoadSimulations(currentProfile);
         profile = SaveSystem.LoadProfile(currentProfile);
         profileText.SetText(profile.GetName());
 
-        int count = 0;
+        int count = simulations.Length;
         if (simulations != null) {
             for (int i = 0; i < simulations.Length; i++) {
                 Simulation simulation = simulations[i];
-                if (simulation.GetUsername() == currentProfile) {
-                    if (count >= 1) {
-                        GameObject clone = Instantiate(simulationGameObject, new Vector3(simulationGameObject.transform.position.x, simulationGameObject.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Simulations").transform);
-                    }
-                    dateText.text = simulation.GetDate().Split(" ")[0];
-                    scoreText.text = "Puntaje Global: "; // + TimeInSeconds(simulation.GetFirstTime());
-                    count++;
+                if (count >= 1) {
+                    GameObject clone = Instantiate(simulationGameObject, new Vector3(simulationGameObject.transform.position.x, simulationGameObject.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Simulations").transform);
                 }
+                dateText.text = simulation.GetDate().Split(" ")[0];
+                scoreText.text = "Puntaje Global: "; // + TimeInSeconds(simulation.GetFirstTime());
             }
         }
         if (count == 0) {
@@ -72,8 +67,8 @@ public class HistoryScene : MonoBehaviour {
         return filename;
     }
 
-    static public void SetSelectedProfile(string profileName) {
-        currentProfile = profileName;
+    static public void SetSelectedProfile(string profileID) {
+        currentProfile = profileID;
     }
 
     static public string GetSelectedProfile() {

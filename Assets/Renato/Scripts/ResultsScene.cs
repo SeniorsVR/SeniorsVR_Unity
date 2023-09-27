@@ -1,15 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System;
-using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using nico;
-using Unity.Mathematics;
-using UnityEngine.UI;
-
 public class ResultsScene : MonoBehaviour {
     static private string filename, currentProfile;
     private Profile profile;

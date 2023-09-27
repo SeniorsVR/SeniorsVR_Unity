@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,16 +19,9 @@ public class ProfileScene : MonoBehaviour {
         now = DateTime.Now;
         id = StartScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(id);
-        simulations = SaveSystem.LoadSimulations();
+        simulations = SaveSystem.LoadSimulations(id);
 
-        int count = 0;
-        if (simulations != null) {
-            for (int i = 0; i < simulations.Length; i++) {
-                if (simulations[i].GetUsername() == currentProfile) {
-                    count++;
-                }
-            }
-        }
+        int count = simulations.Length;
         
         if (count == 0) {
             testsText.SetText("Ninguna");
@@ -84,8 +75,8 @@ public class ProfileScene : MonoBehaviour {
         SceneManager.LoadScene("HistoryScene");
     }
 
-    static public void SetSelectedProfile(string profileName) {
-        currentProfile = profileName;
+    static public void SetSelectedProfile(string profileID) {
+        currentProfile = profileID;
     }
 
     static public string GetSelectedProfile() {

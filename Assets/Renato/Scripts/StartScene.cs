@@ -62,8 +62,8 @@ public class StartScene : MonoBehaviour {
         SceneManager.LoadScene("ProfileScene");
     }
 
-    static public void SetSelectedProfile(string profileName) {
-        selectedProfile = profileName;
+    static public void SetSelectedProfile(string profileID) {
+        selectedProfile = profileID;
     }
 
     static public string GetSelectedProfile() {

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Profile {
@@ -8,8 +6,10 @@ public class Profile {
     private string name;
     private string age;
     
-    public Profile(string id, string name, string age) {
-        this.id = id;
+    public Profile(string name, string age) {
+        Guid guid = Guid.NewGuid();
+        string strID = guid.ToString();
+        id = strID;
         this.name = name;
         this.age = age;
     }
