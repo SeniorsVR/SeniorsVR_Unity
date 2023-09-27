@@ -35,3 +35,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.log
+UserSettings/Layouts/default-2021.dwlt
+UserSettings/Layouts/CurrentMaximizeLayout.dwlt
