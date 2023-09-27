@@ -9,7 +9,6 @@ public class ProfileScene : MonoBehaviour {
     private Profile profile;
     private Simulation[] simulations;
     private DateTime now;
-    private string id;
     static private string currentProfile;
     void Start() {
         popup.SetActive(false);
@@ -17,9 +16,9 @@ public class ProfileScene : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         now = DateTime.Now;
-        id = StartScene.GetSelectedProfile();
-        profile = SaveSystem.LoadProfile(id);
-        simulations = SaveSystem.LoadSimulations(id);
+        currentProfile = StartScene.GetSelectedProfile();
+        profile = SaveSystem.LoadProfile(currentProfile);
+        simulations = SaveSystem.LoadSimulations(currentProfile);
 
         int count = simulations.Length;
         
@@ -47,7 +46,7 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void OptionsMenu() {
-        SetSelectedProfile(id);
+        SetSelectedProfile(currentProfile);
         SceneManager.LoadScene("OptionsScene");
     }
 
@@ -57,6 +56,11 @@ public class ProfileScene : MonoBehaviour {
 
     public void confirmationPopupVolver(){
         popup.SetActive(false);
+    }
+
+    public void Tutorial() {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Invoke("comenzarTutorial",5);
     }
 
     public void StartSimulation() {
@@ -71,7 +75,7 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void History() {
-        SetSelectedProfile(id);
+        SetSelectedProfile(currentProfile);
         SceneManager.LoadScene("HistoryScene");
     }
 
@@ -85,5 +89,9 @@ public class ProfileScene : MonoBehaviour {
 
     private void comenzarTest(){
         SceneManager.LoadScene("test");
+    }
+
+    private void comenzarTutorial() {
+        SceneManager.LoadScene("tutorial");
     }
 }

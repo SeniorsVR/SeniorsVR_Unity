@@ -2015,7 +2015,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1852147972}
         m_TargetAssemblyTypeName: ProfileScene, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Tutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
