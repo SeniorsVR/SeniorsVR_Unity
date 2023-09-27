@@ -59,15 +59,13 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void Tutorial() {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-        Invoke("comenzarTutorial",5);
+        SceneManager.LoadScene("loadingSceneTutorial");
     }
 
     public void StartSimulation() {
         //Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
         //SaveSystem.SaveSimulation(simulation);
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-        Invoke("comenzarTest",5);
+        SceneManager.LoadScene("loadingScene");
     }
 
     public void Graphics() {
@@ -85,13 +83,5 @@ public class ProfileScene : MonoBehaviour {
 
     static public string GetSelectedProfile() {
         return currentProfile;
-    }
-
-    private void comenzarTest(){
-        SceneManager.LoadScene("test");
-    }
-
-    private void comenzarTutorial() {
-        SceneManager.LoadScene("tutorial");
     }
 }
