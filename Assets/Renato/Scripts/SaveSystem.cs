@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 public static class SaveSystem {
     static public void SaveProfile(Profile profile) {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Path.Combine(Application.persistentDataPath, "Profiles", profile.GetName());
+        string path = Path.Combine(Application.persistentDataPath, "Profiles", profile.GetID());
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles"))) {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles"));
         }
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", profile.GetID()));
-        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", profile.GetID(), "Simulations"));
+        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profile.GetID()));
+        Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profile.GetID(), "Simulations"));
 
         formatter.Serialize(stream, profile);
         stream.Close();
@@ -77,8 +77,8 @@ public static class SaveSystem {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(file, FileMode.Open);
 
-            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", id, "Simulations"))) {
-                Directory.Delete(Path.Combine(Application.persistentDataPath, "Profiles", id, "Simulations"),true);
+            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + id, "Simulations"))) {
+                Directory.Delete(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + id, "Simulations"),true);
             }
 
             Profile profile = formatter.Deserialize(stream) as Profile;
@@ -95,9 +95,9 @@ public static class SaveSystem {
 
     static public void SaveSimulation(Simulation simulation) {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Path.Combine(Application.persistentDataPath, "Profiles", simulation.GetProfileID(), "Simulations", simulation.GetID());
-        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", simulation.GetProfileID(), "Simulations"))) {
-            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", simulation.GetProfileID(), "Simulations"));
+        string path = Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations", simulation.GetID());
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations"))) {
+            Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + simulation.GetProfileID(), "Simulations"));
         }
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -107,7 +107,7 @@ public static class SaveSystem {
 
     static public Simulation[] LoadSimulations(string profileID) {
         int i = 0;
-        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Profiles", profileID, "Simulations"));
+        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations"));
         Simulation[] simulations = new Simulation[filenames.Length];
         foreach(var filename in filenames) {
             if (File.Exists(filename)) {
@@ -130,7 +130,7 @@ public static class SaveSystem {
     }
 
     static public Simulation LoadSimulation(string profileID, string simulationID) {
-        string filename = Path.Combine(Application.persistentDataPath, "Profiles", profileID, "Simulations", simulationID);
+        string filename = Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations", simulationID);
         if (File.Exists(filename)){
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(filename, FileMode.Open);
