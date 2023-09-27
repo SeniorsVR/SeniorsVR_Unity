@@ -28,6 +28,11 @@ namespace nico
                         TestManager.SetKioskoFlag(true);
                         TestManager.SetRecojerCanastoFlag(true);
 
+                        if (TutorialManager.Instance)
+                        {
+                            TutorialManager.Instance.ChangeTutorialState(TutorialState.RecojerCanasta);
+                        }
+
                     }
                     else if (TestManager.enIrse && rm.back)
                     {
@@ -38,6 +43,10 @@ namespace nico
 
                         //TestManager.PrintInLog();
 
+                        if (TutorialManager.Instance && TutorialManager.Instance.tutorialState == TutorialState.Irse)
+                        {
+                            TutorialManager.Instance.ChangeTutorialState(TutorialState.EMPTY);
+                        }
                     }
                 }
                 else

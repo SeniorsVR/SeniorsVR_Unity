@@ -30,6 +30,11 @@ namespace nico
             MostradorMovements.Instance.Invoke("StartMovingBasketToPreMostrador", 1);
             Invoke("ActivateAllBilletes", 2);
 
+            if (TutorialManager.Instance)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.CajaAnimacion1);
+            }
+
         }
 
         public void SetStateText(bool state)
@@ -90,6 +95,11 @@ namespace nico
 
             TestManager.AddVueltoFinal(precioRestante);
             TestManager.EvaluateArticulos();
+
+            if (TutorialManager.Instance)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.CajaAnimacion2);
+            }
         }
 
         void ActivateAllBilletes()
@@ -103,6 +113,10 @@ namespace nico
                 billete.gameObject.SetActive(true);
             }
 
+            if (TutorialManager.Instance)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.Pagar1);
+            }
         }
 
         public override bool SelectionConditionFunction()

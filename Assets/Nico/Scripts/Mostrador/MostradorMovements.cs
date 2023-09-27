@@ -224,6 +224,11 @@ namespace nico
                 basketTransform.rotation = targetAngle;
 
                 bagToMostradorFlag = false;
+
+                if (TutorialManager.Instance)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.Recoger);
+                }
             }
         }
 
@@ -235,6 +240,11 @@ namespace nico
             bagToMostradorFlag = false;
             bagToPlayerFlag = true;
 
+
+            if (TutorialManager.Instance)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.Irse);
+            }
         }
         void MoveBagToPlayer()
         {

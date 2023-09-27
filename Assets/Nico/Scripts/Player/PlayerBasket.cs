@@ -56,6 +56,22 @@ namespace nico
             if (IsBasketFull())
             {
                 Mostrador.Instance.ComputeTotalValue(objetos);
+
+
+                if (TutorialManager.Instance)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.IrCaja);
+                }
+
+            }
+
+
+            if (TutorialManager.Instance)
+            {
+                if (GetNumArticulos() >= 3 && TutorialManager.Instance.tutorialState == TutorialState.RecojerObjetos)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.DevolerObjetos);
+                }
             }
 
             return maxArticulos - GetNumArticulos();
@@ -67,6 +83,15 @@ namespace nico
             seleccionableBasket.SetState(false);
 
             objetos[basketIndex] = Articulo.EMPTY;
+
+
+            if (TutorialManager.Instance)
+            {
+                if (TutorialManager.Instance.tutorialState == TutorialState.DevolerObjetos)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.LlenarObjetos);
+                }
+            }
         }
 
 
@@ -84,6 +109,12 @@ namespace nico
             basketTransform.rotation = ogBasket.transform.rotation;
 
             ogBasket.transform.position = Vector3.down * 500;
+
+
+            if (TutorialManager.Instance)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.RecojerObjetos);
+            }
         }
     
         public int GetNumArticulos()

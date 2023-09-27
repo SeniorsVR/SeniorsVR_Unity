@@ -114,6 +114,12 @@ namespace nico
                 outlineRenderer.transform.localScale = Vector3.one * 1.5f;
 
                 TestManager.AddVesMarcadoBillete();
+
+
+                if (TutorialManager.Instance && TutorialManager.Instance.tutorialState == TutorialState.Pagar1)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.Pagar2);
+                }
             }
             else
             {

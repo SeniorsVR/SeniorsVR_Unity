@@ -33,6 +33,8 @@ namespace nico
         protected void Update()
         {
 
+            Update_();
+
             if (isCurrentlySelected)
             {
                 SwitchMaterialState(true);
@@ -44,8 +46,6 @@ namespace nico
             }
 
             isCurrentlySelected = false;
-
-            Update_();
         }
         public virtual void Update_()
         {

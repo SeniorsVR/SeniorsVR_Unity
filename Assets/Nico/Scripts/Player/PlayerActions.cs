@@ -6,6 +6,11 @@ namespace nico
 {
     public class PlayerActions : MonoBehaviour
     {
+        public static PlayerActions Instance;
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         public float grabRange = 3;
         public static float grabTime = 2;

@@ -23,6 +23,7 @@ public class PlayerActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError("USANDO COMPONENTE OBSOLETO");
         PlayerMovement = GetComponent<PlayerMovement>();
     }
 
