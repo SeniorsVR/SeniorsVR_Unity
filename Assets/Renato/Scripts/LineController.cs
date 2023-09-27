@@ -8,12 +8,13 @@ public class LineController : Graphic {
     public Vector2Int gridSize;
     private Vector2[] points;
     private float thickness = 10f;
+    public Graphics graphicContext;
 
     private float width, height, unitWidth, unitHeight;
 
 
     protected override void OnPopulateMesh(VertexHelper vh) {
-        points = Graphics.getVectors();
+        points = graphicContext.getVectors();
         vh.Clear();
 
         width = rectTransform.rect.width;
