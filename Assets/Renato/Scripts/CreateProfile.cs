@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class CreateProfile : MonoBehaviour {
     public TMP_InputField inputName, inputAge;
@@ -41,9 +37,7 @@ public class CreateProfile : MonoBehaviour {
         }
 
         if (name != "" && age != "") {
-            Guid guid = Guid.NewGuid();
-            string str = guid.ToString();
-            Profile profile = new Profile(str, name, age);
+            Profile profile = new Profile(name, age);
             SaveSystem.SaveProfile(profile);
             SceneManager.LoadScene("FirstScene");
         }

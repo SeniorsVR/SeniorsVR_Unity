@@ -6,10 +6,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
-    public TMP_Text profileText, ageText;
-    public GameObject normal, popup;
+    public TMP_Text profileText, ageText,testsText;
+    public GameObject popup;
     private Profile profile;
     private DateTime now;
+    private Simulation[] simulations;
     static private string currentProfile;
     void Start() {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -23,12 +24,23 @@ public class OptionsMenu : MonoBehaviour {
         string[] split = profile.GetAge().Split('-');
         DateTime time = new(int.Parse(split[2]), int.Parse(split[1]), int.Parse(split[0]));
         ageText.SetText((now - time).Days/365 + " años");
+
+        simulations = SaveSystem.LoadSimulations(currentProfile);
+
+        int count = simulations.Length;
+        
+        if (count == 0) {
+            testsText.SetText("Ninguna");
+        } else if (count == 1) {
+            testsText.SetText("1 prueba");
+        } else {
+            testsText.SetText(count.ToString() + " pruebas");
+        }
     }
 
     void Update() {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor) {
             if (Input.GetKeyDown(KeyCode.Escape) && popup.activeSelf) {
-                normal.SetActive(true);
                 popup.SetActive(false);
             }
             else if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -43,7 +55,6 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     public void DeleteProfile() {
-        normal.SetActive(false);
         popup.SetActive(true);
     }
 
@@ -52,12 +63,11 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     public void GoBackButton() {
-        normal.SetActive(true);
         popup.SetActive(false);
     }
 
-    static public void SetSelectedProfile(string profileName) {
-        currentProfile = profileName;
+    static public void SetSelectedProfile(string profileID) {
+        currentProfile = profileID;
     }
 
     static public string GetSelectedProfile() {
