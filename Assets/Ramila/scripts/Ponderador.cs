@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using nico;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 public static class Ponderador {
     public static float ComputeNavigationScore(Metricas metricas) {
