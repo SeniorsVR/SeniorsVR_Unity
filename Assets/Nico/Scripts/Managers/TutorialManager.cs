@@ -81,7 +81,6 @@ namespace nico
 
                 case TutorialState.IrLista:
                     float distance = Vector3.Distance(PlayerMovement.Instance.transform.position, letrero.transform.position);
-                    print(distance);
                     if (distance < 5)
                     {
                         ChangeTutorialState(TutorialState.LeerLista);

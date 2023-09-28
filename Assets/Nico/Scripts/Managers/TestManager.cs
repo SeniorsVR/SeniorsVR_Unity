@@ -59,14 +59,17 @@ namespace nico
                 if (enIda)
                 {
                     metricas.tiempo_total_ida += Time.deltaTime;
+                    //print("en ida");
                 }
                 else if(enVuelta)
                 {
                     metricas.tiempo_total_vuelta += Time.deltaTime;
+                    //print("en vuelta");
                 }
 
                 if (enKiosko)
                 {
+                    //print("en kiosko");
                     metricas.tiempo_total_kiosko += Time.deltaTime;
 
                     if (enCanasto)

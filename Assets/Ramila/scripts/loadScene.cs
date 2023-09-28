@@ -12,8 +12,11 @@ public class loadScene : MonoBehaviour
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         if(esTutorial){
             Invoke("comenzarTutorial",4);
-        }else{
+            nico.TutorialManager.lastTestWasTutorial = true;
+        }
+        else{
             Invoke("comenzarTest",4);
+            nico.TutorialManager.lastTestWasTutorial = false;
         }
     }
 

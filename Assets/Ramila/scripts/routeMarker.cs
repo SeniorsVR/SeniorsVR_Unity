@@ -36,13 +36,17 @@ public class routeMarker : MonoBehaviour
            back = true;
         }
         targetPosition = position;
-        Debug.Log(position);
+        //Debug.Log(position);
     }
 
     void EndSimulation(){
         if(back){
-            if(endSimEvent != null){
-                endSimEvent();
+            if (nico.TestManager.enVuelta)
+            {
+                if (endSimEvent != null)
+                {
+                    endSimEvent();
+                }
             }
         }
     }

@@ -14,6 +14,13 @@ public class cancelButtons : MonoBehaviour
     }
 
     public void reiniciarTest(){
-        SceneManager.LoadScene("loadingScene");
+        if (nico.TutorialManager.lastTestWasTutorial)
+        {
+            SceneManager.LoadScene("loadingSceneTutorial");
+        }
+        else
+        {
+            SceneManager.LoadScene("loadingScene");
+        }
     }
 }

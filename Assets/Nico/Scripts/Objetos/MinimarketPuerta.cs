@@ -55,7 +55,7 @@ namespace nico
                     {
                         if (rm.back && TestManager.enVuelta)
                         {
-                            TestManager.SetVueltaFlag(false);
+                            TestManager.SetTestFlag(false);
                             if (endEvent != null)
                             {
                                 endEvent();
