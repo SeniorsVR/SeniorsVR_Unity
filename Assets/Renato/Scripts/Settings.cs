@@ -19,12 +19,12 @@ public class Settings {
 
     public Settings() {
         values = new float[11];
-        for(int i=0; i<11; i++){
-            values[i]=1;
+        for(int i = 0; i < 11; i++){
+            values[i] = 1.0f;
         }
     }
     public Settings(float[] values) {
-        values = new float[11];
+        this.values = new float[11];
         this.values = values;
     }
 

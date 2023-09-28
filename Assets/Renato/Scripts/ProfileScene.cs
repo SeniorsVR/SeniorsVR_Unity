@@ -50,8 +50,12 @@ public class ProfileScene : MonoBehaviour {
         SceneManager.LoadScene("OptionsScene");
     }
 
-    public void confirmationPopup(){
-        popup.SetActive(true);
+    public void confirmationPopup() {
+        if (!profile.GetTutorialDone()) {
+            Tutorial();
+        } else {
+            popup.SetActive(true);
+        }
     }
 
     public void confirmationPopupVolver(){
@@ -60,12 +64,18 @@ public class ProfileScene : MonoBehaviour {
 
     public void Tutorial() {
         SceneManager.LoadScene("loadingSceneTutorial");
+        if (!profile.GetTutorialDone()) {
+            profile.SetTutorialDone(true);
+            SaveSystem.SaveProfile(profile);
+        }
     }
 
     public void StartSimulation() {
         //Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
         //SaveSystem.SaveSimulation(simulation);
         if (!profile.GetTutorialDone()) {
+            profile.SetTutorialDone(true);
+            SaveSystem.SaveProfile(profile);
             SceneManager.LoadScene("loadingSceneTutorial");
         } else {
             SceneManager.LoadScene("loadingScene");
