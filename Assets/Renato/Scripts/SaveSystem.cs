@@ -144,4 +144,40 @@ public static class SaveSystem {
             return null;
         }
     }
+
+    static public void deleteSimulation(string profileID, string simulationID) {
+        string filename = Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations", simulationID);
+        if (File.Exists(filename)){
+            File.Delete(filename);
+        } else {
+            Debug.LogError("Save file not found in " + filename);
+        }
+    }
+
+    static public void saveSettings(Settings settings){
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Path.Combine(Application.persistentDataPath, "weightData");
+        if (!Directory.Exists(path)) {
+            Directory.CreateDirectory(path);
+        }
+        FileStream stream = new FileStream(Path.Combine(path,"default"), FileMode.Create);
+        formatter.Serialize(stream, settings);
+        stream.Close();
+    }
+
+    static public Settings loadSettings(){
+        string filename = Path.Combine(Application.persistentDataPath,"weightData","default");
+        if (File.Exists(filename)){
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(filename, FileMode.Open);
+
+            Settings settings = formatter.Deserialize(stream) as Settings;
+            stream.Close();
+
+            return settings;
+        } else {
+            Debug.LogError("Save file not found in " + filename);
+            return null;
+        }
+    }
 }

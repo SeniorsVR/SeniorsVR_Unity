@@ -24,6 +24,9 @@ public class StartScene : MonoBehaviour {
             empty.SetActive(true);
             chooseGameObject.SetActive(false);
             profilesGameObject.SetActive(false);
+            
+            Settings settings = new Settings();
+            SaveSystem.saveSettings(settings);
         } else {
             empty.SetActive(false);
             chooseGameObject.SetActive(true);

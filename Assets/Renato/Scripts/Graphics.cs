@@ -13,7 +13,7 @@ public class Graphics : MonoBehaviour {
     public TMP_Text profileText;
     private RectTransform labelTemplateX, labelTemplateY1, labelTemplateY2, labelTemplateY3;
     private RectTransform dashTemplateX, dashTemplateY;
-    private new string currentProfile;
+    private string currentProfile;
     private Profile profile;
     private Vector2[] clones;
     private Simulation[] simulations;
@@ -108,7 +108,7 @@ public class Graphics : MonoBehaviour {
         for(int i = 0; i<sortedSimulations.Count;i++){
             switch(idMetrica){
                 case 0:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total; //GLOBAL
+                    returnData[i]=Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas); //GLOBAL
                     break;
                 case 1:
                     returnData[i]=sortedSimulations[i].metricas.tiempo_total;
