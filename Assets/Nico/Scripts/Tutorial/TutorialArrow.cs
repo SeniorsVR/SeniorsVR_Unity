@@ -27,7 +27,7 @@ public class TutorialArrow : MonoBehaviour
         rectTransform = gameObject.GetComponent<RectTransform>();
 
         dimensionsOfCanvas = parentTransform.rect.size / 2f;
-        dimensionsOfCanvas *= 0.9f;
+        dimensionsOfCanvas *= 1.0f;
     }
 
     // Update is called once per frame

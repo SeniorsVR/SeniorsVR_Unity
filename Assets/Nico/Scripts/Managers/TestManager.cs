@@ -99,7 +99,14 @@ namespace nico
 
         public void finish() {
             StopXR();
-            SceneManager.LoadScene("ResultsScene");
+            if (TutorialManager.Instance)
+            {
+                SceneManager.LoadScene("ProfileScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("ResultsScene");
+            }
         }
 
         #region Metricas

@@ -38,7 +38,10 @@ namespace nico
         private void Awake()
         {
             Instance = this;
+            lastTestWasTutorial = true;
         }
+
+        public static bool lastTestWasTutorial = false;
 
         public GameObject circulo, letrero, cruce, cruce2, semaforo_go, flecha, canastos, caja, bolsa;
 
@@ -78,11 +81,12 @@ namespace nico
 
                 case TutorialState.IrLista:
                     float distance = Vector3.Distance(PlayerMovement.Instance.transform.position, letrero.transform.position);
+                    print(distance);
                     if (distance < 5)
                     {
                         ChangeTutorialState(TutorialState.LeerLista);
                     }
-                    else if (distance > 20)
+                    else if (distance > 25)
                     {
                         ChangeTutorialState(TutorialState.LeerLista);
                     }

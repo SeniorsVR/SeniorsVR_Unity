@@ -65,7 +65,16 @@ public class ProfileScene : MonoBehaviour {
     public void StartSimulation() {
         //Simulation simulation = new Simulation(profile.GetName(), now.ToString(), 5);
         //SaveSystem.SaveSimulation(simulation);
-        SceneManager.LoadScene("loadingScene");
+
+        if (true) //Si es la primera ves ejecutando un test
+        {
+            SceneManager.LoadScene("loadingScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("loadingSceneTutorial");
+            //Settear que ya ha hecho al menos un test, para que no vuelva forzar un tutorial
+        }
     }
 
     public void Graphics() {

@@ -46,6 +46,12 @@ public class ResultsScene : MonoBehaviour {
         texts[12].text = TestManager.metricas.cantidad_segmentos_no_ruta.ToString() + " segmentos fuera de ruta";
         texts[13].text = TestManager.metricas.contador_cruces_invalidos.ToString() + " luces rojas v/s " + TestManager.metricas.contador_cruces_validos.ToString() + " luces verdes";
         texts[14].text = TestManager.metricas.contador_transita_calle.ToString() + " segmentos de calle transitados (no en vía peatonal)";
+
+        if (TutorialManager.lastTestWasTutorial)
+        {
+            TutorialManager.lastTestWasTutorial = false;
+            SceneManager.LoadScene("ProfileScene");
+        }
     }
     
     public void MainMenu() {
