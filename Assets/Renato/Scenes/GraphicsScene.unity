@@ -299,7 +299,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 189458035}
+        m_TargetAssemblyTypeName: Graphics, Assembly-CSharp
+        m_MethodName: changeData
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &76867380
 MonoBehaviour:
@@ -651,6 +663,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 1467009670}
   profileText: {fileID: 197993886}
+  idMetrica: 3
+  lc: {fileID: 1467009673}
 --- !u!114 &189458036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,13 +932,13 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: 0
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: 1
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 2
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 3
       m_Image: {fileID: 0}
     - m_Text: Option C
       m_Image: {fileID: 0}
@@ -940,7 +954,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 232747458}
+        m_TargetAssemblyTypeName: Graphics, Assembly-CSharp
+        m_MethodName: changeData
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &207342325
 MonoBehaviour:
@@ -1100,7 +1126,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1695350275}
+        m_TargetAssemblyTypeName: Graphics, Assembly-CSharp
+        m_MethodName: changeData
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &212020169
 MonoBehaviour:
@@ -1200,6 +1238,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 757345838}
   profileText: {fileID: 197993886}
+  idMetrica: 1
+  lc: {fileID: 757345841}
 --- !u!114 &232747459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,6 +1673,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   gridSize: {x: 1, y: 1}
+  graphicContext: {fileID: 1794638273}
 --- !u!222 &351360024
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2109,7 +2150,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498072711}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2119,7 +2160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -29, y: 28.601562}
+  m_AnchoredPosition: {x: -29.459015, y: 28.835266}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498072713
@@ -2811,6 +2852,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   gridSize: {x: 1, y: 1}
+  graphicContext: {fileID: 232747458}
 --- !u!222 &757345842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3254,7 +3296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4064,6 +4106,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   gridSize: {x: 1, y: 1}
+  graphicContext: {fileID: 1695350275}
 --- !u!222 &1258767631
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4517,6 +4560,7 @@ MonoBehaviour:
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   gridSize: {x: 1, y: 1}
+  graphicContext: {fileID: 189458035}
 --- !u!222 &1467009674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5065,6 +5109,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 1258767627}
   profileText: {fileID: 197993886}
+  idMetrica: 2
+  lc: {fileID: 1258767630}
 --- !u!114 &1695350276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,6 +5323,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 351360021}
   profileText: {fileID: 197993886}
+  idMetrica: 0
+  lc: {fileID: 0}
 --- !u!1 &1818711483
 GameObject:
   m_ObjectHideFlags: 0

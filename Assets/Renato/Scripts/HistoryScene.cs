@@ -2,11 +2,12 @@
     using System.Runtime.Remoting.Messaging;
 #endif
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HistoryScene : MonoBehaviour {
-    public TMP_Text profileText, dateText, scoreText;
+    public TMP_Text profileText, dateText, scoreText, timeText;
     public GameObject simulationGameObject, emptyGameObject;
     static private string currentProfile, filename;
     private Simulation[] simulations;
@@ -24,17 +25,19 @@ public class HistoryScene : MonoBehaviour {
         if (simulations != null) {
             for (int i = 0; i < simulations.Length; i++) {
                 Simulation simulation = simulations[i];
+                dateText.text = simulation.GetDate().Split(" ")[0];
+                timeText.text = simulation.GetDate().Split(" ")[1];
+                scoreText.text = "Puntaje Global: "; // + TimeInSeconds(simulation.GetFirstTime());
                 if (count >= 1) {
                     GameObject clone = Instantiate(simulationGameObject, new Vector3(simulationGameObject.transform.position.x, simulationGameObject.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Simulations").transform);
+                    clone.name = simulation.GetID();
                 }
-                dateText.text = simulation.GetDate().Split(" ")[0];
-                scoreText.text = "Puntaje Global: "; // + TimeInSeconds(simulation.GetFirstTime());
             }
         }
         if (count == 0) {
             emptyGameObject.SetActive(true);
-            simulationGameObject.SetActive(false);
         }
+        simulationGameObject.SetActive(false);
     }
 
     void Update() {

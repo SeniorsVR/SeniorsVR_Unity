@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class cancelButtons : MonoBehaviour
 {
+    private void Start() {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
     public void cancelarTest(){
         Screen.orientation = ScreenOrientation.Portrait;
         SceneManager.LoadScene("FirstScene");
     }
 
     public void reiniciarTest(){
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-        Invoke("comenzarTest",5);
-    }
-
-    private void comenzarTest(){
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene("loadingScene");
     }
 }

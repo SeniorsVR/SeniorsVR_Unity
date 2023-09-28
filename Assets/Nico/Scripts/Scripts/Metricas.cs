@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace nico
 {
-
+    [System.Serializable]
     public class Metricas
     {
         public float tiempo_total = 0; //Tiempo total del test
