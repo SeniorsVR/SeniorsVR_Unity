@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Renato/Scenes/SettingsScene.unity
     guid: 39e033b94b28a1b44a195528591a37ad
+  - enabled: 1
+    path: Assets/Nico/Scenes/tutorial.unity
+    guid: a0a5ccdc165c08040bfdf03930038ea1
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b554cc72793e9c34bb8f65587d659b71,
       type: 2}

@@ -16,7 +16,7 @@ namespace nico
 
         public override bool SelectionConditionFunction()
         {
-            return TestManager.enCaja;
+            return TestManager.enCaja && !confirmar.activeSelf;
         }
         public override void SelectionFunction()
         {

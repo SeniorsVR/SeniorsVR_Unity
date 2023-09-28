@@ -31,7 +31,8 @@ namespace nico
 
             ogPos = transform.position;
 
-            playerPos = Mostrador.Instance.transform.position - (Mostrador.Instance.transform.right + Mostrador.Instance.transform.up * 1.25f) * MostradorMovements.scalar;
+            //playerPos = Mostrador.Instance.transform.position - (Mostrador.Instance.transform.right*2 + Mostrador.Instance.transform.up * 2f) * MostradorMovements.scalar;
+            playerPos = MostradorMovements.Instance.targetPlayerTransform.position + (Mostrador.Instance.transform.up * 1f) * MostradorMovements.scalar;
             pagaPos = Mostrador.Instance.transform.position + (Mostrador.Instance.transform.right - Mostrador.Instance.transform.forward + 0.75f * Mostrador.Instance.transform.up) * MostradorMovements.scalar;
             transform.position = playerPos;
 
@@ -73,7 +74,8 @@ namespace nico
             {
                 if (isPermanentlySelected)
                 {
-                    transform.position = Vector3.Lerp(transform.position, ogPos + transform.right * MostradorMovements.scalar, Time.deltaTime * 2);
+                    Vector3 selectedPos = ogPos + transform.right * MostradorMovements.scalar;
+                    transform.position = Vector3.Lerp(transform.position, selectedPos, Time.deltaTime * 2);
                 }
                 else
                 {
@@ -111,7 +113,7 @@ namespace nico
             if (isPermanentlySelected)
             {
                 Mostrador.Instance.ActualizarPaga(Billete.ObtenerValorDeBilllete(tipo));
-                outlineRenderer.transform.localScale = Vector3.one * 1.5f;
+                outlineRenderer.transform.localScale = Vector3.one * 1.2f;
 
                 TestManager.AddVesMarcadoBillete();
 

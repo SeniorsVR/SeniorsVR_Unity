@@ -1,37 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using nico;
 
-public class CirculoRojo : InteractiveParent
+namespace nico
 {
-    float selectedTime = 0;
 
-
-    public override void Update_()
+    public class CirculoRojo : InteractiveParent
     {
+        float selectedTime = 0;
 
-        if (isCurrentlySelected)
+
+        public override void Update_()
         {
-            TutorialManager.Instance.ChangeTutorialState(TutorialState.MantenerCamara);
+
+            if (isCurrentlySelected)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.MantenerCamara);
+            }
+            else
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.MoverCamara);
+            }
+
+            if (Vector3.Distance(PlayerMovement.Instance.transform.position, transform.position) > 15)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.Moverse);
+                gameObject.SetActive(false);
+            }
         }
-        else
+
+        public override bool SelectionConditionFunction()
         {
-            TutorialManager.Instance.ChangeTutorialState(TutorialState.MoverCamara);
+            selectedTime += Time.deltaTime;
+            if (selectedTime > 3)
+            {
+                TutorialManager.Instance.ChangeTutorialState(TutorialState.Moverse);
+                gameObject.SetActive(false);
+            }
+
+
+            return true;
         }
+
     }
-
-    public override bool SelectionConditionFunction()
-    {
-        selectedTime += Time.deltaTime;
-        if (selectedTime > 3)
-        {
-            TutorialManager.Instance.ChangeTutorialState(TutorialState.Moverse);
-            gameObject.SetActive(false);
-        }
-
-
-        return true;
-    }
-
 }

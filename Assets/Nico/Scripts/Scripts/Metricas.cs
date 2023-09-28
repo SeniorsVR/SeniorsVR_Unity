@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,6 +95,59 @@ namespace nico
             }
 
             return objetos;
+        }
+
+        public float ComputeGeneralScore() //mas positivo es bueno
+        {
+
+            float interaccion_score = 6f / veces_recogido_objeto;
+            float billetes_score = cantidad_minima_billetes / (veces_marcado_billete + veces_devuelto_billete);
+            float correctos_score = articulos_validos / 6f;
+            float pago_score = 1;
+
+            /**float score =
+            tiempo_total_ida / (60f * 15f) > 1 ? -0.5f : 0 +
+            tiempo_total_vuelta / (60f * 5) > 1 ? -0.5f : 0 +
+
+            tiempo_total_kiosko / (60f * 5) > 1 ? -0.5f : 0 +
+            tiempo_total_canasto / (60f * 0.33) > 1 ? -0.5f : 0 +
+            tiempo_total_articulos / (60f * 2.33) > 1 ? -0.5f : 0 +
+            tiempo_total_caja / (60f * 2) > 1 ? -0.5f : 0 +
+            tiempo_total_irse / (60f * 0.33) > 1 ? -0.5f : 0 +
+
+            segundos_mirando_objetos_invalido / (10f) > 1 ? -0.5f : 0 +
+            segundos_mirando_objetos_lleno / (5f) > 1 ? -0.5f : 0 +
+
+            veces_recogido_objeto > 6 ? -0.25f : 0 +
+            veces_devuelto_objeto > 1 ? -0.25f : 0 +
+
+            veces_marcado_billete > cantidad_minima_billetes ? -0.25f : 0 +
+            veces_devuelto_billete > 0 ? -0.25f : 0 +
+
+            segundos_esperando_bolsa > cantidad_minima_billetes ? -0.25f : 0 +
+
+            vuelto_final *
+
+            veces_objeto_innecesario_recojido *
+            veces_objeto_necesario_devuelto *
+
+            Convert.ToInt32(irse_sin_bolsa) *
+
+            numero_billetes_innecesarios *
+
+            articulos_validos *
+
+            contador_cruces_invalidos *
+            contador_cruces_validos *
+            contador_transita_calle *
+            cantidad_segmentos_ruta *
+            cantidad_segmentos_ruta_transitados *
+            cantidad_segmentos_no_ruta *
+
+            1;
+
+            return score;**/
+            return 1;
         }
 
     }

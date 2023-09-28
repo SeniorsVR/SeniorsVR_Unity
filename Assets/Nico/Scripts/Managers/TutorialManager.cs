@@ -63,6 +63,7 @@ namespace nico
         {
             switch (tutorialState)
             {
+
                 case TutorialState.Moverse:
                     if (PlayerMovement.isMoving)
                     {
@@ -76,7 +77,12 @@ namespace nico
                     break;
 
                 case TutorialState.IrLista:
-                    if (Vector3.Distance(PlayerMovement.Instance.transform.position, letrero.transform.position) < 5)
+                    float distance = Vector3.Distance(PlayerMovement.Instance.transform.position, letrero.transform.position);
+                    if (distance < 5)
+                    {
+                        ChangeTutorialState(TutorialState.LeerLista);
+                    }
+                    else if (distance > 20)
                     {
                         ChangeTutorialState(TutorialState.LeerLista);
                     }
@@ -159,6 +165,7 @@ namespace nico
                 case TutorialState.Moverse:
                     staticText.text = "Pulsa cualquier botón del control para moverte.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
+                    PlayerActions.Instance.grabRange = 3;
                     break;
 
                 case TutorialState.IrLista:
@@ -190,7 +197,6 @@ namespace nico
                     staticText.text = "Dirígete hacia a donde apunta la flecha superior para llegar al kiosko.";
                     flecha.SetActive(true);
                     TutorialArrow.Instance.gameObject.SetActive(false);
-                    PlayerActions.Instance.grabRange = 3;
                     break;
 
                 case TutorialState.RecojerCanasta:
@@ -215,7 +221,7 @@ namespace nico
 
                 case TutorialState.IrCaja:
                     staticText.text = "Dirígete hacia la caja e interactúa con ella de la misma forma para pagar tus artículos.";
-                    TutorialArrow.Instance.SetTarget(caja.transform.position + Vector3.up * 3, caja.transform.position);
+                    TutorialArrow.Instance.SetTarget(caja.transform.position + Vector3.up * 1.5f, caja.transform.position);
                     break;
 
                 case TutorialState.Pagar1:

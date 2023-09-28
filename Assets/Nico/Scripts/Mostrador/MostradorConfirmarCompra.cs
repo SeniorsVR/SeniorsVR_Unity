@@ -7,15 +7,18 @@ namespace nico
 
     public class MostradorConfirmarCompra : InteractiveParent
     {
-
+        public bool si;
         public override bool SelectionConditionFunction()
         {
             return TestManager.enCaja;
         }
         public override void SelectionFunction()
         {
-            Mostrador.Instance.ExitoDeCompra();
-            gameObject.SetActive(false);
+            if (si)
+            {
+                Mostrador.Instance.ExitoDeCompra();
+            }
+            transform.parent.gameObject.SetActive(false);
         }
     }
 }

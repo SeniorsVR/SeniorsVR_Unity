@@ -27,12 +27,18 @@ public class TutorialArrow : MonoBehaviour
         rectTransform = gameObject.GetComponent<RectTransform>();
 
         dimensionsOfCanvas = parentTransform.rect.size / 2f;
+        dimensionsOfCanvas *= 0.9f;
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 cameraRenderPos = Camera.main.WorldToViewportPoint(aimPosition);
+        //cameraRenderPos.x = 0.8f * cameraRenderPos.x + 0.1f;
+        //cameraRenderPos.y = 0.8f * cameraRenderPos.y + 0.1f;
+        //cameraRenderPos.x = 1.2f * cameraRenderPos.x - 0.1f;
+        //cameraRenderPos.y = 1.2f * cameraRenderPos.y - 0.1f;
+
         Vector2 aimCameraDirection = (cameraRenderPos - Vector3.one * 0.5f) * 2f;
 
         bool frenteCamera = cameraRenderPos.z >= 0;
