@@ -107,11 +107,11 @@ public class ResultsScene : MonoBehaviour {
     }
 
     public void displayNavigation(){
-        navigationTemplate.SetActive(!safetyTemplate.activeSelf);
+        navigationTemplate.SetActive(!navigationTemplate.activeSelf);
     }
 
     public void displayExecutive(){
-        executiveTemplate.SetActive(!safetyTemplate.activeSelf);
+        executiveTemplate.SetActive(!executiveTemplate.activeSelf);
     }
 
     public void displaySafety(){
