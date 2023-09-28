@@ -38,7 +38,6 @@ namespace nico
         private void Awake()
         {
             Instance = this;
-            lastTestWasTutorial = true;
         }
 
         public static bool lastTestWasTutorial = false;
