@@ -78,7 +78,9 @@ public class ProfileScene : MonoBehaviour {
     }
 
     public void Graphics() {
-        SceneManager.LoadScene("GraphicsScene");
+        if (simulations.Length > 1) {
+            SceneManager.LoadScene("GraphicsScene");
+        }
     }
 
     public void History() {
