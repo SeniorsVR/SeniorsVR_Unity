@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace nico
 {
@@ -96,67 +95,6 @@ namespace nico
             }
 
             return objetos;
-        }
-
-        public float ComputeGeneralScore(float peso_interacciones, float peso_billetes, float peso_correctos, float peso_pago, float peso_viaje, float peso_bolsa, float peso_compra, float peso_ruta, float peso_cruces) //mas positivo es bueno
-        {
-
-            float interaccion_score = 6f / veces_recogido_objeto;
-            float billetes_score = cantidad_minima_billetes / (veces_marcado_billete + veces_devuelto_billete);
-            float correctos_score = articulos_validos / 6f;
-            float pago_score = 1-Math.Abs(vuelto_final)/1000;
-            float idavueltatiempo_score = 1 - Math.Max(tiempo_total_ida / tiempo_total_vuelta, tiempo_total_vuelta / tiempo_total_ida);
-            float bolsa_score = Convert.ToInt32(irse_sin_bolsa);
-            float compratiempo_score = 1 - Math.Max(tiempo_total_articulos / tiempo_total_caja, tiempo_total_caja / tiempo_total_articulos); // no se
-            float ruta_score = cantidad_segmentos_ruta_transitados / cantidad_segmentos_ruta;
-            float cruces_score = 1-contador_cruces_invalidos / (contador_cruces_validos + contador_cruces_invalidos);
-
-
-            float score = interaccion_score * peso_interacciones + billetes_score * peso_billetes + correctos_score * peso_correctos + pago_score * peso_pago + idavueltatiempo_score * peso_viaje + bolsa_score * peso_bolsa + compratiempo_score * peso_compra + ruta_score * peso_ruta + cruces_score * peso_cruces;
-
-            /**float score =
-            tiempo_total_ida / (60f * 15f) > 1 ? -0.5f : 0 +
-            tiempo_total_vuelta / (60f * 5) > 1 ? -0.5f : 0 +
-
-            tiempo_total_kiosko / (60f * 5) > 1 ? -0.5f : 0 +
-            tiempo_total_canasto / (60f * 0.33) > 1 ? -0.5f : 0 +
-            tiempo_total_articulos / (60f * 2.33) > 1 ? -0.5f : 0 +
-            tiempo_total_caja / (60f * 2) > 1 ? -0.5f : 0 +
-            tiempo_total_irse / (60f * 0.33) > 1 ? -0.5f : 0 +
-
-            segundos_mirando_objetos_invalido / (10f) > 1 ? -0.5f : 0 +
-            segundos_mirando_objetos_lleno / (5f) > 1 ? -0.5f : 0 +
-
-            veces_recogido_objeto > 6 ? -0.25f : 0 +
-            veces_devuelto_objeto > 1 ? -0.25f : 0 +
-
-            veces_marcado_billete > cantidad_minima_billetes ? -0.25f : 0 +
-            veces_devuelto_billete > 0 ? -0.25f : 0 +
-
-            segundos_esperando_bolsa > cantidad_minima_billetes ? -0.25f : 0 +
-
-            vuelto_final *
-
-            veces_objeto_innecesario_recojido *
-            veces_objeto_necesario_devuelto *
-
-             *
-
-            numero_billetes_innecesarios *
-
-            articulos_validos *
-
-            contador_cruces_invalidos *
-            contador_cruces_validos *
-            contador_transita_calle *
-            cantidad_segmentos_ruta *
-            cantidad_segmentos_ruta_transitados *
-            cantidad_segmentos_no_ruta *
-
-            1;
-
-            return score;**/
-            return score;
         }
 
     }
