@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using nico;
 public class ResultsScene : MonoBehaviour {
+    public bool isDetailScene = false;
     static private string currentProfile;
     private Profile profile;
-    public TMP_Text nameText, dateText;
+    public TMP_Text nameText, dateText, global, navegacion, seguridad, ejecucion, ida, vuelta;
+
+    public GameObject navigationTemplate, safetyTemplate, executiveTemplate, popup;
     private Simulation newSimulation;
     [SerializeField] private TMP_Text[] texts;
     private string simulationTime;
@@ -17,12 +20,33 @@ public class ResultsScene : MonoBehaviour {
         Cursor.visible = true;
         currentProfile = ProfileScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(currentProfile);
-        simulationTime = DateTime.Now.ToString();
-
-        newSimulation = new Simulation(profile.GetID(),profile.GetName(),simulationTime,TestManager.metricas);
-
         nameText.SetText(profile.GetName());
-        texts[1].text = simulationTime;
+
+        if(!isDetailScene){
+            simulationTime = DateTime.Now.ToString();
+            newSimulation = new Simulation(profile.GetID(),profile.GetName(),simulationTime,TestManager.metricas);
+            dateText.SetText(simulationTime);
+        }else{
+            newSimulation = SaveSystem.LoadSimulation(profile.GetID(),HistoryScene.GetSimulationName());
+            dateText.SetText(newSimulation.GetDate().ToString());
+        }
+        
+
+        global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas)).ToString();
+        navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas)).ToString();
+        ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas)).ToString();
+        seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas)).ToString();
+
+        ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
+        vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
+
+
+
+        for(int i = 0; i < 11; i++){
+            texts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i,newSimulation.metricas)*100.0f).ToString();
+        }
+
+        /* texts[1].text = simulationTime;
         texts[2].text = TimeInSeconds(TestManager.metricas.tiempo_total);
         texts[3].text = TimeInSeconds(TestManager.metricas.tiempo_total_ida) + "/" + TimeInSeconds(TestManager.metricas.tiempo_total_vuelta);
         texts[4].text = TimeInSeconds(TestManager.metricas.tiempo_total_kiosko);
@@ -45,12 +69,23 @@ public class ResultsScene : MonoBehaviour {
         texts[11].text = TestManager.metricas.cantidad_segmentos_ruta_transitados.ToString() + "/" + TestManager.metricas.cantidad_segmentos_ruta.ToString();
         texts[12].text = TestManager.metricas.cantidad_segmentos_no_ruta.ToString() + " segmentos fuera de ruta";
         texts[13].text = TestManager.metricas.contador_cruces_invalidos.ToString() + " luces rojas v/s " + TestManager.metricas.contador_cruces_validos.ToString() + " luces verdes";
-        texts[14].text = TestManager.metricas.contador_transita_calle.ToString() + " segmentos de calle transitados (no en vía peatonal)";
+        texts[14].text = TestManager.metricas.contador_transita_calle.ToString() + " segmentos de calle transitados (no en vía peatonal)"; */
 
         if (TutorialManager.lastTestWasTutorial)
         {
             TutorialManager.lastTestWasTutorial = false;
             SceneManager.LoadScene("ProfileScene");
+        }
+    }
+
+    void Update() {
+        if(!isDetailScene){
+            return;
+        }
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor)  {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                SceneManager.LoadScene("HistoryScene");
+            }
         }
     }
     
@@ -69,6 +104,35 @@ public class ResultsScene : MonoBehaviour {
     public void SaveSimulation(){
         SaveSystem.SaveSimulation(newSimulation);
         SceneManager.LoadScene("ProfileScene");
+    }
+
+    public void displayNavigation(){
+        navigationTemplate.SetActive(!safetyTemplate.activeSelf);
+    }
+
+    public void displayExecutive(){
+        executiveTemplate.SetActive(!safetyTemplate.activeSelf);
+    }
+
+    public void displaySafety(){
+        safetyTemplate.SetActive(!safetyTemplate.activeSelf);
+    }
+
+    public void descartar(){
+        SceneManager.LoadScene("ProfileScene");
+    }
+
+    public void registrar(){
+        popup.SetActive(true);
+    }
+
+    public void volver(){
+        popup.SetActive(false);
+    }
+
+    public void eliminarRegistro(){
+        SaveSystem.deleteSimulation(profile.GetID(),newSimulation.GetID());
+        SceneManager.LoadScene("HistoryScene");
     }
 }
 

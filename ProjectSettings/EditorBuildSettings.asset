@@ -47,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ramila/Scenes/loadingSceneTutorial.unity
     guid: 0b8bd90430af91a44bbedc9d75949b9b
+  - enabled: 1
+    path: Assets/Renato/Scenes/DetailScene.unity
+    guid: 0f1901093d759d04c9d64e89cb1f2750
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b554cc72793e9c34bb8f65587d659b71,
       type: 2}

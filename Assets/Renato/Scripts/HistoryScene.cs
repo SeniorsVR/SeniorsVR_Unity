@@ -26,6 +26,7 @@ public class HistoryScene : MonoBehaviour {
             for (int i = 0; i < simulations.Length; i++) {
                 Simulation simulation = simulations[i];
                 dateText.text = simulation.GetDate().Split(" ")[0];
+                dateText.name = simulation.GetID();
                 timeText.text = simulation.GetDate().Split(" ")[1];
                 scoreText.text = "Puntaje Global: " + Mathf.RoundToInt(Ponderador.ComputeGeneralScore(simulation.metricas));
                 if (count >= 1) {
@@ -57,9 +58,9 @@ public class HistoryScene : MonoBehaviour {
     }
 
     public void SeeSimulation(TMP_Text simulationName) {
-        SetSimulationName(simulationName.text);
+        SetSimulationName(simulationName.name);
         SetSelectedProfile(currentProfile);
-        SceneManager.LoadScene("ResultsScene");
+        SceneManager.LoadScene("DetailScene");
     }
 
     static public void SetSimulationName(string simulationName) {
