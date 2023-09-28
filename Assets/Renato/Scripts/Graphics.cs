@@ -20,6 +20,7 @@ public class Graphics : MonoBehaviour {
     private List<Simulation> sortedSimulations;
     public int desfaseIdMetrica = 0;
     public int idMetrica = 0;
+    private int metricaEnCero;
     public LineController lc;
 
     private List<GameObject> porBorrar;
@@ -33,6 +34,7 @@ public class Graphics : MonoBehaviour {
     }
 
     void Start() {
+        metricaEnCero = idMetrica;
         porBorrar = new List<GameObject>();
         currentProfile = StartScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(currentProfile);
@@ -106,63 +108,34 @@ public class Graphics : MonoBehaviour {
         sortedSimulations = simulations.OrderBy(o=>o.GetDate()).ToList();
         float[] returnData = new float[sortedSimulations.Count];
         for(int i = 0; i<sortedSimulations.Count;i++){
-            switch(idMetrica){
-                case 0:
-                    returnData[i]=Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas); //GLOBAL
-                    break;
-                case 1:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 2:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total_ida;
-                    break;
-                case 3:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total_vuelta;
-                    break;
-                case 4:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total_kiosko;
-                    break;
-                case 5:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 6:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 7:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 8:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 9:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 10:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 11:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 12:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 13:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 14:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
-                case 15:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
-                    break;
+            if(idMetrica<11){
+                returnData[i]=Ponderador.GetScoreForIndex(idMetrica,sortedSimulations[i].metricas)*100.0f;
+            }else{
+                switch(idMetrica){
+                    case 11:
+                        returnData[i]=Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas);
+                        break;
+                    case 12:
+                        returnData[i]=Ponderador.ComputeNavigationScore(sortedSimulations[i].metricas);
+                        break;
+                    case 13:
+                        returnData[i]=Ponderador.ComputeSafetyScore(sortedSimulations[i].metricas);
+                        break;
+                    case 14:
+                        returnData[i]=Ponderador.ComputeExecutionScore(sortedSimulations[i].metricas);
+                        break;
+                }
             }
-            
         }
         return returnData;
     }
 
     public void changeData(int id){
-        idMetrica = id + desfaseIdMetrica;
+        if(id == 0){
+            idMetrica = metricaEnCero;
+        }else{
+            idMetrica = id + desfaseIdMetrica;
+        }
         for(int i = 0; i < porBorrar.Count; i++){
             GameObject.Destroy(porBorrar[i]);
         }

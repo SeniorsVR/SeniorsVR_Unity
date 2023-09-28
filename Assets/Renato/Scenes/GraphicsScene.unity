@@ -291,11 +291,19 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: "Funci\xF3n Ejecutiva"
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Manejo de dinero
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Manejo de productos
+      m_Image: {fileID: 0}
+    - m_Text: Compra de Productos Pedidos
+      m_Image: {fileID: 0}
+    - m_Text: "Precisi\xF3n de pago"
+      m_Image: {fileID: 0}
+    - m_Text: Rapidez en Compra
+      m_Image: {fileID: 0}
+    - m_Text: Se lleva productos
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -648,7 +656,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 872.918, y: 583.5325}
+  m_SizeDelta: {x: 800, y: 583.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189458035
 MonoBehaviour:
@@ -665,8 +673,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 1467009670}
   profileText: {fileID: 197993886}
-  desfaseIdMetrica: 14
-  idMetrica: 3
+  desfaseIdMetrica: 4
+  idMetrica: 14
   lc: {fileID: 1467009673}
 --- !u!114 &189458036
 MonoBehaviour:
@@ -935,25 +943,13 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Tiempo Total
+    - m_Text: "Navegaci\xF3n"
       m_Image: {fileID: 0}
-    - m_Text: Tiempo de Ida
+    - m_Text: Ida / Vuelta
       m_Image: {fileID: 0}
-    - m_Text: Tiempo de Vuelta
+    - m_Text: Completitud de ruta
       m_Image: {fileID: 0}
-    - m_Text: 3
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: "Desv\xEDo de ruta"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1121,11 +1117,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Seguridad Peatonal
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Tasa de Cruces Correctos
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: "Tr\xE1nsito Peatonal Correcto"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1226,7 +1222,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 872.918, y: 583.5325}
+  m_SizeDelta: {x: 800, y: 583.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &232747458
 MonoBehaviour:
@@ -1243,8 +1239,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 757345838}
   profileText: {fileID: 197993886}
-  desfaseIdMetrica: 1
-  idMetrica: 1
+  desfaseIdMetrica: -1
+  idMetrica: 12
   lc: {fileID: 757345841}
 --- !u!114 &232747459
 MonoBehaviour:
@@ -2886,7 +2882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: "Funci\xF3n Ejecutiva"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2913,8 +2909,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3519,8 +3515,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -114, y: -0}
-  m_SizeDelta: {x: -672.0846, y: -13}
+  m_AnchoredPosition: {x: -117.976, y: -0}
+  m_SizeDelta: {x: -664.129, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1022533648
 MonoBehaviour:
@@ -3542,7 +3538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tiempo Total
+  m_text: "Navegaci\xF3n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3569,8 +3565,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3865,7 +3861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: Seguridad Peatonal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3892,8 +3888,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5580,7 +5576,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 872.918, y: 583.5325}
+  m_SizeDelta: {x: 800, y: 583.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1695350275
 MonoBehaviour:
@@ -5597,8 +5593,8 @@ MonoBehaviour:
   dot: {fileID: 1666714557}
   plotObjects: {fileID: 1258767627}
   profileText: {fileID: 197993886}
-  desfaseIdMetrica: 11
-  idMetrica: 2
+  desfaseIdMetrica: 2
+  idMetrica: 13
   lc: {fileID: 1258767630}
 --- !u!114 &1695350276
 MonoBehaviour:
@@ -5839,7 +5835,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 872.918, y: 583.5325}
+  m_SizeDelta: {x: 800, y: 583.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794638271
 MonoBehaviour:
@@ -5896,7 +5892,7 @@ MonoBehaviour:
   profileText: {fileID: 197993886}
   desfaseIdMetrica: 0
   idMetrica: 11
-  lc: {fileID: 0}
+  lc: {fileID: 351360023}
 --- !u!1 &1818711483
 GameObject:
   m_ObjectHideFlags: 0
