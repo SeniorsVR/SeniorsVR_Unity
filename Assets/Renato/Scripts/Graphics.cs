@@ -11,12 +11,13 @@ using UnityEngine.Tilemaps;
 public class Graphics : MonoBehaviour {
     public GameObject dot, plotObjects;
     public TMP_Text profileText;
-    private RectTransform labelTemplateX, labelTemplateY;
+    private RectTransform labelTemplateX, labelTemplateY1, labelTemplateY2, labelTemplateY3;
     private RectTransform dashTemplateX, dashTemplateY;
     private new string currentProfile;
     private Profile profile;
     private Vector2[] clones;
     private Simulation[] simulations;
+    private List<Simulation> sortedSimulations;
     public int desfaseIdMetrica = 0;
     public int idMetrica = 0;
     public LineController lc;
@@ -24,7 +25,9 @@ public class Graphics : MonoBehaviour {
     private List<GameObject> porBorrar;
     void Awake() {
         labelTemplateX = transform.Find("LabelX").GetComponent<RectTransform>();
-        labelTemplateY = transform.Find("LabelY").GetComponent<RectTransform>();
+        labelTemplateY1 = transform.Find("LabelYLow").GetComponent<RectTransform>();
+        labelTemplateY2 = transform.Find("LabelYMid").GetComponent<RectTransform>();
+        labelTemplateY3 = transform.Find("LabelYHigh").GetComponent<RectTransform>();
         dashTemplateX = transform.Find("DashX").GetComponent<RectTransform>();
         dashTemplateY = transform.Find("DashY").GetComponent<RectTransform>();
     }
@@ -50,6 +53,9 @@ public class Graphics : MonoBehaviour {
     private void CreateGraphic(float[] data) {
         clones = new Vector2[data.Length];
         RectTransform plotRT = (RectTransform) plotObjects.transform;
+        labelTemplateY1.GetComponent<Text>().text = Mathf.RoundToInt(data.Min()).ToString();
+        labelTemplateY2.GetComponent<Text>().text = Mathf.RoundToInt((data.Min()/2 + data.Max()/2)).ToString();
+        labelTemplateY3.GetComponent<Text>().text = Mathf.RoundToInt(data.Max()).ToString();
         for (int i = 0; i < data.Length; i++) {
             GameObject clone = Instantiate(dot);
             porBorrar.Add(clone);
@@ -64,7 +70,7 @@ public class Graphics : MonoBehaviour {
             labelX.SetParent(transform);
             labelX.gameObject.SetActive(true);
             labelX.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), -plotRT.rect.height/2 - (rt.rect.width/8 - plotRT.rect.width/8) , 0);
-            labelX.GetComponent<Text>().text = (i + 1).ToString();
+            labelX.GetComponent<Text>().text = (sortedSimulations[i].GetDate().Split(" ")[0]).ToString();
 
             RectTransform dashX = Instantiate(dashTemplateX);
             porBorrar.Add(dashX.gameObject);
@@ -74,12 +80,12 @@ public class Graphics : MonoBehaviour {
             dashX.sizeDelta = new Vector2(plotRT.rect.width, dashX.rect.height);
             dashX.transform.localScale = new Vector3(1f, 1f, 1f);
 
-            RectTransform labelY = Instantiate(labelTemplateY);
-            porBorrar.Add(labelY.gameObject);
-            labelY.SetParent(transform);
-            labelY.gameObject.SetActive(true);
-            labelY.localPosition = new Vector3(-plotRT.rect.width/2 - (rt.rect.width/4 - plotRT.rect.width/4), ((float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min()))*plotRT.rect.height, 0);
-            labelY.GetComponent<Text>().text = (data[i]).ToString();
+            //RectTransform labelY = Instantiate(labelTemplateY);
+            //porBorrar.Add(labelY.gameObject);
+            //labelY.SetParent(transform);
+            //labelY.gameObject.SetActive(true);
+            //labelY.localPosition = new Vector3(-plotRT.rect.width/2 - (rt.rect.width/4 - plotRT.rect.width/4), ((float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min()))*plotRT.rect.height, 0);
+            //labelY.GetComponent<Text>().text = (data[i]).ToString();
 
             RectTransform dashY = Instantiate(dashTemplateY);
             porBorrar.Add(dashY.gameObject);
@@ -97,7 +103,7 @@ public class Graphics : MonoBehaviour {
 
     public float[] getData(){
         simulations = SaveSystem.LoadSimulations(currentProfile);
-        List<Simulation> sortedSimulations = simulations.OrderBy(o=>o.GetDate()).ToList();
+        sortedSimulations = simulations.OrderBy(o=>o.GetDate()).ToList();
         float[] returnData = new float[sortedSimulations.Count];
         for(int i = 0; i<sortedSimulations.Count;i++){
             switch(idMetrica){
@@ -114,7 +120,7 @@ public class Graphics : MonoBehaviour {
                     returnData[i]=sortedSimulations[i].metricas.tiempo_total_vuelta;
                     break;
                 case 4:
-                    returnData[i]=sortedSimulations[i].metricas.tiempo_total;
+                    returnData[i]=sortedSimulations[i].metricas.tiempo_total_kiosko;
                     break;
                 case 5:
                     returnData[i]=sortedSimulations[i].metricas.tiempo_total;
