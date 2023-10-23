@@ -28,7 +28,9 @@ public class HistoryScene : MonoBehaviour {
                 dateText.text = simulation.GetDate().Split(" ")[0];
                 dateText.name = simulation.GetID();
                 timeText.text = simulation.GetDate().Split(" ")[1];
-                scoreText.text = "Puntaje Global: " + Mathf.RoundToInt(Ponderador.ComputeGeneralScore(simulation.metricas));
+
+                Settings settings = SaveSystem.loadSettings();
+                scoreText.text = "Puntaje Global: " + Mathf.RoundToInt(Ponderador.ComputeGeneralScore(simulation.metricas, settings));
                 if (count >= 1) {
                     GameObject clone = Instantiate(simulationGameObject, new Vector3(simulationGameObject.transform.position.x, simulationGameObject.transform.position.y - 220*i, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Simulations").transform);
                     clone.name = simulation.GetID();

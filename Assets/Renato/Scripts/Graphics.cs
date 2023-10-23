@@ -13,15 +13,17 @@ public class Graphics : MonoBehaviour {
     public TMP_Text profileText;
     private RectTransform labelTemplateX, labelTemplateY1, labelTemplateY2, labelTemplateY3;
     private RectTransform dashTemplateX, dashTemplateY;
-    private string currentProfile;
+    private static string currentProfile;
     private Profile profile;
     private Vector2[] clones;
-    private Simulation[] simulations;
-    private List<Simulation> sortedSimulations;
+    private static Simulation[] simulations;
+    private static List<Simulation> sortedSimulations;
     public int desfaseIdMetrica = 0;
     public int idMetrica = 0;
     private int metricaEnCero;
     public LineController lc;
+
+    static Settings settings;
 
     private List<GameObject> porBorrar;
     void Awake() {
@@ -31,17 +33,21 @@ public class Graphics : MonoBehaviour {
         labelTemplateY3 = transform.Find("LabelYHigh").GetComponent<RectTransform>();
         dashTemplateX = transform.Find("DashX").GetComponent<RectTransform>();
         dashTemplateY = transform.Find("DashY").GetComponent<RectTransform>();
-    }
 
-    void Start() {
+
         metricaEnCero = idMetrica;
         porBorrar = new List<GameObject>();
         currentProfile = StartScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(currentProfile);
         profileText.SetText(profile.GetName());
-        
+
+        settings = SaveSystem.loadSettings();
+
         float[] data = getData();
         CreateGraphic(data);
+    }
+
+    void Start() {
     }
 
     void Update() {
@@ -103,31 +109,94 @@ public class Graphics : MonoBehaviour {
         return clones;
     }
 
-    public float[] getData(){
+    public float[] getData()
+    {
+
         simulations = SaveSystem.LoadSimulations(currentProfile);
-        sortedSimulations = simulations.OrderBy(o=>o.GetDate()).ToList();
+        sortedSimulations = simulations.OrderBy(o => o.GetDate()).ToList();
         float[] returnData = new float[sortedSimulations.Count];
-        for(int i = 0; i<sortedSimulations.Count;i++){
-            if(idMetrica<11){
-                returnData[i]=Ponderador.GetScoreForIndex(idMetrica,sortedSimulations[i].metricas)*100.0f;
-            }else{
-                switch(idMetrica){
+        for (int i = 0; i < sortedSimulations.Count; i++)
+        {
+            if (idMetrica < 11)
+            {
+                returnData[i] = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas) * 100.0f;
+            }
+            else
+            {
+                switch (idMetrica)
+                {
                     case 11:
-                        returnData[i]=Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas);
+                        returnData[i] = Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas, settings);
                         break;
                     case 12:
-                        returnData[i]=Ponderador.ComputeNavigationScore(sortedSimulations[i].metricas);
+                        returnData[i] = Ponderador.ComputeNavigationScore(sortedSimulations[i].metricas, settings);
                         break;
                     case 13:
-                        returnData[i]=Ponderador.ComputeSafetyScore(sortedSimulations[i].metricas);
+                        returnData[i] = Ponderador.ComputeSafetyScore(sortedSimulations[i].metricas, settings);
                         break;
                     case 14:
-                        returnData[i]=Ponderador.ComputeExecutionScore(sortedSimulations[i].metricas);
+                        returnData[i] = Ponderador.ComputeExecutionScore(sortedSimulations[i].metricas, settings);
                         break;
                 }
             }
         }
         return returnData;
+    }
+
+    public static Vector2[] get2DData(int idMetrica)
+    {
+        if (simulations.Length > 0)
+        {
+            Vector2[] returnData = new Vector2[sortedSimulations.Count];
+
+            // Define the reference date (01/01/2023)
+            DateTime referenceDate = new DateTime(2023, 1, 1);
+            for (int i = 0; i < sortedSimulations.Count; i++)
+            {
+
+                string inputDateString = sortedSimulations[i].GetDate();
+                DateTime inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm:ss", null);
+                TimeSpan timeDifference = inputDate - referenceDate;
+                float numberOfDays = (float)timeDifference.TotalDays;
+
+                if (idMetrica < 11)
+                {
+
+                    float score = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas) * 100.0f;
+                    returnData[i] = new Vector2(numberOfDays, score);
+                }
+                else
+                {
+                    float score = 0;
+                    switch (idMetrica)
+                    {
+                        case 11:
+                            score = Ponderador.ComputeGeneralScore(sortedSimulations[i].metricas, settings);
+                            returnData[i] = new Vector2(numberOfDays, score);
+                            break;
+                        case 12:
+                            score = Ponderador.ComputeNavigationScore(sortedSimulations[i].metricas, settings);
+                            returnData[i] = new Vector2(numberOfDays, score);
+                            break;
+                        case 13:
+                            score = Ponderador.ComputeSafetyScore(sortedSimulations[i].metricas, settings);
+                            returnData[i] = new Vector2(numberOfDays, score);
+                            break;
+                        case 14:
+                            score = Ponderador.ComputeExecutionScore(sortedSimulations[i].metricas, settings);
+                            returnData[i] = new Vector2(numberOfDays, score);
+                            break;
+                    }
+                }
+            }
+
+            return returnData;
+        }
+        else
+        {
+            Debug.LogError("get2DData no tiene las simulaciones");
+            return new Vector2[1];
+        }
     }
 
     public void changeData(int id){

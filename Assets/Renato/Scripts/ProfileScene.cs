@@ -10,7 +10,9 @@ public class ProfileScene : MonoBehaviour {
     private Simulation[] simulations;
     private DateTime now;
     static private string currentProfile;
-    void Start() {
+
+    private void Awake()
+    {
         popup.SetActive(false);
         Screen.orientation = ScreenOrientation.Portrait;
         Cursor.lockState = CursorLockMode.None;
@@ -19,6 +21,9 @@ public class ProfileScene : MonoBehaviour {
         currentProfile = StartScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(currentProfile);
         simulations = SaveSystem.LoadSimulations(currentProfile);
+    }
+
+    void Start() {
 
         int count = simulations.Length;
         

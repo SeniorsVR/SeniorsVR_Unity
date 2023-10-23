@@ -11,6 +11,10 @@ namespace nico
         private void Awake()
         {
             Instance = this;
+
+            #if UNITY_EDITOR
+                vr = false;
+            #endif
         }
 
         public float speed = 1f;

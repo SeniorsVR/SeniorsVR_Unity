@@ -1,64 +1,86 @@
 using System;
 using nico;
+using UnityEngine;
 
 public static class Ponderador {
-    public static float ComputeNavigationScore(Metricas metricas) {
-        Settings settings = SaveSystem.loadSettings();
+    public static float ComputeNavigationScore(Metricas metricas, Settings settings) {
         float idavueltatiempo_score = (metricas.tiempo_total_ida / (metricas.tiempo_total_vuelta + metricas.tiempo_total_ida))*settings.GetValue(Settings.indices.tiempoIda_vuelta);
         float completitud_score = ((float) metricas.cantidad_segmentos_ruta_transitados / (float) metricas.cantidad_segmentos_ruta)*settings.GetValue(Settings.indices.completitud_ruta);
         float desvio_score = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
-        return (idavueltatiempo_score + completitud_score + desvio_score)*100.0f;
+
+        float score = (idavueltatiempo_score + completitud_score + desvio_score) * 100.0f;
+        if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
+        return score;
     }
 
-    public static float ComputeSafetyScore(Metricas metricas) {
-        Settings settings = SaveSystem.loadSettings();
+    public static float ComputeSafetyScore(Metricas metricas, Settings settings) {
         float cruces_score = ((float) metricas.contador_cruces_validos / (float) (metricas.contador_cruces_validos + metricas.contador_cruces_invalidos))*settings.GetValue(Settings.indices.crucesVerde_roja);
         float transitoInseguro_score = ((float) metricas.cantidad_segmentos_ruta / (float)(metricas.contador_transita_calle+metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.transito_inseguro);
-        return (cruces_score + transitoInseguro_score)*100.0f;
+
+        float score = (cruces_score + transitoInseguro_score) * 100.0f;
+        if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
+        return score;
     }
 
-    public static float ComputeExecutionScore(Metricas metricas) { // hiiii ^.^
-        Settings settings = SaveSystem.loadSettings();
-        float billetes_score = ((float) metricas.cantidad_minima_billetes / (float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete))*settings.GetValue(Settings.indices.efectividad_billetes);
+    public static float ComputeExecutionScore(Metricas metricas, Settings settings) { // hiiii ^.^; FUCK U!!!; 
+        float billetes_score = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
         float interaccion_score = (6.0f / (float) metricas.veces_recogido_objeto)*settings.GetValue(Settings.indices.efectividad_productos);
         float correctos_score = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
         float pago_score = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
         float compratiempo_score = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
         float bolsa_score = (float) Convert.ToInt32(metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
-        return (billetes_score + interaccion_score + correctos_score + pago_score + bolsa_score + compratiempo_score)*100.0f;
+
+        float score = (billetes_score + interaccion_score + correctos_score + pago_score + bolsa_score + compratiempo_score) * 100.0f;
+        if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
+
+        return score;
     }
-    public static float ComputeGeneralScore(Metricas metricas) {
-        float score = ComputeNavigationScore(metricas)+ComputeExecutionScore(metricas)+ComputeSafetyScore(metricas);
+    public static float ComputeGeneralScore(Metricas metricas, Settings settings) {
+        float score = ComputeNavigationScore(metricas, settings) +ComputeExecutionScore(metricas, settings) +ComputeSafetyScore(metricas, settings);
+        if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
         return score;
     }
 
     public static float GetScoreForIndex(int indice, Metricas metricas){
         Settings settings = SaveSystem.loadSettings();
+        float value = 0.0f;
         switch(indice){
             case 0:
-                return (metricas.tiempo_total_ida / (metricas.tiempo_total_vuelta + metricas.tiempo_total_ida))*settings.GetValue(Settings.indices.tiempoIda_vuelta);
+                value = (metricas.tiempo_total_ida / (metricas.tiempo_total_vuelta + metricas.tiempo_total_ida))*settings.GetValue(Settings.indices.tiempoIda_vuelta);
+                break;
             case 1:
-                return ((float) metricas.cantidad_segmentos_ruta_transitados / (float) metricas.cantidad_segmentos_ruta)*settings.GetValue(Settings.indices.completitud_ruta);
+                value = ((float) metricas.cantidad_segmentos_ruta_transitados / (float) metricas.cantidad_segmentos_ruta)*settings.GetValue(Settings.indices.completitud_ruta);
+                break;
             case 2:
-                return ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
+                value = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
+                break;
             case 3:
-                return ((float) metricas.contador_cruces_validos / (float) (metricas.contador_cruces_validos + metricas.contador_cruces_invalidos))*settings.GetValue(Settings.indices.crucesVerde_roja);
+                value = ((float) metricas.contador_cruces_validos / (float) (metricas.contador_cruces_validos + metricas.contador_cruces_invalidos))*settings.GetValue(Settings.indices.crucesVerde_roja);
+                break;
             case 4:
-                return ((float) metricas.cantidad_segmentos_ruta / (float)(metricas.contador_transita_calle+metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.transito_inseguro);
+                value = ((float) metricas.cantidad_segmentos_ruta / (float)(metricas.contador_transita_calle+metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.transito_inseguro);
+                break;
             case 5:
-                return ((float) metricas.cantidad_minima_billetes / (float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete))*settings.GetValue(Settings.indices.efectividad_billetes);
+                value = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
+                break;
             case 6:
-                return (6.0f / (float) metricas.veces_recogido_objeto)*settings.GetValue(Settings.indices.efectividad_productos);
+                value = (6.0f / (float) metricas.veces_recogido_objeto)*settings.GetValue(Settings.indices.efectividad_productos);
+                break;
             case 7:
-                return ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
+                value = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
+                break;
             case 8:
-                return (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
+                value = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
+                break;
             case 9:
-                return ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
+                value = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
+                break;
             case 10:
-                return (float) Convert.ToInt32(metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
+                value = (float) Convert.ToInt32(metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
+                break;
         }
-        return 0.0f;
+        if (float.IsNaN(value)) Debug.LogError("value is NaN or another weird value.");
+        return value;
     }
 }
 

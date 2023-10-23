@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using System;
 
 public static class SaveSystem {
     static public void SaveProfile(Profile profile) {
@@ -65,10 +66,11 @@ public static class SaveSystem {
                 i++;
 
             } else {
-                Debug.LogError("Save file not found in " + filename);
+                Debug.LogError("Perfil no encontrado");
                 return null;
             }
         }
+        Debug.LogError("Perfil no encontrado");
         return null;
     }
 
@@ -106,27 +108,41 @@ public static class SaveSystem {
     }
 
     static public Simulation[] LoadSimulations(string profileID) {
-        int i = 0;
-        var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations"));
-        Simulation[] simulations = new Simulation[filenames.Length];
-        foreach(var filename in filenames) {
-            if (File.Exists(filename)) {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(filename, FileMode.Open);
+        
+        try
+        {
+            int i = 0;
+            var filenames = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Profiles", "Data-" + profileID, "Simulations"));
+            Simulation[] simulations = new Simulation[filenames.Length];
+            foreach (var filename in filenames)
+            {
+                if (File.Exists(filename))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    FileStream stream = new FileStream(filename, FileMode.Open);
 
-                Simulation simulation = formatter.Deserialize(stream) as Simulation;
-                stream.Close();
+                    Simulation simulation = formatter.Deserialize(stream) as Simulation;
+                    stream.Close();
 
-                simulations[i++] = simulation;
-            } else {
-                Debug.LogError("Save file not found in " + filename);
-                return null;
+                    simulations[i++] = simulation;
+                }
+                else
+                {
+                    Debug.LogError("Save file not found in " + filename);
+                    return null;
+                }
             }
+            if (simulations.Length == 0)
+            {
+                Debug.Log("No hay nada simulaciones previas");
+            }
+            return simulations;
         }
-        if (simulations.Length == 0) {
-            Debug.LogError("No hay nada!");
+        catch (Exception e)
+        {
+            Debug.LogError("No esta la carpeta lol: " + e.Message);
+            return new Simulation[0];
         }
-        return simulations;
     }
 
     static public Simulation LoadSimulation(string profileID, string simulationID) {

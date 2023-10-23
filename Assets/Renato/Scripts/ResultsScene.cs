@@ -30,12 +30,14 @@ public class ResultsScene : MonoBehaviour {
             newSimulation = SaveSystem.LoadSimulation(profile.GetID(),HistoryScene.GetSimulationName());
             dateText.SetText(newSimulation.GetDate().ToString());
         }
-        
 
-        global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas)).ToString();
-        navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas)).ToString();
-        ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas)).ToString();
-        seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas)).ToString();
+
+        Settings settings = SaveSystem.loadSettings();
+
+        global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas, settings)).ToString();
+        navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas, settings)).ToString();
+        ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas, settings)).ToString();
+        seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas, settings)).ToString();
 
         ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
         vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
