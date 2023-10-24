@@ -34,18 +34,70 @@ public class ResultsScene : MonoBehaviour {
 
         Settings settings = SaveSystem.loadSettings();
 
-        global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas, settings)).ToString();
-        navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas, settings)).ToString();
-        ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas, settings)).ToString();
-        seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas, settings)).ToString();
+        bool legible = true;
 
-        ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
-        vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
+        if (legible)
+        {
+            Metricas metricas = newSimulation.metricas;
 
+            global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(metricas, settings)).ToString();
 
+            navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(metricas, settings)).ToString();
+            ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(metricas, settings)).ToString();
+            seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(metricas, settings)).ToString();
 
-        for(int i = 0; i < 11; i++){
-            texts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i,newSimulation.metricas)*100.0f).ToString();
+            ida.text = Mathf.RoundToInt(metricas.tiempo_total_ida).ToString() + "s";
+            vuelta.text = Mathf.RoundToInt(metricas.tiempo_total_vuelta).ToString() + "s";
+
+            texts[0].text = Mathf.RoundToInt(metricas.tiempo_total_ida) + "s/" + Mathf.RoundToInt(metricas.tiempo_total_vuelta) + "s";
+            texts[1].text = metricas.cantidad_segmentos_ruta_transitados.ToString() + "/" + metricas.cantidad_segmentos_ruta.ToString();
+            texts[2].text = metricas.cantidad_segmentos_no_ruta.ToString() + " segmentos fuera de ruta";
+
+            texts[3].text = metricas.contador_cruces_invalidos.ToString() + " luces rojas v/s " + metricas.contador_cruces_validos.ToString() + " luces verdes";
+            texts[4].text = metricas.contador_transita_calle.ToString() + " segmentos de calle transitados";
+
+            texts[5].text = (metricas.veces_marcado_billete + metricas.veces_devuelto_billete).ToString() + "/" + metricas.cantidad_minima_billetes.ToString();
+            texts[6].text = (metricas.veces_devuelto_objeto + metricas.veces_recogido_objeto).ToString() + "/6";
+            texts[7].text = metricas.articulos_validos.ToString() + "/6";
+
+            if (metricas.vuelto_final > 0)
+            {
+                texts[8].text = "$" + metricas.vuelto_final.ToString() + " menos";
+            }
+            else if (metricas.vuelto_final == 0)
+            {
+                texts[8].text = "Correcto";
+            }
+            else
+            {
+                texts[8].text = "$" + (-metricas.vuelto_final).ToString() + " más";
+            }
+
+            texts[9].text = Mathf.RoundToInt(metricas.tiempo_total_kiosko).ToString() + "s";
+
+            if (!metricas.irse_sin_bolsa)
+            {
+                texts[10].text = "Sí";
+            }
+            else
+            {
+                texts[10].text = "No";
+            }
+        }
+        else
+        {
+            global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas, settings)).ToString();
+            navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas, settings)).ToString();
+            ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas, settings)).ToString();
+            seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas, settings)).ToString();
+
+            ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
+            vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
+
+            for (int i = 0; i < 11; i++)
+            {
+                texts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
+            }
         }
 
         /* texts[1].text = simulationTime;

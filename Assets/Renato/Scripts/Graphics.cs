@@ -23,6 +23,8 @@ public class Graphics : MonoBehaviour {
     private int metricaEnCero;
     public LineController lc;
 
+    public GraphRegresion graphRegresion;
+
     static Settings settings;
 
     private List<GameObject> porBorrar;
@@ -69,8 +71,8 @@ public class Graphics : MonoBehaviour {
             porBorrar.Add(clone);
             clone.SetActive(true);
             clone.transform.SetParent(plotObjects.transform);
-            clone.transform.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), ((float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min()))*plotRT.rect.height, 0);
-            clones[i] = new Vector2((float) (-0.5 + (double) i/(data.Length - 1)), (float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min()));
+            clone.transform.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), ((float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min() + 0.001f))*plotRT.rect.height, 0);
+            clones[i] = new Vector2((float) (-0.5 + (double) i/(data.Length - 1)), (float) -0.5 + (data[i] - data.Min())/(data.Max() - data.Min() + 0.001f));
 
             RectTransform rt = (RectTransform) transform;
             RectTransform labelX = Instantiate(labelTemplateX);
@@ -119,7 +121,7 @@ public class Graphics : MonoBehaviour {
         {
             if (idMetrica < 11)
             {
-                returnData[i] = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas) * 100.0f;
+                returnData[i] = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas, settings) * 100.0f;
             }
             else
             {
@@ -140,6 +142,9 @@ public class Graphics : MonoBehaviour {
                 }
             }
         }
+
+        graphRegresion.SetGraphDescription(idMetrica);
+
         return returnData;
     }
 
@@ -162,7 +167,7 @@ public class Graphics : MonoBehaviour {
                 if (idMetrica < 11)
                 {
 
-                    float score = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas) * 100.0f;
+                    float score = Ponderador.GetScoreForIndex(idMetrica, sortedSimulations[i].metricas, settings) * 100.0f;
                     returnData[i] = new Vector2(numberOfDays, score);
                 }
                 else

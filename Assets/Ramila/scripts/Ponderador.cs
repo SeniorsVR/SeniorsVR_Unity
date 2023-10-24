@@ -24,7 +24,7 @@ public static class Ponderador {
 
     public static float ComputeExecutionScore(Metricas metricas, Settings settings) { // hiiii ^.^; FUCK U!!!; 
         float billetes_score = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
-        float interaccion_score = (6.0f / (float) metricas.veces_recogido_objeto)*settings.GetValue(Settings.indices.efectividad_productos);
+        float interaccion_score = (6.0f / (float) metricas.veces_recogido_objeto + 0.001f) *settings.GetValue(Settings.indices.efectividad_productos);
         float correctos_score = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
         float pago_score = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
         float compratiempo_score = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
@@ -41,8 +41,8 @@ public static class Ponderador {
         return score;
     }
 
-    public static float GetScoreForIndex(int indice, Metricas metricas){
-        Settings settings = SaveSystem.loadSettings();
+    public static float GetScoreForIndex(int indice, Metricas metricas, Settings settings)
+    {
         float value = 0.0f;
         switch(indice){
             case 0:
@@ -64,7 +64,7 @@ public static class Ponderador {
                 value = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
                 break;
             case 6:
-                value = (6.0f / (float) metricas.veces_recogido_objeto)*settings.GetValue(Settings.indices.efectividad_productos);
+                value = (6.0f / (float) metricas.veces_recogido_objeto +0.001f)*settings.GetValue(Settings.indices.efectividad_productos);
                 break;
             case 7:
                 value = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);

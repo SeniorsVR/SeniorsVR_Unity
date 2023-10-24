@@ -8,10 +8,25 @@ public class GraphRegresion : MonoBehaviour
 {
     public enum GraphRegresionTipo
     {
-        Global,
-        Navegacion,
-        Seguridad,
-        Ejecutiva,
+        Global = 11,
+        Navegacion = 12,
+        Seguridad = 13,
+        Ejecutiva = 14,
+
+        IdaVuelta = 0,
+        Completitud = 1,
+        Desvio = 2,
+
+        CrucesValidos = 3,
+        Transito = 4,
+
+        Dinero = 5,
+        Productos = 6,
+        Compra = 7,
+        Precision = 8,
+        Rapidez = 9,
+        Bolsa = 10,
+
     }
 
     public TextMeshProUGUI text;
@@ -20,38 +35,67 @@ public class GraphRegresion : MonoBehaviour
     string stringTipo = "global";
     string formattedText = "cargando";
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetGraphDescription(int idMetrica)
     {
-        Task task = Task.Run(() => FillText());
+        tipo = (GraphRegresionTipo)idMetrica;
+        Task task = Task.Run(() => FillText(tipo));
         Task.WhenAll(task).Wait();
         text.text = formattedText;
     }
 
 
-    void FillText()
+    void FillText(GraphRegresionTipo tipo)
     {
-        Vector2[] data;
+        Vector2[] data = Graphics.get2DData((int)tipo);
         switch (tipo)
         {
             case GraphRegresionTipo.Global:
-                data = Graphics.get2DData(11);
                 stringTipo = "global";
                 break;
             case GraphRegresionTipo.Navegacion:
-                data = Graphics.get2DData(12);
                 stringTipo = "de navegacion";
                 break;
             case GraphRegresionTipo.Seguridad:
-                data = Graphics.get2DData(13);
-                stringTipo = "de seguridad ";
+                stringTipo = "de seguridad peatonal";
                 break;
             case GraphRegresionTipo.Ejecutiva:
-                data = Graphics.get2DData(14);
-                stringTipo = "ejecutivo";
+                stringTipo = "de función ejecutivo";
                 break;
-            default:
-                data = new Vector2[1];
+
+            case GraphRegresionTipo.IdaVuelta:
+                stringTipo = "ida y vuelta";
+                break;
+            case GraphRegresionTipo.Completitud:
+                stringTipo = "completitud de ruta";
+                break;
+            case GraphRegresionTipo.Desvio:
+                stringTipo = "desvío de ruta";
+                break;
+
+            case GraphRegresionTipo.CrucesValidos:
+                stringTipo = "de cruces correctos";
+                break;
+            case GraphRegresionTipo.Transito:
+                stringTipo = "de tránsito peatonal";
+                break;
+
+            case GraphRegresionTipo.Dinero:
+                stringTipo = "de manejo de dinero";
+                break;
+            case GraphRegresionTipo.Productos:
+                stringTipo = "de manejo de productos";
+                break;
+            case GraphRegresionTipo.Compra:
+                stringTipo = "de compra correcta";
+                break;
+            case GraphRegresionTipo.Precision:
+                stringTipo = "de precisión de pago";
+                break;
+            case GraphRegresionTipo.Rapidez:
+                stringTipo = "de rapidez de compra";
+                break;
+            case GraphRegresionTipo.Bolsa:
+                stringTipo = "de recolección de productos";
                 break;
         }
 

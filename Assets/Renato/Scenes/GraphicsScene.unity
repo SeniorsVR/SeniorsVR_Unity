@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 117810052}
-  tipo: 0
+  tipo: 11
 --- !u!1 &189458033
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +900,7 @@ MonoBehaviour:
   desfaseIdMetrica: 4
   idMetrica: 14
   lc: {fileID: 1467009673}
+  graphRegresion: {fileID: 1360957335}
 --- !u!114 &189458036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,6 +1467,7 @@ MonoBehaviour:
   desfaseIdMetrica: -1
   idMetrica: 12
   lc: {fileID: 757345841}
+  graphRegresion: {fileID: 1458555051}
 --- !u!114 &232747459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5028,7 +5030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1512694545}
-  tipo: 3
+  tipo: 14
 --- !u!114 &1360957336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5328,7 +5330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1940427632}
-  tipo: 1
+  tipo: 12
 --- !u!114 &1458555052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6268,6 +6270,7 @@ MonoBehaviour:
   desfaseIdMetrica: 2
   idMetrica: 13
   lc: {fileID: 1258767630}
+  graphRegresion: {fileID: 1712076093}
 --- !u!114 &1695350276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6359,7 +6362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 689367264}
-  tipo: 2
+  tipo: 13
 --- !u!114 &1712076094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6654,6 +6657,7 @@ MonoBehaviour:
   desfaseIdMetrica: 0
   idMetrica: 11
   lc: {fileID: 351360023}
+  graphRegresion: {fileID: 156562404}
 --- !u!1 &1818711483
 GameObject:
   m_ObjectHideFlags: 0
