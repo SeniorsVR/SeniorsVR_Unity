@@ -4,30 +4,31 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
+public enum GraphRegresionTipo
+{
+    Global = 11,
+    Navegacion = 12,
+    Seguridad = 13,
+    Ejecutiva = 14,
+
+    IdaVuelta = 0,
+    Completitud = 1,
+    Desvio = 2,
+
+    CrucesValidos = 3,
+    Transito = 4,
+
+    Dinero = 5,
+    Productos = 6,
+    Compra = 7,
+    Precision = 8,
+    Rapidez = 9,
+    Bolsa = 10,
+
+}
+
 public class GraphRegresion : MonoBehaviour
 {
-    public enum GraphRegresionTipo
-    {
-        Global = 11,
-        Navegacion = 12,
-        Seguridad = 13,
-        Ejecutiva = 14,
-
-        IdaVuelta = 0,
-        Completitud = 1,
-        Desvio = 2,
-
-        CrucesValidos = 3,
-        Transito = 4,
-
-        Dinero = 5,
-        Productos = 6,
-        Compra = 7,
-        Precision = 8,
-        Rapidez = 9,
-        Bolsa = 10,
-
-    }
 
     public TextMeshProUGUI text;
     public GraphRegresionTipo tipo;
