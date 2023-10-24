@@ -28,7 +28,7 @@ public static class Ponderador {
         float correctos_score = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
         float pago_score = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
         float compratiempo_score = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
-        float bolsa_score = (float) Convert.ToInt32(metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
+        float bolsa_score = (float) Convert.ToInt32(!metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
 
         float score = (billetes_score + interaccion_score + correctos_score + pago_score + bolsa_score + compratiempo_score) * 100.0f;
         if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
@@ -73,10 +73,10 @@ public static class Ponderador {
                 value = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
                 break;
             case 9:
-                value = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
+                value = (((float)metricas.tiempo_total - metricas.tiempo_total_kiosko) / (float)(metricas.tiempo_total)) * settings.GetValue(Settings.indices.tiempo_compra);
                 break;
             case 10:
-                value = (float) Convert.ToInt32(metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
+                value = (float) Convert.ToInt32(!metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
                 break;
         }
         if (float.IsNaN(value)) Debug.LogError("value is NaN or another weird value.");

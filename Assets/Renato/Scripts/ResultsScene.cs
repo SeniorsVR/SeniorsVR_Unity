@@ -13,6 +13,7 @@ public class ResultsScene : MonoBehaviour {
     public GameObject navigationTemplate, safetyTemplate, executiveTemplate, popup;
     private Simulation newSimulation;
     [SerializeField] private TMP_Text[] texts;
+    [SerializeField] private TMP_Text[] pntjTexts;
     private string simulationTime;
     void Start() {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -75,28 +76,28 @@ public class ResultsScene : MonoBehaviour {
 
             texts[9].text = Mathf.RoundToInt(metricas.tiempo_total_kiosko).ToString() + "s";
 
-            if (!metricas.irse_sin_bolsa)
-            {
-                texts[10].text = "Sí";
-            }
-            else
+            if (metricas.irse_sin_bolsa)
             {
                 texts[10].text = "No";
             }
+            else
+            {
+                texts[10].text = "Sí";
+            }
         }
-        else
+        if(true)
         {
-            global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas, settings)).ToString();
-            navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas, settings)).ToString();
-            ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas, settings)).ToString();
-            seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas, settings)).ToString();
+            //global.text = Mathf.RoundToInt(Ponderador.ComputeGeneralScore(newSimulation.metricas, settings)).ToString();
+            //navegacion.text = Mathf.RoundToInt(Ponderador.ComputeNavigationScore(newSimulation.metricas, settings)).ToString();
+            //ejecucion.text = Mathf.RoundToInt(Ponderador.ComputeExecutionScore(newSimulation.metricas, settings)).ToString();
+            //seguridad.text = Mathf.RoundToInt(Ponderador.ComputeSafetyScore(newSimulation.metricas, settings)).ToString();
 
-            ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
-            vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
+            //ida.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_ida).ToString() + "s";
+            //vuelta.text = Mathf.RoundToInt(newSimulation.metricas.tiempo_total_vuelta).ToString() + "s";
 
             for (int i = 0; i < 11; i++)
             {
-                texts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
+                pntjTexts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
             }
         }
 
