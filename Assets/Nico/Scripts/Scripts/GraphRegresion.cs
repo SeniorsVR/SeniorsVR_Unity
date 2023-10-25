@@ -60,7 +60,7 @@ public class GraphRegresion : MonoBehaviour
                 stringTipo = "de seguridad peatonal";
                 break;
             case GraphRegresionTipo.Ejecutiva:
-                stringTipo = "de función ejecutivo";
+                stringTipo = "de funciÃ³n ejecutivo";
                 break;
 
             case GraphRegresionTipo.IdaVuelta:
@@ -70,14 +70,14 @@ public class GraphRegresion : MonoBehaviour
                 stringTipo = "completitud de ruta";
                 break;
             case GraphRegresionTipo.Desvio:
-                stringTipo = "desvío de ruta";
+                stringTipo = "desvÃ­o de ruta";
                 break;
 
             case GraphRegresionTipo.CrucesValidos:
                 stringTipo = "de cruces correctos";
                 break;
             case GraphRegresionTipo.Transito:
-                stringTipo = "de tránsito peatonal";
+                stringTipo = "de trÃ¡nsito peatonal";
                 break;
 
             case GraphRegresionTipo.Dinero:
@@ -90,19 +90,19 @@ public class GraphRegresion : MonoBehaviour
                 stringTipo = "de compra correcta";
                 break;
             case GraphRegresionTipo.Precision:
-                stringTipo = "de precisión de pago";
+                stringTipo = "de precisiÃ³n de pago";
                 break;
             case GraphRegresionTipo.Rapidez:
                 stringTipo = "de rapidez de compra";
                 break;
             case GraphRegresionTipo.Bolsa:
-                stringTipo = "de recolección de productos";
+                stringTipo = "de recolecciÃ³n de productos";
                 break;
         }
 
         LinearRegression linearRegression = new LinearRegression(data);
 
-        string newText = "La tendencia de puntaje {0} es de:\n{1} puntos por día\n\nSe espera que en una semana desde el último test su puntaje sea de:\n{2} puntos";
+        string newText = "La tendencia de puntaje {0} es de:\n{1} puntos por dÃ­a\n\nSe espera que en una semana desde el Ãºltimo test su puntaje sea de:\n{2} puntos";
 
         float pointsInDay = Mathf.RoundToInt((float)linearRegression.slope);
         string dayString = pointsInDay.ToString();
