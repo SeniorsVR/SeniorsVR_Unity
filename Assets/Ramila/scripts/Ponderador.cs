@@ -6,7 +6,7 @@ public static class Ponderador {
     public static float ComputeNavigationScore(Metricas metricas, Settings settings) {
         float idavueltatiempo_score = (metricas.tiempo_total_ida / (metricas.tiempo_total_vuelta + metricas.tiempo_total_ida))*settings.GetValue(Settings.indices.tiempoIda_vuelta);
         float completitud_score = ((float) metricas.cantidad_segmentos_ruta_transitados / (float) metricas.cantidad_segmentos_ruta)*settings.GetValue(Settings.indices.completitud_ruta);
-        float desvio_score = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
+        float desvio_score = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta*2 + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
 
         float score = (idavueltatiempo_score + completitud_score + desvio_score) * 100.0f;
         if (float.IsNaN(score)) Debug.LogError("score is NaN or another weird value.");
@@ -23,10 +23,10 @@ public static class Ponderador {
     }
 
     public static float ComputeExecutionScore(Metricas metricas, Settings settings) { // hiiii ^.^; FUCK U!!!; 
-        float billetes_score = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
+        float billetes_score = (Mathf.Clamp(((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f)),0.0f,1.0f))*settings.GetValue(Settings.indices.efectividad_billetes);
         float interaccion_score = (6.0f / (float) metricas.veces_recogido_objeto + 0.001f) *settings.GetValue(Settings.indices.efectividad_productos);
         float correctos_score = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
-        float pago_score = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
+        float pago_score = (1000.0f/(1000.0f+ (float) Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
         float compratiempo_score = ((float) metricas.tiempo_total/ (float) (metricas.tiempo_total+metricas.tiempo_total_kiosko))*settings.GetValue(Settings.indices.tiempo_compra);
         float bolsa_score = (float) Convert.ToInt32(!metricas.irse_sin_bolsa)*settings.GetValue(Settings.indices.se_llevo);
 
@@ -52,7 +52,7 @@ public static class Ponderador {
                 value = ((float) metricas.cantidad_segmentos_ruta_transitados / (float) metricas.cantidad_segmentos_ruta)*settings.GetValue(Settings.indices.completitud_ruta);
                 break;
             case 2:
-                value = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
+                value = ((float) metricas.cantidad_segmentos_ruta / (float) (metricas.cantidad_segmentos_no_ruta*2 + metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.desvio_ruta);
                 break;
             case 3:
                 value = ((float) metricas.contador_cruces_validos / (float) (metricas.contador_cruces_validos + metricas.contador_cruces_invalidos))*settings.GetValue(Settings.indices.crucesVerde_roja);
@@ -61,7 +61,7 @@ public static class Ponderador {
                 value = ((float) metricas.cantidad_segmentos_ruta / (float)(metricas.contador_transita_calle+metricas.cantidad_segmentos_ruta))*settings.GetValue(Settings.indices.transito_inseguro);
                 break;
             case 5:
-                value = ((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f))*settings.GetValue(Settings.indices.efectividad_billetes);
+                value = (Mathf.Clamp(((float) metricas.cantidad_minima_billetes / ((float) (metricas.veces_marcado_billete + metricas.veces_devuelto_billete) + 0.001f)),0.0f,1.0f))*settings.GetValue(Settings.indices.efectividad_billetes);
                 break;
             case 6:
                 value = (6.0f / (float) metricas.veces_recogido_objeto +0.001f)*settings.GetValue(Settings.indices.efectividad_productos);
@@ -70,7 +70,7 @@ public static class Ponderador {
                 value = ((float) metricas.articulos_validos / 6.0f)*settings.GetValue(Settings.indices.efectividad_compra);
                 break;
             case 8:
-                value = (1.0f/(1.0f+ Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
+                value = (1000.0f/(1000.0f+ (float) Math.Abs(metricas.vuelto_final)))*settings.GetValue(Settings.indices.precision_compra);
                 break;
             case 9:
                 value = (((float)metricas.tiempo_total - metricas.tiempo_total_kiosko) / (float)(metricas.tiempo_total)) * settings.GetValue(Settings.indices.tiempo_compra);
@@ -81,6 +81,21 @@ public static class Ponderador {
         }
         if (float.IsNaN(value)) Debug.LogError("value is NaN or another weird value.");
         return value;
+    }
+
+    public static float GetVariationForIndex(int indice, Metricas metricas, Settings settings, string profileID)
+    {
+        float current  = GetScoreForIndex(indice, metricas, settings);
+        float finiteSeriesSum = GetFiniteSeriesSumForIndex(indice, profileID, settings.GetValue(Settings.indices.r));
+        float variation = 0.0f;
+        variation = current - finiteSeriesSum;
+        if (float.IsNaN(variation)) Debug.LogError("value is NaN or another weird value.");
+        return variation;
+    }
+
+    private static float GetFiniteSeriesSumForIndex(int indice, string profileID, float r){
+
+        return 0.0f;
     }
 }
 

@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using nico;
+using UnityEngine.UI;
 public class ResultsScene : MonoBehaviour {
     public bool isDetailScene = false;
     static private string currentProfile;
@@ -14,6 +15,11 @@ public class ResultsScene : MonoBehaviour {
     private Simulation newSimulation;
     [SerializeField] private TMP_Text[] texts;
     [SerializeField] private TMP_Text[] pntjTexts;
+    [SerializeField] private TMP_Text[] VariacionTexts;
+    [SerializeField] private Image[] VariacionImg;
+    public Sprite variacionPositiva;
+    public Sprite variacionNeutra;
+    public Sprite variacionNegativa;
     private string simulationTime;
     void Start() {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -98,6 +104,15 @@ public class ResultsScene : MonoBehaviour {
             for (int i = 0; i < 11; i++)
             {
                 pntjTexts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
+                float variacion = Ponderador.GetVariationForIndex(i, newSimulation.metricas, settings,currentProfile) * 100.0f;
+                VariacionTexts[i].text = Mathf.RoundToInt(variacion).ToString();
+                if(variacion > 10){
+                    VariacionImg[i].sprite =  variacionPositiva;
+                }else if(variacion < -10){
+                    VariacionImg[i].sprite =  variacionNegativa;
+                }else{
+                    VariacionImg[i].sprite =  variacionNeutra;
+                }
             }
         }
 
@@ -188,6 +203,10 @@ public class ResultsScene : MonoBehaviour {
     public void eliminarRegistro(){
         SaveSystem.deleteSimulation(profile.GetID(),newSimulation.GetID());
         SceneManager.LoadScene("HistoryScene");
+    }
+
+    private void calcularVariacion(){
+
     }
 }
 
