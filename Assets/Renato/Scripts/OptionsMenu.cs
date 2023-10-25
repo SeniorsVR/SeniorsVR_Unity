@@ -1,6 +1,5 @@
+using FantomLib;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,6 +59,8 @@ public class OptionsMenu : MonoBehaviour {
 
     public void ConfirmDeleteButton() {
         SaveSystem.DeleteProfile(currentProfile);
+        ToastController toastController = new ToastController();
+        toastController.Show("Perfil borrado");
     }
 
     public void GoBackButton() {

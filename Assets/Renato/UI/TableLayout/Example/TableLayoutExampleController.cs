@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UI.Tables;
 
 namespace UI.Tables.Examples
 {

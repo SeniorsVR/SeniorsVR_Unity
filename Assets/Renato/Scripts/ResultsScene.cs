@@ -24,7 +24,7 @@ public class ResultsScene : MonoBehaviour {
         nameText.SetText(profile.GetName());
 
         if(!isDetailScene){
-            simulationTime = DateTime.Now.ToString();
+            simulationTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
             newSimulation = new Simulation(profile.GetID(),profile.GetName(),simulationTime,TestManager.metricas);
             dateText.SetText(simulationTime);
         }else{

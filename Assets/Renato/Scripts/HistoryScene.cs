@@ -22,13 +22,14 @@ public class HistoryScene : MonoBehaviour {
         profileText.SetText(profile.GetName());
 
         int count = simulations.Length;
-        if (simulations != null) {
+        if (count != 0) {
             for (int i = 0; i < simulations.Length; i++) {
                 Simulation simulation = simulations[i];
-                dateText.text = simulation.GetDate().Split(" ")[0];
+                Debug.Log(simulation.GetDate().Split(" "));
+                dateText.text = simulation.GetDate().Split(" ")[0]; // Cambiar esto a futuro
                 dateText.name = simulation.GetID();
                 timeText.text = simulation.GetDate().Split(" ")[1];
-
+                
                 Settings settings = SaveSystem.loadSettings();
                 scoreText.text = "Puntaje Global: " + Mathf.RoundToInt(Ponderador.ComputeGeneralScore(simulation.metricas, settings));
                 if (count >= 1) {
@@ -37,7 +38,7 @@ public class HistoryScene : MonoBehaviour {
                 }
             }
         }
-        if (count == 0) {
+        else {
             emptyGameObject.SetActive(true);
         }
         simulationGameObject.SetActive(false);
@@ -81,3 +82,4 @@ public class HistoryScene : MonoBehaviour {
         return currentProfile;
     }
 }
+

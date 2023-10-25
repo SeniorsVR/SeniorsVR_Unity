@@ -16,7 +16,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Collections;
 using UnityEngine;
 
 /// <summary>

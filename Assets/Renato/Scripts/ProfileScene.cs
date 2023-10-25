@@ -1,4 +1,5 @@
 using System;
+using FantomLib;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -90,6 +91,9 @@ public class ProfileScene : MonoBehaviour {
     public void Graphics() {
         if (simulations.Length > 1) {
             SceneManager.LoadScene("GraphicsScene");
+        } else {
+            ToastController toastController = new ToastController();
+            toastController.Show("No hay datos suficientes");
         }
     }
 

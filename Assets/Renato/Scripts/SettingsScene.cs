@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using FantomLib;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsScene : MonoBehaviour {
-    public GameObject popupDiscard, popupConfirm;
+    public GameObject weights, popupDiscard, popupConfirm, popupDownload, commonButtons, modifyButtons;
     public Slider[] sliders;
     void Start() {
         for (int i = 0; i < sliders.Length; i++) {
@@ -16,12 +15,42 @@ public class SettingsScene : MonoBehaviour {
 
     void Update() {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor) {
-            if (Input.GetKeyDown(KeyCode.Escape) && !popupDiscard.activeSelf) {
+            if (Input.GetKeyDown(KeyCode.Escape) && !popupDiscard.activeSelf && !popupDownload.activeSelf) {
                 popupDiscard.SetActive(true);
             } if (Input.GetKeyDown(KeyCode.Escape) && popupConfirm.activeSelf) {
                 popupDiscard.SetActive(false);
+            } if (Input.GetKeyDown(KeyCode.Escape) && popupDownload.activeSelf) {
+                CancelDownload();
             }
         }
+    }
+
+    public void Modify() {
+        weights.SetActive(true);
+        modifyButtons.SetActive(true);
+        commonButtons.SetActive(false);
+    }
+
+    public void Download() {
+        commonButtons.SetActive(false);
+        popupDownload.SetActive(true);
+    }
+
+    public void ConfirmDownload() {
+        SaveSystem.DownloadEverything();
+        ToastController toastController = new ToastController();
+        toastController.Show("Archivo guardado en la carpeta Descargas");
+        CancelDownload();
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void CancelDownload() {
+        commonButtons.SetActive(true);
+        popupDownload.SetActive(false);
+    }
+
+    public void Upload() {
+        SceneManager.LoadScene("UploadScene");
     }
 
     public void SaveChanges() {
@@ -40,6 +69,8 @@ public class SettingsScene : MonoBehaviour {
         Settings settings = new Settings(values);
         SaveSystem.saveSettings(settings);
         SceneManager.LoadScene("FirstScene");
+        ToastController toastController = new ToastController();
+        toastController.Show("Ajustes modificados");
     }
 
     public void DiscardNewChanges() {
