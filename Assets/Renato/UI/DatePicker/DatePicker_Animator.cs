@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace UI.Dates
-{    
+{
     // Was having some positioning issues with the default Animator component, so I wrote a simple animator here
     // It turned out that the Animator component wasn't responsible, but I've decided to leave the simpler implementation in place for now
     [RequireComponent(typeof(RectTransform)), RequireComponent(typeof(CanvasGroup))]

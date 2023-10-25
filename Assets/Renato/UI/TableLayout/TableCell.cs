@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Tables
-{    
+{
     [RequireComponent(typeof(RectTransform))]    
     public class TableCell : HorizontalLayoutGroup
     {        

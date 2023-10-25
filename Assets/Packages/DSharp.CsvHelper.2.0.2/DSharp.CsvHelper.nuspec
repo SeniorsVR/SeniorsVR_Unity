@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DSharp.CsvHelper</id>
+    <version>2.0.2</version>
+    <authors>Erwin Bakels</authors>
+    <owners>Erwin Bakels</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">License.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>DSharp.png</icon>
+    <description>DSharp CSV Helper
+      With this package you can write attributes above your class like:
+
+      [CsvDelimiter("|")]
+
+      and above fields:
+      [CsvFormat("yyyyMMdd")]
+      [CsvLength(8)]
+      [CsvFormat("0.00")]
+      [CsvIgnore]
+
+      Afterwards you can write it:
+
+      var writer = new CsvWriter&lt;MyObject&gt;(@"c:\export.csv");
+      //writer.Definition.WriteHeader = false;
+      writer.Write(list);</description>
+    <releaseNotes>Made ready for .net standard</releaseNotes>
+    <copyright>Copyright ©2008-2020 DSharp</copyright>
+    <tags>csv, csvhelper, comma, delimited, seperated, fixed width, value, serializer, writer, csvwriter</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -14,7 +14,7 @@ public class Settings {
         efectividad_compra,
         precision_compra,
         tiempo_compra, //vs tiempo total
-        se_llevo
+        se_llevo,
     }
 
     public Settings() {
@@ -43,5 +43,4 @@ public class Settings {
     public void setValue(int indice,float value){
         values[indice] = value;
     }
-
 }

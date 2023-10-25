@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UI.Tables;
 
 namespace UI.Dates
 {

@@ -1,12 +1,9 @@
 /*
  * This example shows how you can add rows programmatically.
- */ 
+ */
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UI.Tables;
 
 namespace UI.Tables.Examples
 {

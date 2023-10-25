@@ -1,10 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UI.Tables;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UI.Dates
 {

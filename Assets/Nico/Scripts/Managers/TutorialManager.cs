@@ -118,12 +118,12 @@ namespace nico
                 case TutorialState.Semaforos:
                     if (!semaforo.state)
                     {
-                        staticText.text = "Cruza la calle mientras el semáforo está en verde.";
+                        staticText.text = "Cruza la calle mientras el semï¿½foro estï¿½ en verde.";
                         TutorialArrow.Instance.SetTarget(cruce2.transform.position + Vector3.up * 3, cruce2.transform.position);
                     }
                     else
                     {
-                        staticText.text = "Detente y espera a que el semáforo muestra luz verde para cruzar.";
+                        staticText.text = "Detente y espera a que el semï¿½foro muestra luz verde para cruzar.";
                         TutorialArrow.Instance.gameObject.SetActive(false);
                     }
 
@@ -155,38 +155,38 @@ namespace nico
             switch (state)
             {
                 case TutorialState.MoverCamara:
-                    staticText.text = "Mira hacia el círculo azul.";
+                    staticText.text = "Mira hacia el cï¿½rculo azul.";
                     TutorialArrow.Instance.SetTarget(circulo.transform.position + Vector3.up * 3, circulo.transform.position);
                     PlayerActions.Instance.grabRange = 100;
                     break;
 
                 case TutorialState.MantenerCamara:
-                    staticText.text = "Mantente mirando el círculo azul.";
+                    staticText.text = "Mantente mirando el cï¿½rculo azul.";
                     TutorialArrow.Instance.SetTarget(circulo.transform.position + Vector3.up * 3, circulo.transform.position);
                     break;
                 case TutorialState.Moverse:
-                    staticText.text = "Pulsa cualquier botón del control para moverte.";
+                    staticText.text = "Pulsa cualquier botï¿½n del control para moverte.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     PlayerActions.Instance.grabRange = 3;
                     break;
 
                 case TutorialState.IrLista:
-                    staticText.text = "Dirígete hacia el letrero con la lista.";
+                    staticText.text = "Dirï¿½gete hacia el letrero con la lista.";
                     TutorialArrow.Instance.SetTarget(letrero.transform.position + Vector3.up * 2, letrero.transform.position);
                     break;
 
                 case TutorialState.LeerLista:
-                    staticText.text = "Esta es la lista de los artículos que deberás comprar.";
+                    staticText.text = "Esta es la lista de los artï¿½culos que deberï¿½s comprar.";
                     TutorialArrow.Instance.SetTarget(letrero.transform.position + Vector3.up * 2, letrero.transform.position);
                     break;
 
                 case TutorialState.MoverseCruze:
-                    staticText.text = "Dirígete hacia el cruce peatonal.";
+                    staticText.text = "Dirï¿½gete hacia el cruce peatonal.";
                     TutorialArrow.Instance.SetTarget(cruce.transform.position + Vector3.up * 3, cruce.transform.position);
                     break;
 
                 case TutorialState.LeyesTransito:
-                    staticText.text = "Para desplazarte por esta ciudad deberás respetar las leyes de tránsito, camina solo por las veredas y atraviesa las calles por los cruces peatonales.";
+                    staticText.text = "Para desplazarte por esta ciudad deberï¿½s respetar las leyes de trï¿½nsito, camina solo por las veredas y atraviesa las calles por los cruces peatonales.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
@@ -196,23 +196,23 @@ namespace nico
                     break;
 
                 case TutorialState.CaminoKiosko:
-                    staticText.text = "Dirígete hacia a donde apunta la flecha superior para llegar al kiosko.";
+                    staticText.text = "Dirï¿½gete hacia a donde apunta la flecha superior para llegar al kiosko.";
                     flecha.SetActive(true);
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
                 case TutorialState.RecojerCanasta:
-                    staticText.text = "Mira un canasto y pulsa un botón del controlador para recogerlo.";
+                    staticText.text = "Mira un canasto y pulsa un botï¿½n del controlador para recogerlo.";
                     TutorialArrow.Instance.SetTarget(canastos.transform.position + Vector3.up * 2, canastos.transform.position);
                     break;
 
                 case TutorialState.RecojerObjetos:
-                    staticText.text = "Ahora de la misma forma recoge los artículos que se pedían en la lista, o al menos los que recuerdes.";
+                    staticText.text = "Ahora de la misma forma recoge los artï¿½culos que se pedï¿½an en la lista, o al menos los que recuerdes.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
                 case TutorialState.DevolerObjetos:
-                    staticText.text = "Mira hacia tu canasta e interactúa con un artículo en ella para devolverlo.";
+                    staticText.text = "Mira hacia tu canasta e interactï¿½a con un artï¿½culo en ella para devolverlo.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
@@ -222,12 +222,12 @@ namespace nico
                     break;
 
                 case TutorialState.IrCaja:
-                    staticText.text = "Dirígete hacia la caja e interactúa con ella de la misma forma para pagar tus artículos.";
+                    staticText.text = "Dirï¿½gete hacia la caja e interactï¿½a con ella de la misma forma para pagar tus artï¿½culos.";
                     TutorialArrow.Instance.SetTarget(caja.transform.position + Vector3.up * 1.5f, caja.transform.position);
                     break;
 
                 case TutorialState.Pagar1:
-                    staticText.text = "De la misma manera en la que tomaste los artículos, selecciona las monedas y billetes con los que pagarás el total.";
+                    staticText.text = "De la misma manera en la que tomaste los artï¿½culos, selecciona las monedas y billetes con los que pagarï¿½s el total.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
@@ -237,17 +237,17 @@ namespace nico
                     break;
 
                 case TutorialState.Pagar3:
-                    staticText.text = "Cuando estés listo, habla con la cajera de la misma forma en la que has interactuado con los objetos para terminar el pago.";
+                    staticText.text = "Cuando estï¿½s listo, habla con la cajera de la misma forma en la que has interactuado con los objetos para terminar el pago.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
                 case TutorialState.Recoger:
-                    staticText.text = "Recoge la bolsa con los artículos que compraste.";
+                    staticText.text = "Recoge la bolsa con los artï¿½culos que compraste.";
                     TutorialArrow.Instance.SetTarget(bolsa.transform.position + Vector3.up * 1, bolsa.transform.position);
                     break;
 
                 case TutorialState.Irse:
-                    staticText.text = "Sal del kiosko y vuelve a donde empezaste al principio del test, sigue las leyes del tránsito.";
+                    staticText.text = "Sal del kiosko y vuelve a donde empezaste al principio del test, sigue las leyes del trï¿½nsito.";
                     TutorialArrow.Instance.gameObject.SetActive(false);
                     break;
 
