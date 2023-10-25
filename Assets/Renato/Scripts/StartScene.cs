@@ -78,37 +78,6 @@ public class StartScene : MonoBehaviour {
         SceneManager.LoadScene("SettingsScene");
     }
 
-    public void Download() {
-        chooseGameObject.SetActive(false);
-        profilesGameObject.SetActive(false);
-        empty.SetActive(false);
-        popup.SetActive(true);
-    }
-
-    public void Upload() {
-        SceneManager.LoadScene("UploadScene");
-    }
-
-    public void Confirm() {
-        SaveSystem.DownloadEverything();
-        ToastController toastController = new ToastController();
-        toastController.Show("Archivo guardado en la carpeta Descargas");
-        Cancel();
-    }
-
-    public void Cancel() {
-        popup.SetActive(false);
-        if (profiles == null) {
-            chooseGameObject.SetActive(false);
-            profilesGameObject.SetActive(false);
-            empty.SetActive(true);
-        } else {
-            chooseGameObject.SetActive(true);
-            profilesGameObject.SetActive(true);
-            empty.SetActive(false);
-        }
-    }
-
     public void CreateProfile() {
         SceneManager.LoadScene("CreateProfileScene");
     }

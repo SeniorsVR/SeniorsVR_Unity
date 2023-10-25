@@ -1,3 +1,5 @@
+using System.Collections;
+using System.IO;
 using FantomLib;
 using TMPro;
 using UnityEngine;
@@ -15,12 +17,14 @@ public class SettingsScene : MonoBehaviour {
 
     void Update() {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor) {
-            if (Input.GetKeyDown(KeyCode.Escape) && !popupDiscard.activeSelf && !popupDownload.activeSelf) {
+            if (Input.GetKeyDown(KeyCode.Escape) && !popupDiscard.activeSelf && !commonButtons.activeSelf) {
                 popupDiscard.SetActive(true);
             } if (Input.GetKeyDown(KeyCode.Escape) && popupConfirm.activeSelf) {
                 popupDiscard.SetActive(false);
             } if (Input.GetKeyDown(KeyCode.Escape) && popupDownload.activeSelf) {
                 CancelDownload();
+            } if (Input.GetKeyDown(KeyCode.Escape) && commonButtons.activeSelf) {
+                SceneManager.LoadScene("FirstScene");
             }
         }
     }
@@ -37,10 +41,11 @@ public class SettingsScene : MonoBehaviour {
     }
 
     public void ConfirmDownload() {
-        SaveSystem.DownloadEverything();
+        string downloadFilePath = SaveSystem.DownloadEverything();
         ToastController toastController = new ToastController();
         toastController.Show("Archivo guardado en la carpeta Descargas");
         CancelDownload();
+        StartCoroutine(TakeScreenshotAndShare(downloadFilePath));
         SceneManager.LoadScene("SettingsScene");
     }
 
@@ -91,5 +96,14 @@ public class SettingsScene : MonoBehaviour {
         TMP_Text text = parent.transform.Find("Number").GetComponent<TMP_Text>();
         float number = parent.transform.Find("Slider").GetComponent<Slider>().value;
         text.SetText(number.ToString());
+    }
+
+    private IEnumerator TakeScreenshotAndShare(string downloadFilePath) {
+	    yield return new WaitForEndOfFrame();
+
+	    new NativeShare().AddFile( downloadFilePath )
+	    	.SetSubject( "Archivo CSV" ).SetText("Datos SeniorsVR")
+	    	.SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
+	    	.Share();
     }
 }
