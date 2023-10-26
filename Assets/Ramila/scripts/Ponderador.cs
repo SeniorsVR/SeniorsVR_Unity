@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using nico;
 using UnityEngine;
 
@@ -86,16 +88,21 @@ public static class Ponderador {
     public static float GetVariationForIndex(int indice, Metricas metricas, Settings settings, string profileID)
     {
         float current  = GetScoreForIndex(indice, metricas, settings);
-        float finiteSeriesSum = GetFiniteSeriesSumForIndex(indice, profileID, settings.GetValue(Settings.indices.r));
-        float variation = 0.0f;
-        variation = current - finiteSeriesSum;
+        float finiteSeriesSum = GetFiniteSeriesSumForIndex(indice, profileID, settings.GetValue(Settings.indices.r),settings);
+        float variation = current - finiteSeriesSum;
         if (float.IsNaN(variation)) Debug.LogError("value is NaN or another weird value.");
         return variation;
     }
 
-    private static float GetFiniteSeriesSumForIndex(int indice, string profileID, float r){
-
-        return 0.0f;
+    private static float GetFiniteSeriesSumForIndex(int indice, string profileID, float r, Settings settings){
+        float finiteSum = 0.0f;
+        Simulation[] simulations = SaveSystem.LoadSimulations(profileID);
+        //sortear
+        float a = 1.0f/((1.0f-(Mathf.Pow(r,simulations.Length)))/(1.0f-r));
+        for(int i = 0; i < simulations.Length;i++){
+            finiteSum += a*GetScoreForIndex(indice,simulations[i].metricas,settings)*Mathf.Pow(r,i);
+        }
+        return finiteSum;
     }
 }
 

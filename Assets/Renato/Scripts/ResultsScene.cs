@@ -105,7 +105,7 @@ public class ResultsScene : MonoBehaviour {
             {
                 pntjTexts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
                 float variacion = Ponderador.GetVariationForIndex(i, newSimulation.metricas, settings,currentProfile) * 100.0f;
-                VariacionTexts[i].text = Mathf.RoundToInt(variacion).ToString();
+                VariacionTexts[i].text = Mathf.RoundToInt(Mathf.Abs(variacion)).ToString();
                 if(variacion > 10){
                     VariacionImg[i].sprite =  variacionPositiva;
                 }else if(variacion < -10){
