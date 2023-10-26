@@ -5,6 +5,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Linq;
 
 public class HistoryScene : MonoBehaviour {
     public TMP_Text profileText, dateText, scoreText, timeText;
@@ -22,10 +24,11 @@ public class HistoryScene : MonoBehaviour {
         profileText.SetText(profile.GetName());
 
         int count = simulations.Length;
+        List<Simulation> sortedSimulations = simulations.OrderBy(o => o.GetDate()).ToList();
+        sortedSimulations.Reverse();
         if (count != 0) {
             for (int i = 0; i < simulations.Length; i++) {
-                Simulation simulation = simulations[i];
-                //Debug.Log(simulation.GetDate().Split(" "));
+                Simulation simulation = sortedSimulations[i];
                 dateText.text = simulation.GetDate().Split(" ")[0]; // Cambiar esto a futuro
                 dateText.name = simulation.GetID();
                 timeText.text = simulation.GetDate().Split(" ")[1];
