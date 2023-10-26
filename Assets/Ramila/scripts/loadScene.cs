@@ -25,7 +25,17 @@ public class loadScene : MonoBehaviour
     }
 
     private void comenzarTest(){
-        SceneManager.LoadScene("test");
+        switch(Random.Range(1,4)){
+            case 1:
+                SceneManager.LoadScene("test");
+                break;
+            case 2:
+                SceneManager.LoadScene("test 2");
+                break;
+            case 3:
+                SceneManager.LoadScene("test 3");
+                break;
+        }
     }
 
     private void comenzarTutorial() {
