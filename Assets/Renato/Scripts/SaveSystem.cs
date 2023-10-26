@@ -231,7 +231,7 @@ public static class SaveSystem {
         }
     }
 
-    static public void DownloadEverything() {
+    static public string DownloadEverything() {
         Everything everything = new Everything(loadSettings(), LoadProfiles(), LoadAllSimulations());
 
         string profilesPath = AndroidPlugin.GetExternalStorageDirectoryDownloads(); 
@@ -275,21 +275,22 @@ public static class SaveSystem {
             }
             writer.Close();
         }
-        string settingsHeader = string.Empty;
-        string settingsContent = string.Empty;
-        int i = 0;
-        foreach (var settings in Enum.GetValues(typeof(Settings.indices))) {
-            settingsHeader += settings + ",";
-            settingsContent += everything.GetSettings().GetValues()[i++] + ",";
-        }
-        //Debug.Log(settingsHeader + "\n" + settingsContent);
-        string settingsPath = AndroidPlugin.GetExternalStorageDirectoryDownloads(); 
-        string settingsFilePath = settingsPath + "/Ajustes" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".csv";
-        using (var writer = new StreamWriter(settingsFilePath, false)) {
-            writer.WriteLine(settingsHeader + "\n" + settingsContent);
-            writer.Flush();
-            writer.Close();
-        }
+        //string settingsHeader = string.Empty;
+        //string settingsContent = string.Empty;
+        //int i = 0;
+        //foreach (var settings in Enum.GetValues(typeof(Settings.indices))) {
+        //    settingsHeader += settings + ",";
+        //    settingsContent += everything.GetSettings().GetValues()[i++] + ",";
+        //}
+        ////Debug.Log(settingsHeader + "\n" + settingsContent);
+        //string settingsPath = AndroidPlugin.GetExternalStorageDirectoryDownloads(); 
+        //string settingsFilePath = settingsPath + "/Ajustes" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".csv";
+        //using (var writer = new StreamWriter(settingsFilePath, false)) {
+        //    writer.WriteLine(settingsHeader + "\n" + settingsContent);
+        //    writer.Flush();
+        //    writer.Close();
+        //}
+        return profilesFilePath;
     }
 
     static public string[] GetFolders(string folder) {

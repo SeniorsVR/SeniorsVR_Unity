@@ -158,18 +158,15 @@ public class Graphics : MonoBehaviour {
             DateTime referenceDate = new DateTime(2023, 1, 1);
             for (int i = 0; i < sortedSimulations.Count; i++)
             {
-
                 string inputDateString = sortedSimulations[i].GetDate();
-                DateTime inputDate;
-                try
-                {
-                    inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm:ss", null);
+                if (inputDateString.Split(" ")[1].Split(":").Length == 2) {
+                    inputDateString += ":00";
                 }
-                catch(Exception e)
-                {
-                    inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm", null);
+                if (inputDateString.Split(" ")[0].Split("-").Length == 0) {
+                    inputDateString = inputDateString.Split(" ")[0].Split("-")[0] + "/" + inputDateString.Split(" ")[0].Split("-")[2] + "/" + 
+                                      inputDateString.Split(" ")[0].Split("-")[2] + " " + inputDateString.Split(" ")[1];
                 }
-
+                DateTime inputDate = DateTime.ParseExact(inputDateString, "dd/MM/yyyy HH:mm:ss", null);;
                 TimeSpan timeDifference = inputDate - referenceDate;
                 float numberOfDays = (float)timeDifference.TotalDays;
 

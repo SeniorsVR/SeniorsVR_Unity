@@ -15,16 +15,18 @@ public class Settings {
         precision_compra,
         tiempo_compra, //vs tiempo total
         se_llevo,
+        r,
     }
 
     public Settings() {
-        values = new float[11];
+        values = new float[12];
         for(int i = 0; i < 11; i++){
             values[i] = 1.0f;
         }
+        values[11] = 0.5f;
     }
     public Settings(float[] values) {
-        this.values = new float[11];
+        this.values = new float[12];
         this.values = values;
     }
 
