@@ -83,9 +83,11 @@ public class SettingsScene : MonoBehaviour {
     }
 
     public void RestoreChanges() {
-        for (int i = 0; i < sliders.Length; i++) {
+        for (int i = 0; i < 11; i++) {
             sliders[i].value = 1;
         }
+        sliders[11].value = 0.5f;
+        sliders[12].value = 50;
     }
 
     public void GoBackButton() {
