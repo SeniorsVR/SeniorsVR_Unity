@@ -80,7 +80,7 @@ public class Graphics : MonoBehaviour {
             labelX.SetParent(transform);
             labelX.gameObject.SetActive(true);
             labelX.localPosition = new Vector3((float) ((-0.5 + (double) i/(data.Length - 1))*plotRT.rect.width), -plotRT.rect.height/2 - (rt.rect.width/8 - plotRT.rect.width/8) , 0);
-            labelX.GetComponent<Text>().text = (sortedSimulations[i].GetDate().Split(" ")[0].Split("-")[0] + "/" + sortedSimulations[i].GetDate().Split(" ")[0].Split("-")[1]).ToString();
+            labelX.GetComponent<Text>().text = (sortedSimulations[i].GetDate().Split(" ")[0].Split("/")[0] + "/" + sortedSimulations[i].GetDate().Split(" ")[0].Split("/")[1]).ToString();
 
             RectTransform dashX = Instantiate(dashTemplateX);
             porBorrar.Add(dashX.gameObject);

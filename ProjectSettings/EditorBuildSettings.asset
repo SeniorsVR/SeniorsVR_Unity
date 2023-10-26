@@ -53,6 +53,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Renato/Scenes/UploadScene.unity
     guid: a8097ad35288fd94caf24fd0c03a0559
+  - enabled: 1
+    path: Assets/Ramila/Scenes/test 2.unity
+    guid: d99dae4b0d7a303439bbfb062bf47f96
+  - enabled: 1
+    path: Assets/Ramila/Scenes/test 3.unity
+    guid: a8a7365426724ea4ea55a844704aff16
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b554cc72793e9c34bb8f65587d659b71,
       type: 2}
