@@ -11,5 +11,7 @@ namespace nico
         Chorizo,
         Bebida,
         Cordero,
+        Pan,
+        Papitas,
     }
 }

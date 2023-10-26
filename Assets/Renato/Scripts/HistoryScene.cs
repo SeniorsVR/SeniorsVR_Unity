@@ -25,7 +25,7 @@ public class HistoryScene : MonoBehaviour {
         if (count != 0) {
             for (int i = 0; i < simulations.Length; i++) {
                 Simulation simulation = simulations[i];
-                Debug.Log(simulation.GetDate().Split(" "));
+                //Debug.Log(simulation.GetDate().Split(" "));
                 dateText.text = simulation.GetDate().Split(" ")[0]; // Cambiar esto a futuro
                 dateText.name = simulation.GetID();
                 timeText.text = simulation.GetDate().Split(" ")[1];

@@ -86,8 +86,23 @@ namespace nico
                         }
                         break;
                     case "Tomate":
-                        for(int i = 0; i < kvp.Value; i++){
+                        for (int i = 0; i < kvp.Value; i++)
+                        {
                             objetos[k] = Articulo.Tomate;
+                            k++;
+                        }
+                        break;
+                    case "Pan":
+                        for (int i = 0; i < kvp.Value; i++)
+                        {
+                            objetos[k] = Articulo.Pan;
+                            k++;
+                        }
+                        break;
+                    case "Papas":
+                        for (int i = 0; i < kvp.Value; i++)
+                        {
+                            objetos[k] = Articulo.Papitas;
                             k++;
                         }
                         break;
