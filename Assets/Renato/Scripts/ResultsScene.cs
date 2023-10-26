@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using nico;
 using UnityEngine.UI;
+using Unity.Mathematics;
 public class ResultsScene : MonoBehaviour {
     public bool isDetailScene = false;
     static private string currentProfile;
@@ -20,6 +21,8 @@ public class ResultsScene : MonoBehaviour {
     public Sprite variacionPositiva;
     public Sprite variacionNeutra;
     public Sprite variacionNegativa;
+    public GameObject alerta;
+    [SerializeField] private TMP_Text[] textsAlerta;
     private string simulationTime;
     void Start() {
         Screen.orientation = ScreenOrientation.Portrait;
@@ -28,18 +31,24 @@ public class ResultsScene : MonoBehaviour {
         currentProfile = ProfileScene.GetSelectedProfile();
         profile = SaveSystem.LoadProfile(currentProfile);
         nameText.SetText(profile.GetName());
+        Settings settings = SaveSystem.loadSettings();
 
         if(!isDetailScene){
             simulationTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
             newSimulation = new Simulation(profile.GetID(),profile.GetName(),simulationTime,TestManager.metricas);
             dateText.SetText(simulationTime);
+            float[] categoriesVariation = Ponderador.GetVariationForCategories(newSimulation.metricas, settings, currentProfile);
+            if(categoriesVariation[0]*100.0f < -settings.GetValue(Settings.indices.s)*3.0f || categoriesVariation[1]*100.0f < -settings.GetValue(Settings.indices.s)*2.0f|| categoriesVariation[2]*100.0f < -settings.GetValue(Settings.indices.s)*6.0f){
+                textsAlerta[0].SetText((Mathf.RoundToInt(categoriesVariation[0]*100.0f)).ToString());
+                textsAlerta[1].SetText((Mathf.RoundToInt(categoriesVariation[1]*100.0f)).ToString());
+                textsAlerta[2].SetText((Mathf.RoundToInt(categoriesVariation[2]*100.0f)).ToString());
+                alerta.SetActive(true);
+            }
         }else{
             newSimulation = SaveSystem.LoadSimulation(profile.GetID(),HistoryScene.GetSimulationName());
             dateText.SetText(newSimulation.GetDate().ToString());
         }
-
-
-        Settings settings = SaveSystem.loadSettings();
+        
 
         bool legible = true;
 
@@ -104,14 +113,16 @@ public class ResultsScene : MonoBehaviour {
             for (int i = 0; i < 11; i++)
             {
                 pntjTexts[i].text = Mathf.RoundToInt(Ponderador.GetScoreForIndex(i, newSimulation.metricas, settings) * 100.0f).ToString();
-                float variacion = Ponderador.GetVariationForIndex(i, newSimulation.metricas, settings, currentProfile) * 100.0f;
-                VariacionTexts[i].text = Mathf.RoundToInt(Mathf.Abs(variacion)).ToString();
-                if(variacion > 10){
-                    VariacionImg[i].sprite =  variacionPositiva;
-                }else if(variacion < -10){
-                    VariacionImg[i].sprite =  variacionNegativa;
-                }else{
-                    VariacionImg[i].sprite =  variacionNeutra;
+                if(!isDetailScene){
+                    float variacion = Ponderador.GetVariationForIndex(i, newSimulation.metricas, settings,currentProfile) * 100.0f;
+                    VariacionTexts[i].text = Mathf.RoundToInt(Mathf.Abs(variacion)).ToString();
+                    if(variacion > 10){
+                        VariacionImg[i].sprite =  variacionPositiva;
+                    }else if(variacion < -10){
+                        VariacionImg[i].sprite =  variacionNegativa;
+                    }else{
+                        VariacionImg[i].sprite =  variacionNeutra;
+                    }
                 }
             }
         }

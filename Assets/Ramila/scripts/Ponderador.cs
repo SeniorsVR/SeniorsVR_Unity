@@ -97,12 +97,21 @@ public static class Ponderador {
     private static float GetFiniteSeriesSumForIndex(int indice, string profileID, float r, Settings settings){
         float finiteSum = 0.0f;
         Simulation[] simulations = SaveSystem.LoadSimulations(profileID);
-        //sortear
+        List<Simulation> sortedSimulations = simulations.OrderBy(o => o.GetDate()).ToList();
+        sortedSimulations.Reverse();
         float a = 1.0f/((1.0f-(Mathf.Pow(r,simulations.Length)))/(1.0f-r));
         for(int i = 0; i < simulations.Length;i++){
-            finiteSum += a*GetScoreForIndex(indice,simulations[i].metricas,settings)*Mathf.Pow(r,i);
+            finiteSum += a*GetScoreForIndex(indice,sortedSimulations[i].metricas,settings)*Mathf.Pow(r,i);
         }
         return finiteSum;
+    }
+
+    public static float[] GetVariationForCategories(Metricas metricas, Settings settings, string profileID){
+        float[] variations = new float[3];
+        variations[0] = GetVariationForIndex(0,metricas,settings,profileID) + GetVariationForIndex(1,metricas,settings,profileID) + GetVariationForIndex(2,metricas,settings,profileID);
+        variations[1] = GetVariationForIndex(3,metricas,settings,profileID) + GetVariationForIndex(4,metricas,settings,profileID);
+        variations[2] = GetVariationForIndex(6,metricas,settings,profileID) + GetVariationForIndex(6,metricas,settings,profileID) + GetVariationForIndex(7,metricas,settings,profileID) + GetVariationForIndex(8,metricas,settings,profileID) + GetVariationForIndex(9,metricas,settings,profileID) + GetVariationForIndex(10,metricas,settings,profileID);
+        return variations;
     }
 }
 
