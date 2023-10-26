@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using System;
+using UnityEngine;
 
 [System.Serializable]
 public class Settings {
@@ -25,7 +28,7 @@ public class Settings {
             values[i] = 1.0f;
         }
         values[11] = 0.5f;
-        values[11] = 50.0f;
+        values[12] = 50.0f;
     }
     public Settings(float[] values) {
         this.values = new float[13];
