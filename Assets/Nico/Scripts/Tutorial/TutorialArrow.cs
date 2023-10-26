@@ -10,7 +10,7 @@ public class TutorialArrow : MonoBehaviour
         Instance = this;
     }
 
-    Vector3 aimPosition;//Posicion donde estara el centro de la fecha
+    Vector3 aimPosition = Vector3.up;//Posicion donde estara el centro de la fecha
     Vector3 aimPositionTarget;//Posicion hacia donde apunta la flecha
 
     Vector2 dimensionsOfCanvas;
@@ -22,7 +22,6 @@ public class TutorialArrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aimPosition += Vector3.up;
 
         rectTransform = gameObject.GetComponent<RectTransform>();
 

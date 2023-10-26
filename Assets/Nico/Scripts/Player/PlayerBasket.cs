@@ -91,6 +91,10 @@ namespace nico
                 {
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.LlenarObjetos);
                 }
+                else if (TutorialManager.Instance.tutorialState == TutorialState.IrCaja)
+                {
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.LlenarObjetos);
+                }
             }
         }
 

@@ -160,7 +160,16 @@ public class Graphics : MonoBehaviour {
             {
 
                 string inputDateString = sortedSimulations[i].GetDate();
-                DateTime inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm:ss", null);
+                DateTime inputDate;
+                try
+                {
+                    inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm:ss", null);
+                }
+                catch(Exception e)
+                {
+                    inputDate = DateTime.ParseExact(inputDateString, "dd-MM-yyyy HH:mm", null);
+                }
+
                 TimeSpan timeDifference = inputDate - referenceDate;
                 float numberOfDays = (float)timeDifference.TotalDays;
 
