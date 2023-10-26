@@ -106,6 +106,13 @@ namespace nico
                             k++;
                         }
                         break;
+                    case "Cereal":
+                        for (int i = 0; i < kvp.Value; i++)
+                        {
+                            objetos[k] = Articulo.Cereal;
+                            k++;
+                        }
+                        break;
                 }
             }
 

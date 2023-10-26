@@ -13,5 +13,6 @@ namespace nico
         Cordero,
         Pan,
         Papitas,
+        Cereal,
     }
 }

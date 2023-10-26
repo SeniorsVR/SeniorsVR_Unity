@@ -24,6 +24,7 @@ namespace nico
                 precios_articulos[Articulo.Tomate] = GetPrecioPorMonedas(2, 1, 3, 0, 0, 0, 0, 0, 0);//370
                 precios_articulos[Articulo.Pan] = GetPrecioPorMonedas(0, 0, 0, 1, 0, 0, 0, 0, 0);//370
                 precios_articulos[Articulo.Papitas] = GetPrecioPorMonedas(0, 0, 0, 0, 1, 0, 0, 0, 0);//1000
+                precios_articulos[Articulo.Cereal] = GetPrecioPorMonedas(0, 0, 0, 0, 0, 1, 0, 0, 0);//2000
             }
 
             return precios_articulos[articulo];
