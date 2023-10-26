@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Semaforo : MonoBehaviour {
-    public GameObject redLight, greenLight;
+    public GameObject redLight, greenLight, yellowLight;
     public float constRedTime, constGreenTime;
     private float redTime, greenTime, blinkingTime, blinkingRatio;
     public bool isClock;
     public Transit cruce;
     public bool state;
+    public bool esPeatonal;
     void Start() {
         blinkingTime = 6.0f;
         blinkingRatio = 0.5f;
@@ -27,19 +28,24 @@ public class Semaforo : MonoBehaviour {
                 if(isClock){
                     cruce.canTransit = true;
                 }
-                redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.white);
+                redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
                 greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
             }
         } else {
             greenTime -= Time.deltaTime;
             if (greenTime <= blinkingTime) {
-                blinkingRatio -= Time.deltaTime;
-                if (0 < blinkingRatio && blinkingRatio <= 0.5) {
-                    greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.white);
-                } else if (blinkingRatio <= 0 && -0.5 <= blinkingRatio) {
-                    greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
-                } else if (blinkingRatio < -0.5) {
-                    blinkingRatio = 0.5f;
+                if(esPeatonal){
+                    blinkingRatio -= Time.deltaTime;
+                    if (0 < blinkingRatio && blinkingRatio <= 0.5) {
+                        greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
+                    } else if (blinkingRatio <= 0 && -0.5 <= blinkingRatio) {
+                        greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
+                    } else if (blinkingRatio < -0.5) {
+                        blinkingRatio = 0.5f;
+                    }
+                }else{
+                    greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
+                    yellowLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.yellow);
                 }
             }
             if (greenTime <= 0) {
@@ -51,7 +57,10 @@ public class Semaforo : MonoBehaviour {
                 }
                 blinkingRatio = 0.5f;
                 redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
-                greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.white);
+                greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
+                if(!esPeatonal){
+                    yellowLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
+                }
             }
         }
     }
@@ -66,7 +75,7 @@ public class Semaforo : MonoBehaviour {
             }
             redTime = 0.0f;
             greenTime = constGreenTime;
-            redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.white);
+            redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
             greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
         } else { // en rojo
             state = false;
@@ -76,7 +85,7 @@ public class Semaforo : MonoBehaviour {
             redTime = constRedTime;
             greenTime = 0.0f;
             redLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
-            greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.white);
+            greenLight.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.black);
         }
     }
 }
