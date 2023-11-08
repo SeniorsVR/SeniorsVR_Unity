@@ -301,7 +301,7 @@ public static class SaveSystem {
 
     static public string[] GetFiles(string folder) {
         string mainPath = AndroidPlugin.GetExternalStorageDirectory(); 
-        string [] files = Directory.GetFiles(mainPath + folder);
+        string [] files = Directory.GetFiles(mainPath + folder, "*.csv");
         return files;
     }
 

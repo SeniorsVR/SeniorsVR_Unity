@@ -41,6 +41,7 @@ namespace nico
         public static TutorialManager Instance;
         private void Awake()
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Instance = this;
         }
 

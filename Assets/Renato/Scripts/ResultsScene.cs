@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using nico;
 using UnityEngine.UI;
 using Unity.Mathematics;
+using FantomLib;
 public class ResultsScene : MonoBehaviour {
     public bool isDetailScene = false;
     static private string currentProfile;
@@ -184,6 +185,8 @@ public class ResultsScene : MonoBehaviour {
 
     public void SaveSimulation(){
         SaveSystem.SaveSimulation(newSimulation);
+        ToastController toastController = new ToastController();
+        toastController.Show("Simulación guardada correctamente");
         SceneManager.LoadScene("ProfileScene");
     }
 
@@ -200,6 +203,8 @@ public class ResultsScene : MonoBehaviour {
     }
 
     public void descartar(){
+        ToastController toastController = new ToastController();
+        toastController.Show("No se guardaron los datos");
         SceneManager.LoadScene("ProfileScene");
     }
 
@@ -213,6 +218,8 @@ public class ResultsScene : MonoBehaviour {
 
     public void eliminarRegistro(){
         SaveSystem.deleteSimulation(profile.GetID(),newSimulation.GetID());
+        ToastController toastController = new ToastController();
+        toastController.Show("Registro eliminado correctamente");
         SceneManager.LoadScene("HistoryScene");
     }
 

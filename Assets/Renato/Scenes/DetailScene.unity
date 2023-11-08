@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 122365060}
   - component: {fileID: 122365059}
   m_Layer: 5
-  m_Name: Template Seguridad (1)
+  m_Name: Template Seguridad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3989,7 +3989,7 @@ MonoBehaviour:
   m_text: Puntaje
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: acad4f9c60a2a534ba026077bef30291, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5237,7 +5237,7 @@ GameObject:
   - component: {fileID: 1129443456}
   - component: {fileID: 1129443455}
   m_Layer: 5
-  m_Name: Template ejecutiva (1)
+  m_Name: Template ejecutiva
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5279,7 +5279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -1210.2747}
+  m_AnchoredPosition: {x: 490, y: -600}
   m_SizeDelta: {x: 803.49, y: 719.8857}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1129443455
@@ -5788,7 +5788,7 @@ MonoBehaviour:
   m_text: "Esto eliminar\xE1 el registro de esta prueba de forma definitiva."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: f9904d713a129454fbf6504f5fbf0fab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7981,7 +7981,7 @@ GameObject:
   - component: {fileID: 1795533562}
   - component: {fileID: 1795533561}
   m_Layer: 5
-  m_Name: Template navegacion (1)
+  m_Name: Template navegacion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8965,7 +8965,7 @@ MonoBehaviour:
   m_text: Puntaje
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 600157172b19c87428117e9958661c99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9647,7 +9647,7 @@ MonoBehaviour:
   m_text: Puntaje
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: d6389d7974ef6ce4a9255f3041451f5e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9993,7 +9993,7 @@ MonoBehaviour:
   m_text: "\xBFEst\xE1 seguro de que desea eliminar este registro?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 9c44f76f10f6a74419f2bab85d84da6e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

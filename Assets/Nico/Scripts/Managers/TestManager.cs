@@ -13,6 +13,7 @@ namespace nico
 
         private void Awake()
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             if (Instance != null)
             {
                 Destroy(Instance.gameObject);

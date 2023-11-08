@@ -68,16 +68,10 @@ public class UploadScene : MonoBehaviour {
             }
         }
 
-        List<string> fileClonesList = new List<string>();
         if (directories.Length > 0) {
             folderClones = new GameObject[directories.Length];
         } if (files.Length > 0) {
-            for (int i = 0; i < files.Length; i++) {
-                if (files[i].Split("/")[^1].Split(".")[1] == "csv") {
-                    fileClonesList.Add(files[i]);
-                }
-            }
-            fileClones = new GameObject[fileClonesList.Count];
+            fileClones = new GameObject[files.Length];
         }
 
         if (directories.Length + files.Length == 0) {
@@ -110,20 +104,20 @@ public class UploadScene : MonoBehaviour {
                 }
                 dateText.SetText("");
             }
-            for (int i = 0; i < fileClonesList.Count; i++) {
+            for (int i = 0; i < files.Length; i++) {
                 if (i == 0) {
                     file.SetActive(true);
-                    nameTextFile.text = fileClonesList[0].Split("/")[^1];
-                    file.name = "File/" + fileClonesList[^1].Split("/")[^1];
-                    dateText.SetText(Directory.GetLastWriteTime(fileClonesList[i]).ToString("dd/MM/yyyy HH:mm"));
+                    nameTextFile.text = files[0].Split("/")[^1];
+                    file.name = "File/" + files[^1].Split("/")[^1];
+                    dateText.SetText(Directory.GetLastWriteTime(files[i]).ToString("dd/MM/yyyy HH:mm"));
                     GameObject firstClone = Instantiate(file, new Vector3(file.transform.position.x, file.transform.position.y - 220*directories.Length, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Profiles").transform);
                     firstClone.SetActive(false);
                     fileClones[0] = firstClone;
                 } else {
                     GameObject fileClone = Instantiate(file, new Vector3(file.transform.position.x, file.transform.position.y - 220*(i + directories.Length), 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Profiles").transform);
-                    nameTextFile.text = fileClonesList[i].Split("/")[^1];
-                    dateText.SetText(Directory.GetLastWriteTime(fileClonesList[i]).ToString("dd/MM/yyyy HH:mm"));
-                    fileClone.name = "File/" + fileClonesList[i - 1].Split("/")[^1];
+                    nameTextFile.text = files[i].Split("/")[^1];
+                    dateText.SetText(Directory.GetLastWriteTime(files[i]).ToString("dd/MM/yyyy HH:mm"));
+                    fileClone.name = "File/" + files[i - 1].Split("/")[^1];
                     fileClone.SetActive(true);
                     fileClones[i] = fileClone;
                 }
